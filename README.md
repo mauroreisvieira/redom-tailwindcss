@@ -1,3 +1,3 @@
 # redomjs.org
 
-This site content is written in Markdown format located in src.
+This site content is written in `.MD` format located in **docs/** folder.

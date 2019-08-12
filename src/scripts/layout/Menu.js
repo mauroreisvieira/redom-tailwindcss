@@ -1,9 +1,19 @@
-import { list } from 'https://redom.js.org/redom.es.min.js';
-import { Item } from './Item.js';
+import { el, list } from 'https://redom.js.org/redom.es.min.js';
 
-export class List {
+class Item {
+  constructor () {
+    this.el = el('li');
+  }
+
+ update (item) {
+    console.log(item);
+    this.el.textContent = item.title;
+  }
+}
+
+export class Menu {
     constructor () {
-        this.el = list('ul', Item, 'id');
+        this.el = list('ul', new Item(), 'id');
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then(items => {

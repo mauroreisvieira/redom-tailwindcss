@@ -1,0 +1,8 @@
+{
+  "name": "redom-samples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mauroreisvieira/redom-samples.git",
+  "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
+  "license": "MIT"
+}

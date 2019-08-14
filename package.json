@@ -1,13 +1,22 @@
 {
-  "name": "redomjs.org",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/mauroreisvieira/redom-samples.git",
-  "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "prism": "^4.1.2",
-    "redom": "^3.24.1",
-    "remarkable": "^2.0.0"
-  }
+    "name": "redomjs.org",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/mauroreisvieira/redom-samples.git",
+    "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "dev": "rollup -c -w",
+        "build": "rollup -c"
+    },
+    "dependencies": {
+        "prism": "^4.1.2",
+        "redom": "^3.24.1",
+        "remarkable": "^2.0.0"
+    },
+    "devDependencies": {
+        "prettier": "1.18.2",
+        "rollup": "^1.19.4",
+        "rollup-plugin-serve": "^1.0.1"
+    }
 }

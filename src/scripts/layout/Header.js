@@ -1,3 +1,11 @@
 import { el } from 'https://redom.js.org/redom.es.min.js';
 
-export const Header = el('header', 'Header');
+export default class Header {
+    constructor() {
+
+        this.el = el('header.header', {},
+            el('div.header__logo', 'Redomjs'),
+            el('div.header__nav', 'NAV')
+        );
+    }
+}

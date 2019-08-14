@@ -1,3 +1,7 @@
 import { el } from 'https://redom.js.org/redom.es.min.js';
 
-export const Footer = el('footer', 'Footer');
+export default class Footer {
+    constructor() {
+        this.el = el('footer', 'Footer');
+    }
+}

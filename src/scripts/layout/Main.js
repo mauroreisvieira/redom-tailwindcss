@@ -4,7 +4,7 @@ import { el } from 'https://redom.js.org/redom.es.min.js';
 
 // import Sidebar from './Sidebar.js';
 
-export class Main {
+export default class Main {
     constructor (path) {
         // const md = new Remarkable({
         //     langPrefix: 'hljs language-'

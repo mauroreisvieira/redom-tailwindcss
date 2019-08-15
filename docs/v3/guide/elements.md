@@ -32,22 +32,26 @@ RE:DOM supports [UMD](https://github.com/umdjs/umd):
 ```
 
 ### ES2015
+
 It's also possible to use the new [ES2015 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import):
+
 ```js
 import { el, mount } from 'https://redom.js.org/redom.es.min.js';
 ```
 
 ### Download
 Here's the download links:
-- https://redom.js.org/redom.js (UMD, development)
-- https://redom.js.org/redom.min.js (UMD, production)
-- https://redom.js.org/redom.es.js (ES2015, development)
-- https://redom.js.org/redom.es.min.js (ES2015, production)
+- [UMD, development](https://redom.js.org/redom.js)
+- [UMD, production](https://redom.js.org/redom.min.js)
+- [ES2015, development](https://redom.js.org/redom.es.js)
+- [ES2015, production](https://redom.js.org/redom.es.min.js)
 
 ### Project generator
+
 You can also use the project generator, which will also install a file watcher and bundler. You can find it [here](https://github.com/redom/redom-cli).
 
 ### Server-side use
+
 RE:DOM also works on server side, by using [NO:DOM](https://github.com/redom/nodom).
 
 ### RE:DOM dev tools for Chrome
@@ -631,6 +635,7 @@ When you call `place.update(visible, data)`, the `Place` will automatically dete
 - [destroy](https://github.com/redom/redom/blob/master/esm/place.js#L40)
 
 ## Router
+
 [`router(parent, routes, initData)`](https://github.com/redom/redom/blob/master/esm/router.js) is a component/element router, which will create/update/remove components/element based on the current route.
 
 ```js
@@ -650,7 +655,8 @@ app.update('home', data);
 app.update('about', data);
 ```
 
-The example will:
+**The example will:**
+
 - create a `Home` component
 - update it with `data`
 - remove it
@@ -659,12 +665,15 @@ The example will:
 - call all defined [lifecycle events](#component-lifecycle)
 
 ## More examples
+
 You can find more examples on the [RE:DOM website](https://redom.js.org)!
 
 ## Support / feedback
+
 You're welcome to join  [#redom](https://koodiklinikka.slack.com/messages/redom/) @ [koodiklinikka.slack.com](koodiklinikka.slack.com) (get invitation by entering your email at [koodiklinikka.fi](https://koodiklinikka.fi)). If you have any questions / feedback, you can also raise an issue on [GitHub](https://github.com/redom/redom).
 
 ## Developing
+
 RE:DOM is on [GitHub](https://github.com/redom/redom), source is [here](https://github.com/redom/redom/tree/master/esm). To start developing:
 - Clone repository
 - `npm i`
@@ -674,5 +683,3 @@ Pull requests are more than welcome!
 
 ## License
 [MIT](https://github.com/redom/redom/blob/master/LICENSE)
-
-

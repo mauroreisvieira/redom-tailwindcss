@@ -1,4 +1,4 @@
-import { el } from 'https://redom.js.org/redom.es.min.js';
+import { el } from 'redom';
 
 export default class Footer {
     constructor() {

@@ -1,22 +1,16 @@
-import { el } from 'https://redom.js.org/redom.es.min.js';
-// import Remarkable from 'remarkable'
-// import Prism from 'prismjs'
-
-// import Sidebar from './Sidebar.js';
+import { el, mount } from "redom";
+import Prism from "prismjs";
+import Markdown from "../components/Markdown.js";
 
 export default class Main {
-    constructor (path) {
-        // const md = new Remarkable({
-        //     langPrefix: 'hljs language-'
-        // });
-
-        // fetch(path)
-        // .then(response => response.text())
-        // .then(content => {
-        //     this.markdown = md.render(content);
-        //     Prism.highlightAll();
-        // });
-
-        this.el = el('main', {}, el('div.content'));
+    constructor() {
+        const file = "docs/v3/guide/elements.md";
+        this.el = el("main#main");
+        new Markdown(file, this.content).then(response => {
+            this.content = el("div.content");
+            this.content.innerHTML = response;
+            mount(this.el, this.content);
+            Prism.highlightAll();
+        });
     }
 }

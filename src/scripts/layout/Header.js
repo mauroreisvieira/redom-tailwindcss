@@ -1,11 +1,13 @@
-import { el } from 'https://redom.js.org/redom.es.min.js';
+import { el } from 'redom';
+import Nav from './Nav.js';
 
 export default class Header {
     constructor() {
 
-        this.el = el('header.header', {},
-            el('div.header__logo', 'Redomjs'),
-            el('div.header__nav', 'NAV')
+        console.log('Header');
+        this.el = el('header#header.header', {},
+            el('div.header__logo', {}, el('a#logo', { href: "/"}, 'Redom:js')),
+            el('div.header__nav', {}, new Nav())
         );
     }
 }

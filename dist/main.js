@@ -597,37 +597,28 @@ List.extend = function extendList (parent, View, key, initData) {
 list.extend = List.extend;
 
 class Link {
-    constructor () {
-        this.el = el('a.nav__item', { href: '/'});
+    constructor() {
+        this.el = el('a.nav__link', { href: '/'});
     }
 
-    update (i) {
-        console.log('Link');
-        this.el.textContent = i;
+    update (text) {
+        this.el.textContent = text;
     }
 }
 
 class Nav {
     constructor () {
-        this.el = list('nav#nav.nav', Link);
+        this.el = list('nav.nav', Link);
         this.el.update(['Lorem 1', 'Lorem 2', 'Lorem 3']);
     }
 }
 
 class Header {
     constructor() {
-
-        console.log('Header');
         this.el = el('header#header.header', {},
             el('div.header__logo', {}, el('a#logo', { href: "/"}, 'Redom:js')),
             el('div.header__nav', {}, new Nav())
         );
-    }
-}
-
-class Footer {
-    constructor() {
-        this.el = el('footer', 'Footer');
     }
 }
 
@@ -8910,9 +8901,11 @@ class Markdown {
 class Main {
     constructor() {
         const file = "docs/v3/guide/elements.md";
-        this.el = el("main#main");
+        this.el = el("main.main#main", {},
+            this.sidebar = el("div.sidebar", {}, new Nav()),
+            this.content = el("div.content", {})
+        );
         new Markdown(file, this.content).then(response => {
-            this.content = el("div.content");
             this.content.innerHTML = response;
             mount(this.el, this.content);
             prism.highlightAll();
@@ -8924,8 +8917,7 @@ class App {
     constructor () {
         this.el = el('div#app', {},
             new Header,
-            new Main,
-            new Footer
+            new Main
         );
     }
 }

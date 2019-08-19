@@ -11,12 +11,29 @@ module.exports = {
         apiKey: "<API_KEY>",
         index: "<INDEX_NAME>",
     },
-    sidebar: [
+    topNav: [
+        {
+            text: "Twitter",
+            link: ""
+        },
+        {
+            text: "Github",
+            link: ""
+        }
+    ],
+    sideNav: [
         {
             text: "Mouning",
             link: "docs/v3/guide/mounting.md",
             meta: false,
-            children: [],
+            children: [
+                {
+                    text: "Mouning",
+                    link: "docs/v3/guide/mounting.md",
+                    meta: false,
+                    children: [],
+                }
+            ],
         },
         {
             text: "Elements",

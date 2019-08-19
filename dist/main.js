@@ -596,29 +596,62 @@ List.extend = function extendList (parent, View, key, initData) {
 
 list.extend = List.extend;
 
-class Link {
-    constructor() {
-        this.el = el('a.nav__link', { href: '/'});
-    }
+const dispatch = (view, type, data) => {
+    const el = view.el || view;
 
-    update (text) {
+    el.dispatchEvent(new CustomEvent('redom', {
+        detail: {
+            type, data
+        },
+        bubbles: true
+    }));
+};
+
+class NavLink {
+    constructor () {
+        this.el = el('.nav__link');
+        this.el.onclick = e => {
+            dispatch(this, 'section', this.data.id);
+        };
+
+    }
+    update (data) {
+        const { text, _current } = data;
         this.el.textContent = text;
+
+        if (_current) {
+            this.el.classList.add('current');
+        } else {
+            this.el.classList.remove('current');
+        }
+
+        this.data = data;
     }
 }
 
 class Nav {
     constructor () {
-        this.el = list('nav.nav', Link);
-        this.el.update(['Lorem 1', 'Lorem 2', 'Lorem 3']);
+        this.el = list('.nav', NavLink, 'id');
+    }
+
+    update (data) {
+        this.el.update(data.map(item => {
+            return {
+                ...item,
+            };
+        }));
     }
 }
 
 class Header {
-    constructor() {
+    constructor(data) {
+        const { topNav } = data;
         this.el = el('header#header.header', {},
             el('div.header__logo', {}, el('a#logo', { href: "/"}, 'Redom:js')),
-            el('div.header__nav', {}, new Nav())
+            el('div.header__nav', {}, this.nav = new Nav())
         );
+
+        this.nav.update(topNav);
     }
 }
 
@@ -8899,12 +8932,19 @@ class Markdown {
 }
 
 class Main {
-    constructor() {
+    constructor(data) {
+        const { sideNav } = data;
+        console.log(sideNav);
         const file = "docs/v3/guide/elements.md";
         this.el = el("main.main#main", {},
-            this.sidebar = el("div.sidebar", {}, new Nav()),
+            this.sidebar = el("div.sidebar", {}, this.nav = new Nav()),
             this.content = el("div.content", {})
         );
+        this.nav.update(sideNav);
+        this.update(file);
+    }
+
+    update (file) {
         new Markdown(file, this.content).then(response => {
             this.content.innerHTML = response;
             mount(this.el, this.content);
@@ -8914,12 +8954,76 @@ class Main {
 }
 
 class App {
-    constructor () {
+    constructor (data) {
         this.el = el('div#app', {},
-            new Header,
-            new Main
+            this.header = new Header(data),
+            this.main = new Main(data)
         );
+
+        this.data = data;
     }
 }
 
-mount(document.body, new App());
+var config$1 = {
+    themeConfig: {
+        accentColor: "#f00",
+        themeColor: "#f00",
+    },
+    search: {
+        searchMaxSuggestions: 10,
+    },
+    algolia: {
+        applicationID: "<APPLICATION_ID>",
+        apiKey: "<API_KEY>",
+        index: "<INDEX_NAME>",
+    },
+    topNav: [
+        {
+            text: "Twitter",
+            link: ""
+        },
+        {
+            text: "Github",
+            link: ""
+        }
+    ],
+    sideNav: [
+        {
+            text: "Mouning",
+            link: "docs/v3/guide/mounting.md",
+            meta: false,
+            children: [
+                {
+                    text: "Mouning",
+                    link: "docs/v3/guide/mounting.md",
+                    meta: false,
+                    children: [],
+                }
+            ],
+        },
+        {
+            text: "Elements",
+            link: "docs/v3/guide/elements.md",
+            meta: false,
+            children: [],
+        }
+    ],
+};
+var config_1 = config$1.themeConfig;
+var config_2 = config$1.search;
+var config_3 = config$1.algolia;
+var config_4 = config$1.topNav;
+var config_5 = config$1.sideNav;
+
+var data = /*#__PURE__*/Object.freeze({
+  'default': config$1,
+  __moduleExports: config$1,
+  themeConfig: config_1,
+  search: config_2,
+  algolia: config_3,
+  topNav: config_4,
+  sideNav: config_5
+});
+
+const app = new App(data);
+mount(document.body, app);

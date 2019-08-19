@@ -1,6 +1,8 @@
 import { mount } from 'redom';
 import { App } from './scripts/App.js';
 
+import * as data from '../.redomdoc/config.js';
 import './styles/main.scss';
 
-mount(document.body, new App());
+const app = new App(data);
+mount(document.body, app);

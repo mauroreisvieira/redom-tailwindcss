@@ -1,7 +1,8 @@
 module.exports = {
     themeConfig: {
-        accentColor: "#f00",
-        themeColor: "#f00",
+        primaryColor: "#673ab7",
+        accentColor: "#e91e63",
+        bgColor: "#f5f5f5",
     },
     search: {
         searchMaxSuggestions: 10,
@@ -14,18 +15,25 @@ module.exports = {
     topNav: [
         {
             text: "Twitter",
-            link: ""
+            link: "https://www.twitter.com/"
         },
         {
             text: "Github",
-            link: ""
+            link: "https://www.github.com/"
         }
     ],
     sideNav: [
         {
-            path: "",
-            text: "Intro",
-            link: "docs/v3/guide/mounting.md",
+            path: "#installation",
+            text: "Installation",
+            link: "docs/v3/guide/Installation.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#introduction",
+            text: "Introduction",
+            link: "docs/v3/guide/introduction.md",
             meta: false,
             children: [],
         },

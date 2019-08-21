@@ -596,53 +596,195 @@ List.extend = function extendList (parent, View, key, initData) {
 
 list.extend = List.extend;
 
-class NavLink {
-  constructor() {
-    this.el = el('a.nav__link');
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
   }
 
-  update(data) {
-    const {
-      text,
-      path,
-      _current
-    } = data;
-    this.el.href = path;
-    this.el.textContent = text;
+  return obj;
+}
 
-    if (_current) {
-      this.el.classList.add('is-active');
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(source, true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      this.el.classList.remove('is-active');
+      ownKeys(source).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
   }
 
+  return target;
 }
 
-class Nav {
-  constructor(data) {
+var NavLink =
+/*#__PURE__*/
+function () {
+  function NavLink() {
+    _classCallCheck(this, NavLink);
+
+    this.el = el('a.nav__link');
+  }
+
+  _createClass(NavLink, [{
+    key: "update",
+    value: function update(data) {
+      var text = data.text,
+          path = data.path,
+          link = data.link,
+          _current = data._current;
+      this.el.href = path || link;
+      this.el.title = text;
+      this.el.textContent = text;
+
+      if (_current) {
+        this.el.classList.add('is-active');
+      } else {
+        this.el.classList.remove('is-active');
+      }
+    }
+  }]);
+
+  return NavLink;
+}();
+
+var Nav =
+/*#__PURE__*/
+function () {
+  function Nav(data) {
+    _classCallCheck(this, Nav);
+
     this.el = list('.nav', NavLink, 'id');
   }
 
-  update(data, current) {
-    this.el.update(data.map(item => {
-      return {
-        _current: item.path === current,
-        ...item
-      };
-    }));
-  }
+  _createClass(Nav, [{
+    key: "update",
+    value: function update(data, current) {
+      this.el.update(data.map(function (item) {
+        return _objectSpread2({
+          _current: item.path === current
+        }, item);
+      }));
+    }
+  }]);
 
-}
+  return Nav;
+}();
 
-class Header {
-  constructor(data) {
+var Styles = function Styles(styles) {
+  var style = el('style', {}, styles);
+  mount(document.head, style);
+};
+
+var Header =
+/*#__PURE__*/
+function () {
+  function Header(data) {
+    _classCallCheck(this, Header);
+
+    var vdom = "<div id=\"foo\"><p><span>Hello!</span></p></div>";
+    var dom = this.render(vdom);
+    console.log(dom);
     this.el = el('header#header.header', {}, el('div.header__logo', {}, el('a#logo', {
       href: "/"
-    }, 'Redom:js')), el('div.header__nav', {}));
+    }, 'Redom:js')), el('div.header__nav', {}, this.nav = new Nav()));
+    this.nav.update(data);
+    Styles("\n            .markdown-doc {\n                border: 2px solid red;\n                padding: 24px;\n            }\n        ");
   }
 
-}
+  _createClass(Header, [{
+    key: "render",
+    value: function (_render) {
+      function render(_x) {
+        return _render.apply(this, arguments);
+      }
+
+      render.toString = function () {
+        return _render.toString();
+      };
+
+      return render;
+    }(function (vnode) {
+      var aux = document.createElement('div');
+      aux.innerHTML = vnode;
+      console.dir(aux.childNodes[0]);
+      var elm = aux.childNodes[0];
+      var n = document.createElement(elm.nodeName);
+      console.warn(n);
+      Object.keys(elm.attributes || {}).forEach(function (k) {
+        return n.setAttribute(k, elm.attributes[k]);
+      });
+      (elm.children || []).forEach(function (c) {
+        return n.appendChild(render(c));
+      });
+      return n;
+    })
+  }, {
+    key: "obj",
+    value: function obj(val) {
+      var nodeName = val.nodeName,
+          attributes = val.attributes,
+          children = val.children;
+      return {
+        nodeName: nodeName,
+        attributes: attributes,
+        children: children
+      };
+    }
+  }]);
+
+  return Header;
+}();
 
 // List of valid entities
 //
@@ -8903,57 +9045,66 @@ Prism.languages.js = Prism.languages.javascript;
 })();
 });
 
-class Markdown {
-  constructor(path, content) {
-    this.parent = content;
-    return new Promise((resolve, reject) => {
-      return fetch(window.location.origin + window.location.pathname + path).then(response => {
-        return response.text();
-      }).then(result => {
-        this.md = new Remarkable({
-          langPrefix: "hljs language-"
-        });
-        this.content = el("div.markdown-doc", {});
-        this.content.innerHTML = this.md.render(result);
-        setChildren(this.parent, this.content);
-      }).then(response => {
-        prism.highlightAll();
+var Markdown = function Markdown(path, content) {
+  var _this = this;
+
+  _classCallCheck(this, Markdown);
+
+  this.parent = content;
+  new Promise(function (resolve, reject) {
+    return fetch(window.location.origin + window.location.pathname + path).then(function (response) {
+      return response.text();
+    }).then(function (result) {
+      _this.md = new Remarkable({
+        langPrefix: "hljs language-"
       });
+      _this.content = el("div.markdown-doc", {});
+      _this.content.innerHTML = _this.md.render(result);
+      setChildren(_this.parent, _this.content);
+    }).then(function (response) {
+      prism.highlightAll();
     });
-  }
+  });
+};
 
-}
+var Main =
+/*#__PURE__*/
+function () {
+  function Main(sideNav) {
+    _classCallCheck(this, Main);
 
-class Main {
-  constructor(sideNav) {
-    const current = sideNav.filter(item => item.path === window.location.hash)[0];
-    this.url = current.link;
+    var current = sideNav.filter(function (item) {
+      return item.path === window.location.hash;
+    })[0];
+    this.url = current.link || '/';
     this.el = el("main.main#main", {}, this.sidebar = el("div.sidebar", {}, this.nav = new Nav()), this.content = el("div.content", {}));
     this.nav.update(sideNav, current.path);
     this.update();
   }
 
-  update() {
-    new Markdown(this.url, this.content);
-  }
+  _createClass(Main, [{
+    key: "update",
+    value: function update() {
+      new Markdown(this.url, this.content);
+    }
+  }]);
 
-}
+  return Main;
+}();
 
-class App {
-  constructor(data) {
-    const {
-      topNav,
-      sideNav
-    } = data;
-    this.el = el('div#app', {}, this.header = new Header(topNav), this.main = new Main(sideNav));
-  }
+var App = function App(data) {
+  _classCallCheck(this, App);
 
-}
+  var topNav = data.topNav,
+      sideNav = data.sideNav;
+  this.el = el('div#app', {}, this.header = new Header(topNav), this.main = new Main(sideNav));
+};
 
 var config$1 = {
   themeConfig: {
-    accentColor: "#f00",
-    themeColor: "#f00"
+    primaryColor: "#673ab7",
+    accentColor: "#e91e63",
+    bgColor: "#f5f5f5"
   },
   search: {
     searchMaxSuggestions: 10
@@ -8965,15 +9116,21 @@ var config$1 = {
   },
   topNav: [{
     text: "Twitter",
-    link: ""
+    link: "https://www.twitter.com/"
   }, {
     text: "Github",
-    link: ""
+    link: "https://www.github.com/"
   }],
   sideNav: [{
-    path: "",
-    text: "Intro",
-    link: "docs/v3/guide/mounting.md",
+    path: "#installation",
+    text: "Installation",
+    link: "docs/v3/guide/Installation.md",
+    meta: false,
+    children: []
+  }, {
+    path: "#introduction",
+    text: "Introduction",
+    link: "docs/v3/guide/introduction.md",
     meta: false,
     children: []
   }, {
@@ -9012,6 +9169,6 @@ var data = /*#__PURE__*/Object.freeze({
   sideNav: config_5
 });
 
-const styles = el('style', {}, 'body { background: red; }');
-mount(document.head, styles);
+var themeConfig = config_1;
+Styles("\n    body {\n        background: ".concat(themeConfig.bgColor, ";\n    }\n\n    h2 {\n        color: ").concat(themeConfig.primaryColor, ";\n    }\n"));
 mount(document.body, new App(data));

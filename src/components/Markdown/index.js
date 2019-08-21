@@ -2,10 +2,12 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
+import { Styles } from './../../utils/Styles.js';
+
 export default class Markdown {
     constructor(path, content) {
         this.parent = content;
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             return fetch(window.location.origin + window.location.pathname + path)
                 .then(response => {
                     return response.text();

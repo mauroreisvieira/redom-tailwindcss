@@ -1,5 +1,4 @@
 import { el } from 'redom';
-import { dispatch } from './../../utils/dispatch';
 
 export default class NavLink {
     constructor () {
@@ -7,9 +6,9 @@ export default class NavLink {
     }
 
     update (data) {
-        const { text, path, _current } = data;
-
-        this.el.href = path;
+        const { text, path, link, _current } = data;
+        this.el.href = path || link;
+        this.el.title = text;
         this.el.textContent = text;
         if (_current) {
             this.el.classList.add('is-active');

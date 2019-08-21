@@ -23,11 +23,20 @@ module.exports = {
     ],
     sideNav: [
         {
+            path: "",
+            text: "Intro",
+            link: "docs/v3/guide/mounting.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#mounting",
             text: "Mouning",
             link: "docs/v3/guide/mounting.md",
             meta: false,
             children: [
                 {
+                    path: "#mounting",
                     text: "Mouning",
                     link: "docs/v3/guide/mounting.md",
                     meta: false,
@@ -36,6 +45,7 @@ module.exports = {
             ],
         },
         {
+            path: "#elements",
             text: "Elements",
             link: "docs/v3/guide/elements.md",
             meta: false,

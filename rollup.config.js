@@ -1,3 +1,4 @@
+import babel from 'rollup-plugin-babel';
 import serve from 'rollup-plugin-serve'
 import scss from 'rollup-plugin-scss'
 import resolve from 'rollup-plugin-node-resolve';
@@ -10,6 +11,9 @@ module.exports = {
         format: 'esm'
     },
     plugins: [
+        babel({
+            exclude: 'node_modules/**'
+        }),
         serve(),
         scss(),
         resolve(),

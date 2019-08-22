@@ -8,15 +8,11 @@ class Link {
     }
 
     update(data) {
-        const { text, path, link, _current } = data;
-        this.el.href = path || link;
+        const { link, text, icon } = data;
+        this.el.target = '_blank';
+        this.el.href = link;
         this.el.title = text;
-        this.el.textContent = text;
-        if (_current) {
-            this.el.classList.add("is-active");
-        } else {
-            this.el.classList.remove("is-active");
-        }
+        this.el.innerHTML = icon;
     }
 }
 
@@ -32,7 +28,6 @@ export default class TopNav {
         this.list.update(
             data.map(item => {
                 return {
-                    _current: item.path === current,
                     ...item,
                 };
             })

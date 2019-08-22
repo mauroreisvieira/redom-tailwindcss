@@ -2,9 +2,10 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
+import { repo } from '../../../.redomdoc/config.js';
+
 export default class Markdown {
     constructor(path, content) {
-        this.parent = content;
         new Promise((resolve, reject) => {
             return fetch(window.location.origin + window.location.pathname + path)
                 .then(response => {
@@ -14,10 +15,31 @@ export default class Markdown {
                     this.md = new Remarkable({
                         langPrefix: "hljs language-",
                     });
-                    this.content = el("div.markdown-doc", {});
-                    this.content.innerHTML = this.md.render(result)
-                    setChildren(this.parent, this.content);
-                }).then(response => {
+
+                    this.content = el(
+                        "div",
+                        {
+                            class: "markdown-doc mt-16 pt-8 pb-16 w-full",
+                        },
+                        (this.markdown = el("div")),
+                        (this.footer = el(
+                            "div",
+                            { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },
+                            "Caught a mistake or want to contribute to the documentation? ",
+                            el(
+                                "a",
+                                {
+                                    href: repo + path,
+                                    target: "_black"
+                                },
+                                "Edit this page on GitHub"
+                            )
+                        ))
+                    );
+                    this.markdown.innerHTML = this.md.render(result);
+                    setChildren(content, this.content);
+                })
+                .then(response => {
                     Prism.highlightAll();
                 });
         });

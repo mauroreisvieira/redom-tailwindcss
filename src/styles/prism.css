@@ -1,15 +1,18 @@
 pre  {
-    width: 100%;
-    background-color: #161616;
-    padding: 1.5rem;
-    border-radius: 0.25rem;
-    line-height: 1;
+    font-size: 0.85em;
+    @apply bg-gray-100;
+    border-radius: 2px;
+    position: relative;
 }
 
-code {
-    color: #eee;
-    font-size: .875rem;
-    line-height: 1.25;
+pre code {
+    overflow-x: auto;
+    color: #525252;
+    white-space: pre;
+    padding: 1.2em 1.4em;
+    font-size: 0.85rem;
+    line-height: 1.6rem;
+    display: block;
 }
 
 .token.comment {
@@ -33,19 +36,19 @@ code {
 }
 
 .token.tag, .token.constant, .token.symbol {
-    color: #E57373;
+@apply text-pink-600;
 }
 
 .token.function {
-    color: hsl(210, 80%, 70%);
+    @apply text-blue-600;
 }
 
 .token.selector, .token.attr-name, .token.char, .token.builtin, .token.inserted, .token.class-name, .token.boolean, .token.number {
-    color: #FFB74D;
+    @apply text-yellow-700;
 }
 
 .token.operator {
-    color: #4DD0E1;
+    @apply text-indigo-600;
 }
 
 .token.entity, .token.url, .token.variable {
@@ -53,11 +56,11 @@ code {
 }
 
 .token.atrule, .token.attr-value, .token.string {
-    color: #AED581;
+    @apply text-green-600;
 }
 
 .token.keyword {
-    color: hsl(290, 85%, 75%);
+    @apply text-purple-600;
 }
 
 .token.regex, .token.important {
@@ -77,5 +80,5 @@ code {
 }
 
 .token.deleted {
-    color: red;
+    @apply text-red-600;
 }

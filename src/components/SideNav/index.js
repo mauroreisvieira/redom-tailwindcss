@@ -3,19 +3,20 @@ import { el, list } from "redom";
 class Link {
     constructor() {
         this.el = el("a", {
-            class: "px-2 -mx-2 py-1 transition-fast relative block text-teal-600 font-medium",
+            class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
         });
     }
 
     update(data) {
-        const { text, path, link, _current } = data;
-        this.el.href = path || link;
+        const { text, path, _current } = data;
+        this.el.href = path;
         this.el.title = text;
         this.el.textContent = text;
+
         if (_current) {
-            this.el.classList.add("is-active");
+            this.el.classList.add("text-primary");
         } else {
-            this.el.classList.remove("is-active");
+            this.el.classList.remove("text-primary");
         }
     }
 }
@@ -24,7 +25,7 @@ export default class SideNav {
     constructor(data) {
         this.el = el("nav", {
             class:
-                "h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent",
+                "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
         });
         this.list = list(this.el, Link, "id");
     }

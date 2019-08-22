@@ -604,15 +604,11 @@ class Link {
     }
 
     update(data) {
-        const { text, path, link, _current } = data;
-        this.el.href = path || link;
+        const { link, text, icon } = data;
+        this.el.target = '_blank';
+        this.el.href = link;
         this.el.title = text;
-        this.el.textContent = text;
-        if (_current) {
-            this.el.classList.add("is-active");
-        } else {
-            this.el.classList.remove("is-active");
-        }
+        this.el.innerHTML = icon;
     }
 }
 
@@ -628,7 +624,6 @@ class TopNav {
         this.list.update(
             data.map(item => {
                 return {
-                    _current: item.path === current,
                     ...item,
                 };
             })
@@ -636,37 +631,156 @@ class TopNav {
     }
 }
 
+var config = {
+    repo: 'https://github.com/mauroreisvieira/redomjs.org/blob/master/',
+    theme: {
+        colors: {
+            primary: "#d31b33",
+            accent: "#673ab7"
+        }
+    },
+    search: {
+        searchMaxSuggestions: 10,
+    },
+    algolia: {
+        applicationID: "<APPLICATION_ID>",
+        apiKey: "<API_KEY>",
+        index: "<INDEX_NAME>",
+    },
+    topNav: [
+        {
+            text: "Twitter",
+            link: "https://twitter.com/redomjs/",
+            icon:
+                '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"/></svg>',
+        },
+        {
+            text: "Github",
+            link: "https://github.com/redom/redom/",
+            icon:
+                '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0"/></svg>',
+        },
+    ],
+    sideNav: [
+        {
+            path: "#installation",
+            text: "Installation",
+            link: "docs/v3/guide/Installation.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#introduction",
+            text: "Introduction",
+            link: "docs/v3/guide/introduction.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#elements",
+            text: "Elements",
+            link: "docs/v3/guide/elements.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#mounting",
+            text: "Mounting",
+            link: "docs/v3/guide/mounting.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#lifecycle",
+            text: "Lifecycle",
+            link: "docs/v3/guide/lifecycle.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#lists",
+            text: "Lists",
+            link: "docs/v3/guide/lists.md",
+            meta: false,
+            children: [
+                {
+                    path: "#mounting",
+                    text: "Mouning",
+                    link: "docs/v3/guide/mounting.md",
+                    meta: false,
+                    children: [],
+                },
+            ],
+        },
+        {
+            path: "#update-elements",
+            text: "Update elements",
+            link: "docs/v3/guide/update-elements.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#router",
+            text: "Router",
+            link: "docs/v3/guide/router.md",
+            meta: false,
+            children: [],
+        },
+    ],
+};
+var config_1 = config.repo;
+var config_2 = config.theme;
+var config_3 = config.search;
+var config_4 = config.algolia;
+var config_5 = config.topNav;
+var config_6 = config.sideNav;
+
+var data = /*#__PURE__*/Object.freeze({
+  'default': config,
+  __moduleExports: config,
+  repo: config_1,
+  theme: config_2,
+  search: config_3,
+  algolia: config_4,
+  topNav: config_5,
+  sideNav: config_6
+});
+
 class Header {
-    constructor(data) {
+    constructor() {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 h-16 items-center",
             },
             el(
                 "div",
-                {
-                    class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
-                },
+                { class: "flex w-full max-w-screen-xl mx-auto" },
                 el(
-                    "a#logo",
+                    "div",
                     {
-                        class: "flex items-center",
-                        href: "/",
+                        class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
                     },
-                    "Redom:js"
+                    el(
+                        "a#logo",
+                        {
+                            class: "flex items-center font-light text-2xl",
+                            href: "/",
+                        },
+                        "Redom:js"
+                    )
+                ),
+                el(
+                    "nav#social",
+                    {
+                        class: "flex flex-grow justify-end lg:w-3/4 xl:w-4/5",
+                    },
+                    (this.nav = new TopNav())
                 )
-            ),
-            el(
-                "div",
-                {
-                    class: "flex flex-grow lg:w-3/4 xl:w-4/5",
-                },
-                (this.nav = new TopNav())
             )
         );
 
-        this.nav.update(data);
+        this.nav.update(config_5);
     }
 }
 
@@ -7777,7 +7891,7 @@ var commonmarkConfig = {
  * Preset configs
  */
 
-var config = {
+var config$1 = {
   'default': defaultConfig,
   'full': fullConfig,
   'commonmark': commonmarkConfig
@@ -7834,7 +7948,7 @@ function Remarkable(preset, options) {
   this.ruler    = new Ruler();
 
   this.options  = {};
-  this.configure(config[preset]);
+  this.configure(config$1[preset]);
   this.set(options || {});
 }
 
@@ -8931,7 +9045,6 @@ Prism.languages.js = Prism.languages.javascript;
 
 class Markdown {
     constructor(path, content) {
-        this.parent = content;
         new Promise((resolve, reject) => {
             return fetch(window.location.origin + window.location.pathname + path)
                 .then(response => {
@@ -8941,10 +9054,31 @@ class Markdown {
                     this.md = new Remarkable({
                         langPrefix: "hljs language-",
                     });
-                    this.content = el("div.markdown-doc", {});
-                    this.content.innerHTML = this.md.render(result);
-                    setChildren(this.parent, this.content);
-                }).then(response => {
+
+                    this.content = el(
+                        "div",
+                        {
+                            class: "markdown-doc mt-16 pt-8 pb-16 w-full",
+                        },
+                        (this.markdown = el("div")),
+                        (this.footer = el(
+                            "div",
+                            { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },
+                            "Caught a mistake or want to contribute to the documentation? ",
+                            el(
+                                "a",
+                                {
+                                    href: config_1 + path,
+                                    target: "_black"
+                                },
+                                "Edit this page on GitHub"
+                            )
+                        ))
+                    );
+                    this.markdown.innerHTML = this.md.render(result);
+                    setChildren(content, this.content);
+                })
+                .then(response => {
                     prism.highlightAll();
                 });
         });
@@ -8954,19 +9088,20 @@ class Markdown {
 class Link$1 {
     constructor() {
         this.el = el("a", {
-            class: "px-2 -mx-2 py-1 transition-fast relative block text-teal-600 font-medium",
+            class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
         });
     }
 
     update(data) {
-        const { text, path, link, _current } = data;
-        this.el.href = path || link;
+        const { text, path, _current } = data;
+        this.el.href = path;
         this.el.title = text;
         this.el.textContent = text;
+
         if (_current) {
-            this.el.classList.add("is-active");
+            this.el.classList.add("text-primary");
         } else {
-            this.el.classList.remove("is-active");
+            this.el.classList.remove("text-primary");
         }
     }
 }
@@ -8975,7 +9110,7 @@ class SideNav {
     constructor(data) {
         this.el = el("nav", {
             class:
-                "h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent",
+                "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
         });
         this.list = list(this.el, Link$1, "id");
     }
@@ -8993,28 +9128,28 @@ class SideNav {
 }
 
 class Main {
-    constructor(sideNav) {
-        const current = sideNav.filter(item => item.path === window.location.hash)[0];
+    constructor() {
+        const current = config_6.filter(item => item.path === window.location.hash)[0];
         this.url = current.link || "/";
 
         this.el = el(
             "main#main",
             {
-                class: " lg:flex w-full max-w-screen-xl mx-auto px-6 -mx-6 pt-24 pb-16 lg:pt-28",
+                class: "lg:flex w-full max-w-screen-xl mx-auto m-auto",
             },
             el(
                 "div#sidebar",
                 {
                     class:
-                        "hidden fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5",
+                        "hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
                 (this.sideNav = new SideNav())
             ),
             (this.content = el("div#content", {
-                class: "min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5",
-            }))
+                class: "min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6 lg:pl-0",
+            })),
         );
-        this.sideNav.update(sideNav, current.path);
+        this.sideNav.update(config_6, current.path);
         this.update();
     }
 
@@ -9024,92 +9159,12 @@ class Main {
 }
 
 class App {
-    constructor (data) {
-        const { topNav, sideNav } = data;
+    constructor () {
         this.el = el('div#app', {},
-            this.header = new Header(topNav),
-            this.main = new Main(sideNav)
+            this.header = new Header(),
+            this.main = new Main()
         );
     }
 }
-
-var config$1 = {
-    search: {
-        searchMaxSuggestions: 10,
-    },
-    algolia: {
-        applicationID: "<APPLICATION_ID>",
-        apiKey: "<API_KEY>",
-        index: "<INDEX_NAME>",
-    },
-    topNav: [
-        {
-            text: "Twitter",
-            link: "https://www.twitter.com/"
-        },
-        {
-            text: "Github",
-            link: "https://www.github.com/"
-        }
-    ],
-    sideNav: [
-        {
-            path: "#installation",
-            text: "Installation",
-            link: "docs/v3/guide/Installation.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#introduction",
-            text: "Introduction",
-            link: "docs/v3/guide/introduction.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#mounting",
-            text: "Mouning",
-            link: "docs/v3/guide/mounting.md",
-            meta: false,
-            children: [
-                {
-                    path: "#mounting",
-                    text: "Mouning",
-                    link: "docs/v3/guide/mounting.md",
-                    meta: false,
-                    children: [],
-                }
-            ],
-        },
-        {
-            path: "#elements",
-            text: "Elements",
-            link: "docs/v3/guide/elements.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#lifecycle",
-            text: "Lifecycle",
-            link: "docs/v3/guide/lifecycle.md",
-            meta: false,
-            children: [],
-        }
-    ],
-};
-var config_1 = config$1.search;
-var config_2 = config$1.algolia;
-var config_3 = config$1.topNav;
-var config_4 = config$1.sideNav;
-
-var data = /*#__PURE__*/Object.freeze({
-  'default': config$1,
-  __moduleExports: config$1,
-  search: config_1,
-  algolia: config_2,
-  topNav: config_3,
-  sideNav: config_4
-});
 
 mount(document.body, new App(data));

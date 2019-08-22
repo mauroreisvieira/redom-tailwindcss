@@ -3,11 +3,10 @@ import Header from './Header/index';
 import Main from './Main/index';
 
 export default class App {
-    constructor (data) {
-        const { topNav, sideNav } = data;
+    constructor () {
         this.el = el('div#app', {},
-            this.header = new Header(topNav),
-            this.main = new Main(sideNav)
+            this.header = new Header(),
+            this.main = new Main()
         );
     }
 }

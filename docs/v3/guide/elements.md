@@ -1,8 +1,9 @@
-## Elements
+# Elements
 
 `el()` (actually an [alias](#alias) for [`html()`](https://github.com/redom/redom/blob/master/esm/html.js)) is a helper for `document.createElement()` with a couple of differences.
 
 The basic idea is to simply create elements with `el()` and mount them with `mount()`, almost like you would do with plain JavaScript:
+
 ```js
 import { el, mount } from 'redom';
 
@@ -10,6 +11,7 @@ const hello = el('h1', 'Hello RE:DOM!');
 
 mount(document.body, hello);
 ```
+
 ```html
 <body>
   <h1>Hello RE:DOM!</h1>
@@ -17,7 +19,9 @@ mount(document.body, hello);
 ```
 
 ### Text reference
+
 String and Number arguments (after the query) generate text nodes. You can also use the [`text()`](https://github.com/redom/redom/blob/master/esm/text.js) helper, which will return a reference to the text node:
+
 ```js
 import { text, mount } from 'redom';
 
@@ -27,9 +31,13 @@ mount(document.body, hello);
 
 hello.textContent = 'hi!';
 ```
+
 ```html
+
 <body>hi!</body>
+
 ```
+
 ### ID and class names
 
 You can use `#` and `.` as shortcuts for defining element IDs and class names. `div` is the default tag name:
@@ -181,37 +189,6 @@ mount(document.body, drawing);
 </body>
 ```
 
-## Mounting
-Please use `mount()`/`unmount()`/`setChildren()` every time you need to mount/unmount elements inside a RE:DOM app. These functions will trigger lifecycle events, add references to components etc.
-
-### Mount
-You can mount elements/components with [`mount(parent, child, /*opt.*/ before, /*opt.*/ replace)`](https://github.com/redom/redom/blob/master/esm/mount.js). If you omit the optional arguments, it works like [`appendChild()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild). If you pass a `before` value, it works like [`insertBefore()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore). If you, additionally, pass `true` as the `replace` argument, it works like [`replaceChild()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild) (in this case, the name `before` can be viewed in a chronological manner).
-
-The first time you mount a child, the `onmount` [lifecycle event](#component-lifecycle) will be triggered. If you mount the same child again to the same parent, `onremount` will be triggered. If you mount it to another place, `onunmount` and `onmount` will be triggered. Read more about lifecycle events [here](#component-lifecycle).
-
-```js
-import { el, mount } from 'redom';
-
-const hello = el('h1', 'Hello RE:DOM!');
-
-// append element:
-mount(document.body, hello);
-
-// insert before the first element:
-mount(document.body, hello, document.body.firstChild);
-
-// replace an existing element:
-const revamped = el('h1', 'Revamped!');
-mount(document.body, revamped, hello, true);
-```
-
-### Unmount
-If you need to remove elements/components, use [`unmount(parent, child)`](https://github.com/redom/redom/blob/master/esm/unmount.js). That will trigger the `onunmount` [lifecycle event](#component-lifecycle):
-
-```js
-unmount(document.body, hello);
-```
-
 ### Set children
 RE:DOM uses [`setChildren(parent, ...children)`](https://github.com/redom/redom/blob/master/esm/setchildren.js) under the hood for [lists](#lists). When you call `setChildren()`, RE:DOM will add/reorder/remove elements/components automatically by reference:
 ```js
@@ -305,69 +282,6 @@ class Image {
 }
 ```
 
-### Component lifecycle
-RE:DOM supports true lifecycle events. Three events are defined: `onmount`, `onremount` and `onunmount`.
-
-* The first time you mount an element to a specific parent, `onmount` will be triggered.
-* If you mount an element again to the same parent, `onremount` will be triggered.
-* If you unmount an element or move it from one parent to another, `onunmount` will be triggered.
-
-This means that `onunmount` and `onmount` will be triggered in succession when moving an element from one parent to another.
-
-```js
-import { el, mount } from 'redom';
-
-class Hello {
-  constructor () {
-    this.el = el('h1', 'Hello RE:DOM!');
-  }
-  onmount () {
-    console.log('mounted Hello');
-  }
-  onremount () {
-    console.log('remounted Hello');
-  }
-  onunmount () {
-    console.log('unmounted Hello');
-  }
-}
-
-class App {
-  constructor () {
-    this.el = el('app',
-      this.hello = new Hello()
-    );
-  }
-  onmount () {
-    console.log('mounted App');
-  }
-  onremount () {
-    console.log('remounted App');
-  }
-  onunmount () {
-    console.log('unmounted App');
-  }
-}
-
-const app = new App();
-
-mount(document.body, app);
-mount(document.body, app);
-mount(document.head, app);
-unmount(document.head, app);
-```
-```
-mounted App
-mounted Hello
-remounted App
-remounted Hello
-unmounted App
-unmounted Hello
-mounted App
-mounted Hello
-unmounted App
-unmounted Hello
-```
 ## Lists
 When you have dynamic data, it's not that easy to manually keep the elements and the data in sync.
 That's when the [`list(parent, View, key, initData)`](https://github.com/redom/redom/blob/master/esm/list.js) helper comes to rescue.

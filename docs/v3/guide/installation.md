@@ -1,13 +1,17 @@
-## Installing
+# Installing
 
 There are many ways to use RE:DOM.
 
-### npm
+## Via npm
 
 You can install RE:DOM from npm by calling:
 
-```
-npm i redom
+```shell
+# Using npm
+npm install redom
+
+# Using Yarn
+yarn add redom
 ```
 
 ### UMD

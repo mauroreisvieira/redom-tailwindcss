@@ -23,7 +23,7 @@ export default class Main {
                 (this.sideNav = new SideNav())
             ),
             (this.content = el("div#content", {
-                class: "min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6 lg:pl-0",
+                class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
             })),
         );
         this.sideNav.update(sideNav, current.path);

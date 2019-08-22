@@ -3,7 +3,7 @@ import { el, list } from "redom";
 class Link {
     constructor() {
         this.el = el("a", {
-            class: "block flex items-center hover:text-gray-700 mr-5",
+            class: "block flex items-center hover:text-gray-700 ml-5",
         });
     }
 
@@ -18,7 +18,7 @@ class Link {
 
 export default class TopNav {
     constructor(data) {
-        this.el = el("nav", {
+        this.el = el("div", {
             class: "flex justify-start items-center text-gray-500",
         });
         this.list = list(this.el, Link, "id");

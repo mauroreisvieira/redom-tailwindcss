@@ -271,6 +271,10 @@ function setStyleValue (el, key, value) {
 
 var xlinkns = 'http://www.w3.org/1999/xlink';
 
+function setAttr (view, arg1, arg2) {
+  setAttrInternal(view, arg1, arg2);
+}
+
 function setAttrInternal (view, arg1, arg2, initial) {
   var el = getEl(view);
 
@@ -599,7 +603,7 @@ list.extend = List.extend;
 class Link {
     constructor() {
         this.el = el("a", {
-            class: "block flex items-center hover:text-gray-700 mr-5",
+            class: "block flex items-center hover:text-gray-700 ml-5",
         });
     }
 
@@ -614,7 +618,7 @@ class Link {
 
 class TopNav {
     constructor(data) {
-        this.el = el("nav", {
+        this.el = el("div", {
             class: "flex justify-start items-center text-gray-500",
         });
         this.list = list(this.el, Link, "id");
@@ -633,6 +637,7 @@ class TopNav {
 
 var config = {
     repo: 'https://github.com/mauroreisvieira/redomjs.org/blob/master/',
+    version: "3.24.1",
     theme: {
         colors: {
             primary: "#d31b33",
@@ -729,21 +734,23 @@ var config = {
     ],
 };
 var config_1 = config.repo;
-var config_2 = config.theme;
-var config_3 = config.search;
-var config_4 = config.algolia;
-var config_5 = config.topNav;
-var config_6 = config.sideNav;
+var config_2 = config.version;
+var config_3 = config.theme;
+var config_4 = config.search;
+var config_5 = config.algolia;
+var config_6 = config.topNav;
+var config_7 = config.sideNav;
 
 var data = /*#__PURE__*/Object.freeze({
   'default': config,
   __moduleExports: config,
   repo: config_1,
-  theme: config_2,
-  search: config_3,
-  algolia: config_4,
-  topNav: config_5,
-  sideNav: config_6
+  version: config_2,
+  theme: config_3,
+  search: config_4,
+  algolia: config_5,
+  topNav: config_6,
+  sideNav: config_7
 });
 
 class Header {
@@ -751,7 +758,7 @@ class Header {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 h-16 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 items-center",
             },
             el(
                 "div",
@@ -759,28 +766,31 @@ class Header {
                 el(
                     "div",
                     {
-                        class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
+                        class: "lg:w-1/4 xl:w-1/5",
                     },
-                    el(
+                    (this.logo = el(
                         "a#logo",
                         {
-                            class: "flex items-center font-light text-2xl",
+                            class: "flex items-center h-16 font-light text-2xl px-6",
                             href: "/",
                         },
                         "Redom:js"
-                    )
+                    ))
                 ),
                 el(
-                    "nav#social",
+                    "div",
                     {
-                        class: "flex flex-grow justify-end lg:w-3/4 xl:w-4/5",
+                        class: "items-center flex flex-grow justify-end lg:w-3/4 xl:w-4/5 px-6",
                     },
-                    (this.nav = new TopNav())
+                    el(
+                        "div",
+                        (this.nav = new TopNav())
+                    )
                 )
             )
         );
 
-        this.nav.update(config_5);
+        this.nav.update(config_6);
     }
 }
 
@@ -9099,23 +9109,56 @@ class Link$1 {
         this.el.textContent = text;
 
         if (_current) {
-            this.el.classList.add("text-primary");
+            setAttr(this.el, {
+                class:
+                    "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium text-primary pointer-events-none",
+            });
         } else {
-            this.el.classList.remove("text-primary");
+            setAttr(this.el, {
+                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
+            });
         }
     }
 }
 
 class SideNav {
-    constructor(data) {
-        this.el = el("nav", {
-            class:
-                "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
-        });
-        this.list = list(this.el, Link$1, "id");
+    constructor() {
+        this.onSearch = this.onSearch.bind(this);
+
+        this.el = el(
+            "div",
+            {
+                class: "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
+            },
+            (this.search = el("input", {
+                class:
+                    "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-2 pr-4 pl-6 mb-6 block w-full appearance-none leading-normal ds-input",
+                placeholder: "Search docs...",
+                type: "text",
+                value: "",
+                ariaLabel: "search input",
+            })),
+            (this.nav = el("nav", {
+                role: "navigation",
+            }))
+        );
+
+        this.list = list(this.nav, Link$1);
+        this.search.oninput = evt => {
+            this.onSearch(this.search.value);
+        };
+    }
+
+    onSearch(value) {
+        if (value) {
+            this.update(config_7.filter(item => item.text.toUpperCase().includes(value.toUpperCase())), this._current);
+        } else {
+            this.update(config_7, this._current);
+        }
     }
 
     update(data, current) {
+        this._current = current;
         this.list.update(
             data.map(item => {
                 return {
@@ -9129,7 +9172,7 @@ class SideNav {
 
 class Main {
     constructor() {
-        const current = config_6.filter(item => item.path === window.location.hash)[0];
+        const current = config_7.filter(item => item.path === window.location.hash)[0];
         this.url = current.link || "/";
 
         this.el = el(
@@ -9146,10 +9189,10 @@ class Main {
                 (this.sideNav = new SideNav())
             ),
             (this.content = el("div#content", {
-                class: "min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6 lg:pl-0",
+                class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
             })),
         );
-        this.sideNav.update(config_6, current.path);
+        this.sideNav.update(config_7, current.path);
         this.update();
     }
 

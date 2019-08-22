@@ -1,14 +1,14 @@
 import { el } from "redom";
 import TopNav from "./../TopNav/index";
 
-import { topNav } from '../../../.redomdoc/config.js';
+import { topNav } from "../../../.redomdoc/config.js";
 
 export default class Header {
     constructor() {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 h-16 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 items-center",
             },
             el(
                 "div",
@@ -16,23 +16,26 @@ export default class Header {
                 el(
                     "div",
                     {
-                        class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
+                        class: "lg:w-1/4 xl:w-1/5",
                     },
-                    el(
+                    (this.logo = el(
                         "a#logo",
                         {
-                            class: "flex items-center font-light text-2xl",
+                            class: "flex items-center h-16 font-light text-2xl px-6",
                             href: "/",
                         },
                         "Redom:js"
-                    )
+                    ))
                 ),
                 el(
-                    "nav#social",
+                    "div",
                     {
-                        class: "flex flex-grow justify-end lg:w-3/4 xl:w-4/5",
+                        class: "items-center flex flex-grow justify-end lg:w-3/4 xl:w-4/5 px-6",
                     },
-                    (this.nav = new TopNav())
+                    el(
+                        "div",
+                        (this.nav = new TopNav())
+                    )
                 )
             )
         );

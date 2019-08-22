@@ -1,6 +1,6 @@
 # Installing
 
-There are many ways to use RE:DOM.
+There are many ways to use **RE:DOM**.
 
 ## Via npm
 

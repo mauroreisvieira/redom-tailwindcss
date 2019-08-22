@@ -11606,6 +11606,10 @@ video {
   z-index: auto;
 }
 
+input:focus {
+  outline: none;
+}
+
 @media (min-width: 576px) {
   .sm\:sr-only {
     position: absolute;
@@ -55197,9 +55201,9 @@ video {
   color: #2b6cb0;
 }
 
-.markdown-doc ul {
+.markdown-doc ul,
+.markdown-doc ol {
   display: block;
-  list-style-type: disc;
   -webkit-margin-before: 1em;
           margin-block-start: 1em;
   -webkit-margin-after: 1em;
@@ -55210,6 +55214,14 @@ video {
           margin-inline-end: 0px;
   -webkit-padding-start: 40px;
           padding-inline-start: 40px;
+}
+
+.markdown-doc ul {
+  list-style-type: disc;
+}
+
+.markdown-doc ol {
+  list-style-type: decimal;
 }
 
 .markdown-doc pre {
@@ -55307,20 +55319,21 @@ video {
 }
 
 .markdown-doc blockquote::before {
-  content: '❝';
+  content: '!';
+  width: 1.25rem;
+  height: 1.25rem;
   background-color: #673ab7;
-  width: 20px;
-  height: 20px;
   position: absolute;
   left: 0;
   top: 0;
-  transform: translate(calc(-50% + -2px), 50%);
-  border-radius: 50%;
+  border-radius: 9999px;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transform: translate(calc(-50% + -2px), 50%);
 }
 
 .markdown-doc blockquote p {

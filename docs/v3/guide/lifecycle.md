@@ -1,4 +1,5 @@
 # Lifecycle
+
 RE:DOM supports true lifecycle events. Three events are defined: `onmount`, `onremount` and `onunmount`.
 
 * The first time you mount an element to a specific parent, `onmount` will be triggered.

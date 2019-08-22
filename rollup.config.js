@@ -1,8 +1,7 @@
-import babel from 'rollup-plugin-babel';
 import serve from 'rollup-plugin-serve'
-import scss from 'rollup-plugin-scss'
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import postcss from 'rollup-plugin-postcss'
 
 module.exports = {
     input: 'src/main.js',
@@ -11,11 +10,10 @@ module.exports = {
         format: 'esm'
     },
     plugins: [
-        babel({
-            exclude: 'node_modules/**'
+        postcss({
+            extract: true
         }),
         serve(),
-        scss(),
         resolve(),
         commonjs()
     ]

@@ -1,50 +1,36 @@
-import { el } from 'redom';
-import Nav from './../Nav/index';
-
-import { Styles } from './../../utils/Styles.js';
+import { el } from "redom";
+import TopNav from "./../TopNav/index";
 
 export default class Header {
     constructor(data) {
-        let vdom = `<div id="foo"><p><span>Hello!</span></p></div>`;
-        let dom = this.render(vdom);
-        console.log(dom);
-
-        this.el = el('header#header.header', {},
-            el('div.header__logo', {}, el('a#logo', { href: "/"}, 'Redom:js')),
-            el('div.header__nav', {}, this.nav = new Nav())
+        this.el = el(
+            "header#header",
+            {
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center",
+            },
+            el(
+                "div",
+                {
+                    class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
+                },
+                el(
+                    "a#logo",
+                    {
+                        class: "flex items-center",
+                        href: "/",
+                    },
+                    "Redom:js"
+                )
+            ),
+            el(
+                "div",
+                {
+                    class: "flex flex-grow lg:w-3/4 xl:w-4/5",
+                },
+                (this.nav = new TopNav())
+            )
         );
 
         this.nav.update(data);
-
-
-
-        Styles(`
-            .markdown-doc {
-                border: 2px solid red;
-                padding: 24px;
-            }
-        `);
-    }
-
-    render(vnode) {
-        const aux = document.createElement('div');
-        aux.innerHTML = vnode;
-        console.dir(aux.childNodes[0]);
-        const elm = aux.childNodes[0];
-        let n = document.createElement(elm.nodeName);
-        console.warn(n);
-        Object.keys(elm.attributes || {}).forEach( k => n.setAttribute(k, elm.attributes[k]) );
-        (elm.children || []).forEach( c => n.appendChild(render(c)) );
-        return n;
-    }
-
-    obj(val) {
-        const { nodeName, attributes, children } = val;
-
-        return {
-            nodeName: nodeName,
-            attributes: attributes,
-            children: children,
-        }
     }
 }

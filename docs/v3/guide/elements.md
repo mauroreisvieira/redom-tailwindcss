@@ -1,14 +1,3 @@
-### Project generator
-
-You can also use the project generator, which will also install a file watcher and bundler. You can find it [here](https://github.com/redom/redom-cli).
-
-### Server-side use
-
-RE:DOM also works on server side, by using [NO:DOM](https://github.com/redom/nodom).
-
-### RE:DOM dev tools for Chrome
-You can install [RE:DOM dev tools for Chrome](https://github.com/redom/redom-devtools)
-
 ## Elements
 
 `el()` (actually an [alias](#alias) for [`html()`](https://github.com/redom/redom/blob/master/esm/html.js)) is a helper for `document.createElement()` with a couple of differences.

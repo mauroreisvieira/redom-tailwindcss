@@ -2,8 +2,6 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
-import { Styles } from './../../utils/Styles.js';
-
 export default class Markdown {
     constructor(path, content) {
         this.parent = content;

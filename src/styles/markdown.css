@@ -1,0 +1,65 @@
+.markdown-doc p {
+  @apply text-base;
+  @apply mt-6;
+}
+
+.markdown-doc a {
+   @apply text-blue-500 underline font-medium;
+}
+
+.markdown-doc a:hover {
+  @apply text-blue-700;
+}
+
+.markdown-doc pre {
+    @apply my-6;
+}
+
+.markdown-doc p code,
+.markdown-doc li code {
+    @apply inline-block;
+    @apply bg-gray-100;
+    @apply rounded-sm;
+    @apply text-sm;
+    @apply px-1;
+    @apply leading-none;
+    @apply whitespace-no-wrap;
+    @apply text-purple-600;
+    @apply font-mono;
+    @apply align-baseline;
+    font-weight: 400;
+}
+
+.markdown-doc h1 {
+    @apply mb-1;
+    @apply leading-none;
+    @apply text-gray-900;
+    @apply font-light;
+    @apply text-3xl;
+}
+
+.markdown-doc h2 {
+    @apply mt-16;
+    @apply mb-4;
+    @apply text-gray-900;
+    @apply leading-none;
+    @apply font-normal;
+    @apply text-2xl;
+}
+
+.markdown-doc h3 {
+    @apply mt-12 -mb-3;
+    @apply text-gray-900;
+    @apply leading-tight;
+    @apply font-medium;
+    @apply text-xl;
+}
+
+.markdown-doc h4 {
+    @apply mt-12;
+    @apply mb-0;
+    @apply text-gray-900;
+    @apply leading-snug;
+    @apply font-medium;
+    @apply text-lg;
+}

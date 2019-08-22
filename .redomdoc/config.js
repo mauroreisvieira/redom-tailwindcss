@@ -1,9 +1,4 @@
 module.exports = {
-    themeConfig: {
-        primaryColor: "#673ab7",
-        accentColor: "#e91e63",
-        bgColor: "#f5f5f5",
-    },
     search: {
         searchMaxSuggestions: 10,
     },
@@ -56,6 +51,13 @@ module.exports = {
             path: "#elements",
             text: "Elements",
             link: "docs/v3/guide/elements.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#lifecycle",
+            text: "Lifecycle",
+            link: "docs/v3/guide/lifecycle.md",
             meta: false,
             children: [],
         }

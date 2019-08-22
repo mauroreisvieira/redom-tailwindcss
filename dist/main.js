@@ -596,195 +596,79 @@ List.extend = function extendList (parent, View, key, initData) {
 
 list.extend = List.extend;
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(source, true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(source).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
+class Link {
+    constructor() {
+        this.el = el("a", {
+            class: "block flex items-center hover:text-gray-700 mr-5",
+        });
     }
-  }
 
-  return target;
+    update(data) {
+        const { text, path, link, _current } = data;
+        this.el.href = path || link;
+        this.el.title = text;
+        this.el.textContent = text;
+        if (_current) {
+            this.el.classList.add("is-active");
+        } else {
+            this.el.classList.remove("is-active");
+        }
+    }
 }
 
-var NavLink =
-/*#__PURE__*/
-function () {
-  function NavLink() {
-    _classCallCheck(this, NavLink);
-
-    this.el = el('a.nav__link');
-  }
-
-  _createClass(NavLink, [{
-    key: "update",
-    value: function update(data) {
-      var text = data.text,
-          path = data.path,
-          link = data.link,
-          _current = data._current;
-      this.el.href = path || link;
-      this.el.title = text;
-      this.el.textContent = text;
-
-      if (_current) {
-        this.el.classList.add('is-active');
-      } else {
-        this.el.classList.remove('is-active');
-      }
+class TopNav {
+    constructor(data) {
+        this.el = el("nav", {
+            class: "flex justify-start items-center text-gray-500",
+        });
+        this.list = list(this.el, Link, "id");
     }
-  }]);
 
-  return NavLink;
-}();
-
-var Nav =
-/*#__PURE__*/
-function () {
-  function Nav(data) {
-    _classCallCheck(this, Nav);
-
-    this.el = list('.nav', NavLink, 'id');
-  }
-
-  _createClass(Nav, [{
-    key: "update",
-    value: function update(data, current) {
-      this.el.update(data.map(function (item) {
-        return _objectSpread2({
-          _current: item.path === current
-        }, item);
-      }));
+    update(data, current) {
+        this.list.update(
+            data.map(item => {
+                return {
+                    _current: item.path === current,
+                    ...item,
+                };
+            })
+        );
     }
-  }]);
+}
 
-  return Nav;
-}();
+class Header {
+    constructor(data) {
+        this.el = el(
+            "header#header",
+            {
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center",
+            },
+            el(
+                "div",
+                {
+                    class: "lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8",
+                },
+                el(
+                    "a#logo",
+                    {
+                        class: "flex items-center",
+                        href: "/",
+                    },
+                    "Redom:js"
+                )
+            ),
+            el(
+                "div",
+                {
+                    class: "flex flex-grow lg:w-3/4 xl:w-4/5",
+                },
+                (this.nav = new TopNav())
+            )
+        );
 
-var Styles = function Styles(styles) {
-  var style = el('style', {}, styles);
-  mount(document.head, style);
-};
-
-var Header =
-/*#__PURE__*/
-function () {
-  function Header(data) {
-    _classCallCheck(this, Header);
-
-    var vdom = "<div id=\"foo\"><p><span>Hello!</span></p></div>";
-    var dom = this.render(vdom);
-    console.log(dom);
-    this.el = el('header#header.header', {}, el('div.header__logo', {}, el('a#logo', {
-      href: "/"
-    }, 'Redom:js')), el('div.header__nav', {}, this.nav = new Nav()));
-    this.nav.update(data);
-    Styles("\n            .markdown-doc {\n                border: 2px solid red;\n                padding: 24px;\n            }\n        ");
-  }
-
-  _createClass(Header, [{
-    key: "render",
-    value: function (_render) {
-      function render(_x) {
-        return _render.apply(this, arguments);
-      }
-
-      render.toString = function () {
-        return _render.toString();
-      };
-
-      return render;
-    }(function (vnode) {
-      var aux = document.createElement('div');
-      aux.innerHTML = vnode;
-      console.dir(aux.childNodes[0]);
-      var elm = aux.childNodes[0];
-      var n = document.createElement(elm.nodeName);
-      console.warn(n);
-      Object.keys(elm.attributes || {}).forEach(function (k) {
-        return n.setAttribute(k, elm.attributes[k]);
-      });
-      (elm.children || []).forEach(function (c) {
-        return n.appendChild(render(c));
-      });
-      return n;
-    })
-  }, {
-    key: "obj",
-    value: function obj(val) {
-      var nodeName = val.nodeName,
-          attributes = val.attributes,
-          children = val.children;
-      return {
-        nodeName: nodeName,
-        attributes: attributes,
-        children: children
-      };
+        this.nav.update(data);
     }
-  }]);
-
-  return Header;
-}();
+}
 
 // List of valid entities
 //
@@ -9045,130 +8929,187 @@ Prism.languages.js = Prism.languages.javascript;
 })();
 });
 
-var Markdown = function Markdown(path, content) {
-  var _this = this;
-
-  _classCallCheck(this, Markdown);
-
-  this.parent = content;
-  new Promise(function (resolve, reject) {
-    return fetch(window.location.origin + window.location.pathname + path).then(function (response) {
-      return response.text();
-    }).then(function (result) {
-      _this.md = new Remarkable({
-        langPrefix: "hljs language-"
-      });
-      _this.content = el("div.markdown-doc", {});
-      _this.content.innerHTML = _this.md.render(result);
-      setChildren(_this.parent, _this.content);
-    }).then(function (response) {
-      prism.highlightAll();
-    });
-  });
-};
-
-var Main =
-/*#__PURE__*/
-function () {
-  function Main(sideNav) {
-    _classCallCheck(this, Main);
-
-    var current = sideNav.filter(function (item) {
-      return item.path === window.location.hash;
-    })[0];
-    this.url = current.link || '/';
-    this.el = el("main.main#main", {}, this.sidebar = el("div.sidebar", {}, this.nav = new Nav()), this.content = el("div.content", {}));
-    this.nav.update(sideNav, current.path);
-    this.update();
-  }
-
-  _createClass(Main, [{
-    key: "update",
-    value: function update() {
-      new Markdown(this.url, this.content);
+class Markdown {
+    constructor(path, content) {
+        this.parent = content;
+        new Promise((resolve, reject) => {
+            return fetch(window.location.origin + window.location.pathname + path)
+                .then(response => {
+                    return response.text();
+                })
+                .then(result => {
+                    this.md = new Remarkable({
+                        langPrefix: "hljs language-",
+                    });
+                    this.content = el("div.markdown-doc", {});
+                    this.content.innerHTML = this.md.render(result);
+                    setChildren(this.parent, this.content);
+                }).then(response => {
+                    prism.highlightAll();
+                });
+        });
     }
-  }]);
+}
 
-  return Main;
-}();
+class Link$1 {
+    constructor() {
+        this.el = el("a", {
+            class: "px-2 -mx-2 py-1 transition-fast relative block text-teal-600 font-medium",
+        });
+    }
 
-var App = function App(data) {
-  _classCallCheck(this, App);
+    update(data) {
+        const { text, path, link, _current } = data;
+        this.el.href = path || link;
+        this.el.title = text;
+        this.el.textContent = text;
+        if (_current) {
+            this.el.classList.add("is-active");
+        } else {
+            this.el.classList.remove("is-active");
+        }
+    }
+}
 
-  var topNav = data.topNav,
-      sideNav = data.sideNav;
-  this.el = el('div#app', {}, this.header = new Header(topNav), this.main = new Main(sideNav));
-};
+class SideNav {
+    constructor(data) {
+        this.el = el("nav", {
+            class:
+                "h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent",
+        });
+        this.list = list(this.el, Link$1, "id");
+    }
+
+    update(data, current) {
+        this.list.update(
+            data.map(item => {
+                return {
+                    _current: item.path === current,
+                    ...item,
+                };
+            })
+        );
+    }
+}
+
+class Main {
+    constructor(sideNav) {
+        const current = sideNav.filter(item => item.path === window.location.hash)[0];
+        this.url = current.link || "/";
+
+        this.el = el(
+            "main#main",
+            {
+                class: " lg:flex w-full max-w-screen-xl mx-auto px-6 -mx-6 pt-24 pb-16 lg:pt-28",
+            },
+            el(
+                "div#sidebar",
+                {
+                    class:
+                        "hidden fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5",
+                },
+                (this.sideNav = new SideNav())
+            ),
+            (this.content = el("div#content", {
+                class: "min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5",
+            }))
+        );
+        this.sideNav.update(sideNav, current.path);
+        this.update();
+    }
+
+    update() {
+        new Markdown(this.url, this.content);
+    }
+}
+
+class App {
+    constructor (data) {
+        const { topNav, sideNav } = data;
+        this.el = el('div#app', {},
+            this.header = new Header(topNav),
+            this.main = new Main(sideNav)
+        );
+    }
+}
 
 var config$1 = {
-  themeConfig: {
-    primaryColor: "#673ab7",
-    accentColor: "#e91e63",
-    bgColor: "#f5f5f5"
-  },
-  search: {
-    searchMaxSuggestions: 10
-  },
-  algolia: {
-    applicationID: "<APPLICATION_ID>",
-    apiKey: "<API_KEY>",
-    index: "<INDEX_NAME>"
-  },
-  topNav: [{
-    text: "Twitter",
-    link: "https://www.twitter.com/"
-  }, {
-    text: "Github",
-    link: "https://www.github.com/"
-  }],
-  sideNav: [{
-    path: "#installation",
-    text: "Installation",
-    link: "docs/v3/guide/Installation.md",
-    meta: false,
-    children: []
-  }, {
-    path: "#introduction",
-    text: "Introduction",
-    link: "docs/v3/guide/introduction.md",
-    meta: false,
-    children: []
-  }, {
-    path: "#mounting",
-    text: "Mouning",
-    link: "docs/v3/guide/mounting.md",
-    meta: false,
-    children: [{
-      path: "#mounting",
-      text: "Mouning",
-      link: "docs/v3/guide/mounting.md",
-      meta: false,
-      children: []
-    }]
-  }, {
-    path: "#elements",
-    text: "Elements",
-    link: "docs/v3/guide/elements.md",
-    meta: false,
-    children: []
-  }]
+    search: {
+        searchMaxSuggestions: 10,
+    },
+    algolia: {
+        applicationID: "<APPLICATION_ID>",
+        apiKey: "<API_KEY>",
+        index: "<INDEX_NAME>",
+    },
+    topNav: [
+        {
+            text: "Twitter",
+            link: "https://www.twitter.com/"
+        },
+        {
+            text: "Github",
+            link: "https://www.github.com/"
+        }
+    ],
+    sideNav: [
+        {
+            path: "#installation",
+            text: "Installation",
+            link: "docs/v3/guide/Installation.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#introduction",
+            text: "Introduction",
+            link: "docs/v3/guide/introduction.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#mounting",
+            text: "Mouning",
+            link: "docs/v3/guide/mounting.md",
+            meta: false,
+            children: [
+                {
+                    path: "#mounting",
+                    text: "Mouning",
+                    link: "docs/v3/guide/mounting.md",
+                    meta: false,
+                    children: [],
+                }
+            ],
+        },
+        {
+            path: "#elements",
+            text: "Elements",
+            link: "docs/v3/guide/elements.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#lifecycle",
+            text: "Lifecycle",
+            link: "docs/v3/guide/lifecycle.md",
+            meta: false,
+            children: [],
+        }
+    ],
 };
-var config_1 = config$1.themeConfig;
-var config_2 = config$1.search;
-var config_3 = config$1.algolia;
-var config_4 = config$1.topNav;
-var config_5 = config$1.sideNav;
+var config_1 = config$1.search;
+var config_2 = config$1.algolia;
+var config_3 = config$1.topNav;
+var config_4 = config$1.sideNav;
 
 var data = /*#__PURE__*/Object.freeze({
   'default': config$1,
   __moduleExports: config$1,
-  themeConfig: config_1,
-  search: config_2,
-  algolia: config_3,
-  topNav: config_4,
-  sideNav: config_5
+  search: config_1,
+  algolia: config_2,
+  topNav: config_3,
+  sideNav: config_4
 });
 
-var themeConfig = config_1;
-Styles("\n    body {\n        background: ".concat(themeConfig.bgColor, ";\n    }\n\n    h2 {\n        color: ").concat(themeConfig.primaryColor, ";\n    }\n"));
 mount(document.body, new App(data));

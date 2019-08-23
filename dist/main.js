@@ -9367,7 +9367,7 @@ class Home {
                     el(
                         "a",
                         {
-                            href: "/#installation",
+                            href: "#installation",
                             class:
                                 "uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
                         },

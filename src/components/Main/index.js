@@ -24,21 +24,12 @@ export default class Main {
             })),
         );
 
-        this.mounted();
-
-        window.addEventListener("hashchange", (event) => {
-            this.mounted();
-        });
+        this.update();
     }
 
     update() {
-        new Markdown(this.url, this.content);
-    }
-
-    mounted() {
         const current = sideNav.filter(item => item.path === window.location.hash)[0];
-        this.url = current.link || "/";
         this.sideNav.update(sideNav, current.path);
-        this.update();
+        new Markdown(current.link, this.content);
     }
 }

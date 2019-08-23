@@ -12,7 +12,7 @@ export default class Home {
             el(
                 "div",
                 {
-                    class: "px-6 text-left md:text-center xl:text-left max-w-2xl md:max-w-3xl mx-auto",
+                    class: "px-6 max-w-3xl mx-auto",
                 },
                 el(
                     "h1",

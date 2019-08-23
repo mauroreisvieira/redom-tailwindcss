@@ -5,8 +5,13 @@ import Main from './../components/Main';
 export default class Doc {
     constructor () {
         this.el = el('div', { class: "bg-gray-100" },
-            new Header(),
-            new Main()
+            this.header = new Header(),
+            this.main = new Main()
         );
+    }
+
+    update(data) {
+        console.log(data);
+        this.main.update();
     }
 }

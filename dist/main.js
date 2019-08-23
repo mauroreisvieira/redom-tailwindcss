@@ -9310,22 +9310,13 @@ class Main {
             })),
         );
 
-        this.mounted();
-
-        window.addEventListener("hashchange", (event) => {
-            this.mounted();
-        });
+        this.update();
     }
 
     update() {
-        new Markdown(this.url, this.content);
-    }
-
-    mounted() {
         const current = config_7.filter(item => item.path === window.location.hash)[0];
-        this.url = current.link || "/";
         this.sideNav.update(config_7, current.path);
-        this.update();
+        new Markdown(current.link, this.content);
     }
 }
 
@@ -9339,7 +9330,7 @@ class Home {
             el(
                 "div",
                 {
-                    class: "px-6 text-left md:text-center xl:text-left max-w-2xl md:max-w-3xl mx-auto",
+                    class: "px-6 max-w-3xl mx-auto",
                 },
                 el(
                     "h1",
@@ -9401,9 +9392,14 @@ class Home {
 class Doc {
     constructor () {
         this.el = el('div', { class: "bg-gray-100" },
-            new Header(),
-            new Main()
+            this.header = new Header(),
+            this.main = new Main()
         );
+    }
+
+    update(data) {
+        console.log(data);
+        this.main.update();
     }
 }
 

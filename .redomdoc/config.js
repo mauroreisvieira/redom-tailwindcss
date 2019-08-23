@@ -33,7 +33,7 @@ module.exports = {
         {
             path: "#installation",
             text: "Installation",
-            link: "docs/v3/guide/Installation.md",
+            link: "docs/v3/guide/installation.md",
             meta: false,
             children: [],
         },

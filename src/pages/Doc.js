@@ -11,7 +11,6 @@ export default class Doc {
     }
 
     update(data) {
-        console.log(data);
         this.main.update();
     }
 }

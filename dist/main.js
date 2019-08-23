@@ -9192,20 +9192,24 @@ class Markdown {
                         {
                             class: "markdown-doc mt-16 pt-8 pb-16 w-full",
                         },
-                        (this.markdown = el("div", { class: "max-w-screen-xl" })),
-                        (this.footer = el(
+                        el(
                             "div",
-                            { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },
-                            "Caught a mistake or want to contribute to the documentation? ",
-                            el(
-                                "a",
-                                {
-                                    href: config_1 + path,
-                                    target: "_black"
-                                },
-                                "Edit this page on GitHub"
-                            )
-                        ))
+                            { class: "max-w-screen-xl" },
+                            (this.markdown = el("div")),
+                            (this.footer = el(
+                                "div",
+                                { class: "border-t border-gray-400 py-6 mt-8 text-gray-600" },
+                                "Caught a mistake or want to contribute to the documentation? ",
+                                el(
+                                    "a",
+                                    {
+                                        href: config_1 + path,
+                                        target: "_black",
+                                    },
+                                    "Edit this page on GitHub"
+                                )
+                            ))
+                        )
                     );
                     this.markdown.innerHTML = this.md.render(result);
                     setChildren(content, this.content);
@@ -9230,18 +9234,17 @@ class Link$1 {
 
         if (_current) {
             setAttr(this.el, {
-                class:
-                    "px-2 py-1 mb-3 lg:mb-1 block text-primary",
+                class: "py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
             });
         }
     }
 }
 
-class SideNav {
+class SideBar {
     constructor() {
         this.onSearch = this.onSearch.bind(this);
 
@@ -9252,7 +9255,7 @@ class SideNav {
             },
             (this.search = el("input", {
                 class:
-                    "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-2 pr-4 pl-6 mb-6 block w-full appearance-none leading-normal ds-input",
+                    "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",
                 placeholder: "Search docs...",
                 type: "text",
                 value: "",
@@ -9298,12 +9301,12 @@ class Main {
                 class: "lg:flex w-full mx-auto m-auto",
             },
             el(
-                "div#sidebar",
+                "aside#sidebar",
                 {
                     class:
                         "hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
-                (this.sideNav = new SideNav())
+                (this.sideNav = new SideBar())
             ),
             (this.content = el("div#content", {
                 class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
@@ -9398,7 +9401,6 @@ class Doc {
     }
 
     update(data) {
-        console.log(data);
         this.main.update();
     }
 }
@@ -9416,7 +9418,6 @@ if (window.location.hash) {
 
 window.addEventListener("hashchange", (event) => {
     window.scroll(0, 0);
-
     if (window.location.hash) {
         app.update("doc", data);
     } else {

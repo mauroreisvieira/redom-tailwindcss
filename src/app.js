@@ -18,7 +18,6 @@ if (window.location.hash) {
 
 window.addEventListener("hashchange", (event) => {
     window.scroll(0, 0);
-
     if (window.location.hash) {
         app.update("doc", data);
     } else {

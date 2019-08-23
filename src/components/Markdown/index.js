@@ -2,7 +2,7 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
-import { repo } from '../../../.redomdoc/config.js';
+import { repo } from "../../../.redomdoc/config.js";
 import "./../../styles/markdown.css";
 
 export default class Markdown {
@@ -22,20 +22,24 @@ export default class Markdown {
                         {
                             class: "markdown-doc mt-16 pt-8 pb-16 w-full",
                         },
-                        (this.markdown = el("div", { class: "max-w-screen-xl" })),
-                        (this.footer = el(
+                        el(
                             "div",
-                            { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },
-                            "Caught a mistake or want to contribute to the documentation? ",
-                            el(
-                                "a",
-                                {
-                                    href: repo + path,
-                                    target: "_black"
-                                },
-                                "Edit this page on GitHub"
-                            )
-                        ))
+                            { class: "max-w-screen-xl" },
+                            (this.markdown = el("div")),
+                            (this.footer = el(
+                                "div",
+                                { class: "border-t border-gray-400 py-6 mt-8 text-gray-600" },
+                                "Caught a mistake or want to contribute to the documentation? ",
+                                el(
+                                    "a",
+                                    {
+                                        href: repo + path,
+                                        target: "_black",
+                                    },
+                                    "Edit this page on GitHub"
+                                )
+                            ))
+                        )
                     );
                     this.markdown.innerHTML = this.md.render(result);
                     setChildren(content, this.content);

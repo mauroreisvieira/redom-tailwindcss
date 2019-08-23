@@ -4,7 +4,7 @@ import Main from './../components/Main';
 
 export default class Doc {
     constructor () {
-        this.el = el('div', {},
+        this.el = el('div', { class: "bg-gray-100" },
             new Header(),
             new Main()
         );

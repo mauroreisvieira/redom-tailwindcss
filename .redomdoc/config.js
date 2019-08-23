@@ -1,6 +1,6 @@
 module.exports = {
     repo: 'https://github.com/mauroreisvieira/redomjs.org/blob/master/',
-    version: "3.24.1",
+    version: "3.x",
     theme: {
         colors: {
             primary: "#d31b33",

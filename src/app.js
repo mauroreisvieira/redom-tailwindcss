@@ -5,7 +5,7 @@ import * as data from "../.redomdoc/config.js";
 import "./styles/prism.css";
 import "./styles/tailwind.css";
 
-const app = router("main#app", {
+const app = router("div#app", {
     home: Home,
     doc: Doc,
 });
@@ -16,15 +16,12 @@ if (window.location.hash) {
     app.update("home", data);
 }
 
-
 window.addEventListener("hashchange", (event) => {
     window.scroll(0, 0);
 
     if (window.location.hash) {
-        console.log("#Sasss");
         app.update("doc", data);
     } else {
-        console.log("#Sas");
         app.update("home", data);
     }
 });

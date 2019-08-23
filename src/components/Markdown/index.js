@@ -22,7 +22,7 @@ export default class Markdown {
                         {
                             class: "markdown-doc mt-16 pt-8 pb-16 w-full",
                         },
-                        (this.markdown = el("div")),
+                        (this.markdown = el("div", { class: "max-w-screen-xl" })),
                         (this.footer = el(
                             "div",
                             { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },

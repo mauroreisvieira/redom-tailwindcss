@@ -629,6 +629,46 @@ Router.prototype.update = function update (route, data) {
   this.view && this.view.update && this.view.update(data, route);
 };
 
+var ns = 'http://www.w3.org/2000/svg';
+
+var svgCache = {};
+
+function svg (query) {
+  var args = [], len = arguments.length - 1;
+  while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+  var element;
+
+  var type = typeof query;
+
+  if (type === 'string') {
+    element = memoizeSVG(query).cloneNode(false);
+  } else if (isNode(query)) {
+    element = query.cloneNode(false);
+  } else if (type === 'function') {
+    var Query = query;
+    element = new (Function.prototype.bind.apply( Query, [ null ].concat( args) ));
+  } else {
+    throw new Error('At least one argument required');
+  }
+
+  parseArgumentsInternal(getEl(element), args, true);
+
+  return element;
+}
+
+svg.extend = function extendSvg (query) {
+  var clone = memoizeSVG(query);
+
+  return svg.bind(this, clone);
+};
+
+svg.ns = ns;
+
+function memoizeSVG (query) {
+  return svgCache[query] || (svgCache[query] = createElement(query, ns));
+}
+
 class Link {
     constructor() {
         this.el = el("a", {
@@ -666,7 +706,7 @@ class TopNav {
 
 var config = {
     repo: 'https://github.com/mauroreisvieira/redomjs.org/blob/master/',
-    version: "3.24.1",
+    version: "3.x",
     theme: {
         colors: {
             primary: "#d31b33",
@@ -812,11 +852,11 @@ class Header {
             },
             el(
                 "div",
-                { class: "flex w-full max-w-screen-xl mx-auto" },
+                { class: "flex w-full mx-auto" },
                 el(
                     "div",
                     {
-                        class: "lg:w-1/4 xl:w-1/5",
+                        class: "lg:w-1/4",
                     },
                     (this.logo = el(
                         "a#logo",
@@ -830,12 +870,44 @@ class Header {
                 el(
                     "div",
                     {
-                        class: "items-center flex flex-grow justify-end lg:w-3/4 xl:w-4/5 px-6",
+                        class: " max-w-screen-xl items-center flex flex-grow justify-end lg:w-3/4 px-6",
                     },
                     el(
                         "div",
-                        (this.nav = new TopNav())
-                    )
+                        { class: "relative" },
+                        el(
+                            "select",
+                            {
+                                class:
+                                    "appearance-none block bg-white pl-2 pr-8 py-1 text-gray-500 font-medium text-base focus:outline-none",
+                            },
+                            el(
+                                "option",
+                                {
+                                    value: "v3",
+                                },
+                                config_2
+                            )
+                        ),
+                        el(
+                            "div",
+                            {
+                                class:
+                                    "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500",
+                            },
+                            svg("svg",
+                                {
+                                    class: "fill-current h-4 w-4",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                },
+                                svg("path", {
+                                    d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                })
+                            )
+                        )
+                    ),
+                    el("div", (this.nav = new TopNav()))
                 )
             )
         );
@@ -9120,7 +9192,7 @@ class Markdown {
                         {
                             class: "markdown-doc mt-16 pt-8 pb-16 w-full",
                         },
-                        (this.markdown = el("div")),
+                        (this.markdown = el("div", { class: "max-w-screen-xl" })),
                         (this.footer = el(
                             "div",
                             { class: 'border-t border-gray-500 py-6 mt-8 text-gray-600' },
@@ -9223,7 +9295,7 @@ class Main {
         this.el = el(
             "main#main",
             {
-                class: "lg:flex w-full max-w-screen-xl mx-auto m-auto",
+                class: "lg:flex w-full mx-auto m-auto",
             },
             el(
                 "div#sidebar",
@@ -9328,14 +9400,14 @@ class Home {
 
 class Doc {
     constructor () {
-        this.el = el('div', {},
+        this.el = el('div', { class: "bg-gray-100" },
             new Header(),
             new Main()
         );
     }
 }
 
-const app = router("main#app", {
+const app = router("div#app", {
     home: Home,
     doc: Doc,
 });
@@ -9346,15 +9418,12 @@ if (window.location.hash) {
     app.update("home", data);
 }
 
-
 window.addEventListener("hashchange", (event) => {
     window.scroll(0, 0);
 
     if (window.location.hash) {
-        console.log("#Sasss");
         app.update("doc", data);
     } else {
-        console.log("#Sas");
         app.update("home", data);
     }
 });

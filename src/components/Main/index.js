@@ -9,7 +9,7 @@ export default class Main {
         this.el = el(
             "main#main",
             {
-                class: "lg:flex w-full max-w-screen-xl mx-auto m-auto",
+                class: "lg:flex w-full mx-auto m-auto",
             },
             el(
                 "div#sidebar",

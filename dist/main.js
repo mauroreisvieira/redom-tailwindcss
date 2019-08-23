@@ -789,7 +789,7 @@ class Header {
                 )
             )
         );
-
+        // this.logo.innerHTML = ;
         this.nav.update(config_6);
     }
 }

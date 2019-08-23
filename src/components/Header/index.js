@@ -39,7 +39,7 @@ export default class Header {
                 )
             )
         );
-
+        // this.logo.innerHTML = ;
         this.nav.update(topNav);
     }
 }

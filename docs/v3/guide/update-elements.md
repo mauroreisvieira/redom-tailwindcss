@@ -25,6 +25,7 @@ setStyle(hello, { color: 'green' });
 ```
 
 ## Components
+
 It's really easy to create components with RE:DOM.
 Simply define a class or function, which returns an object with at least an `el` property, and in case of [list](#lists) also the `update` property:
 

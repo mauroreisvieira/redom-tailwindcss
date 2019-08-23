@@ -1,14 +1,11 @@
 import { el, mount, setChildren } from "redom";
-import Markdown from "./../Markdown/index";
-import SideNav from "./../SideNav/index";
+import Markdown from "./../Markdown";
+import SideNav from "./../SideNav";
 
 import { sideNav } from '../../../.redomdoc/config.js';
 
 export default class Main {
     constructor() {
-        const current = sideNav.filter(item => item.path === window.location.hash)[0];
-        this.url = current.link || "/";
-
         this.el = el(
             "main#main",
             {
@@ -26,11 +23,22 @@ export default class Main {
                 class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
             })),
         );
-        this.sideNav.update(sideNav, current.path);
-        this.update();
+
+        this.mounted();
+
+        window.addEventListener("hashchange", (event) => {
+            this.mounted();
+        });
     }
 
     update() {
         new Markdown(this.url, this.content);
+    }
+
+    mounted() {
+        const current = sideNav.filter(item => item.path === window.location.hash)[0];
+        this.url = current.link || "/";
+        this.sideNav.update(sideNav, current.path);
+        this.update();
     }
 }

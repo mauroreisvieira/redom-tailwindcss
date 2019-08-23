@@ -1,7 +1,7 @@
 .markdown-doc p {
     @apply text-base;
     @apply mt-6;
-    @apply leading-loose;
+    @apply leading-relaxed;
 }
 
 .markdown-doc strong {
@@ -10,15 +10,15 @@
 
 .markdown-doc p,
 .markdown-doc li {
-    @apply leading-loose;
+    @apply leading-relaxed;
 }
 
 .markdown-doc a {
-    @apply text-blue-600;
+    @apply text-primary;
 }
 
 .markdown-doc a:hover {
-    @apply text-blue-700;
+    @apply text-primary underline;
 }
 
 .markdown-doc ul,
@@ -65,6 +65,10 @@
     content: 'shell';
 }
 
+.markdown-doc pre.language-bash::before  {
+    content: 'bash';
+}
+
 .markdown-doc p code,
 .markdown-doc li code {
     @apply inline-block;
@@ -72,7 +76,7 @@
     @apply rounded-sm;
     @apply text-sm;
     @apply px-1;
-    @apply leading-loose;
+    @apply leading-relaxed;
     @apply whitespace-no-wrap;
     @apply text-accent;
     @apply font-mono;

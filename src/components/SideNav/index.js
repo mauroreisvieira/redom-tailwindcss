@@ -4,9 +4,7 @@ import { sideNav } from "../../../.redomdoc/config.js";
 
 class Link {
     constructor() {
-        this.el = el("a", {
-            class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
-        });
+        this.el = el("a", {});
     }
 
     update(data) {
@@ -18,11 +16,11 @@ class Link {
         if (_current) {
             setAttr(this.el, {
                 class:
-                    "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium text-primary pointer-events-none",
+                    "px-2 py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
+                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
             });
         }
     }

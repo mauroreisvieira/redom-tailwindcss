@@ -1,5 +1,5 @@
 import { el } from "redom";
-import TopNav from "./../TopNav/index";
+import TopNav from "./../TopNav";
 
 import { topNav } from "../../../.redomdoc/config.js";
 

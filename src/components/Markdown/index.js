@@ -3,6 +3,7 @@ import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
 import { repo } from '../../../.redomdoc/config.js';
+import "./../../styles/markdown.css";
 
 export default class Markdown {
     constructor(path, content) {

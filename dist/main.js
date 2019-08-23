@@ -600,6 +600,35 @@ List.extend = function extendList (parent, View, key, initData) {
 
 list.extend = List.extend;
 
+/* global Node */
+
+function router (parent, Views, initData) {
+  return new Router(parent, Views, initData);
+}
+
+var Router = function Router (parent, Views, initData) {
+  this.el = ensureEl(parent);
+  this.Views = Views;
+  this.initData = initData;
+};
+Router.prototype.update = function update (route, data) {
+  if (route !== this.route) {
+    var Views = this.Views;
+    var View = Views[route];
+
+    this.route = route;
+
+    if (View && (View instanceof Node || View.el instanceof Node)) {
+      this.view = View;
+    } else {
+      this.view = View && new View(this.initData, data);
+    }
+
+    setChildren(this.el, [ this.view ]);
+  }
+  this.view && this.view.update && this.view.update(data, route);
+};
+
 class Link {
     constructor() {
         this.el = el("a", {
@@ -689,6 +718,20 @@ var config = {
             children: [],
         },
         {
+            path: "#svg",
+            text: "SVG",
+            link: "docs/v3/guide/svg.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#set-children.md",
+            text: "Set Children",
+            link: "docs/v3/guide/set-children.md",
+            meta: false,
+            children: [],
+        },
+        {
             path: "#mounting",
             text: "Mounting",
             link: "docs/v3/guide/mounting.md",
@@ -721,6 +764,13 @@ var config = {
             path: "#update-elements",
             text: "Update elements",
             link: "docs/v3/guide/update-elements.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#place",
+            text: "Place",
+            link: "docs/v3/guide/place.md",
             meta: false,
             children: [],
         },
@@ -9097,9 +9147,7 @@ class Markdown {
 
 class Link$1 {
     constructor() {
-        this.el = el("a", {
-            class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
-        });
+        this.el = el("a", {});
     }
 
     update(data) {
@@ -9111,11 +9159,11 @@ class Link$1 {
         if (_current) {
             setAttr(this.el, {
                 class:
-                    "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium text-primary pointer-events-none",
+                    "px-2 py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700 font-medium",
+                class: "px-2 py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
             });
         }
     }
@@ -9172,9 +9220,6 @@ class SideNav {
 
 class Main {
     constructor() {
-        const current = config_7.filter(item => item.path === window.location.hash)[0];
-        this.url = current.link || "/";
-
         this.el = el(
             "main#main",
             {
@@ -9192,22 +9237,126 @@ class Main {
                 class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
             })),
         );
-        this.sideNav.update(config_7, current.path);
-        this.update();
+
+        this.mounted();
+
+        window.addEventListener("hashchange", (event) => {
+            this.mounted();
+        });
     }
 
     update() {
         new Markdown(this.url, this.content);
     }
+
+    mounted() {
+        const current = config_7.filter(item => item.path === window.location.hash)[0];
+        this.url = current.link || "/";
+        this.sideNav.update(config_7, current.path);
+        this.update();
+    }
 }
 
-class App {
-    constructor () {
-        this.el = el('div#app', {},
-            this.header = new Header(),
-            this.main = new Main()
+class Home {
+    constructor() {
+        this.el = el(
+            "div",
+            {
+                class: "w-full max-w-screen-xl relative mx-auto px-6 pt-16 pb-40 md:pb-24",
+            },
+            el(
+                "div",
+                {
+                    class: "px-6 text-left md:text-center xl:text-left max-w-2xl md:max-w-3xl mx-auto",
+                },
+                el(
+                    "h1",
+                    { class: "text-3xl sm:text-4xl md:text-7xl xl:text-4xl font-bold leading-tight" },
+                    "Tiny (2 KB) turboboosted JavaScript library for creating user interfaces"
+                ),
+                el(
+                    "div",
+                    { class: "leading-relaxed text-gray-900" },
+                    el(
+                        "p",
+                        { class: "my-6" },
+                        "RE:DOM is a tiny (2 KB) DOM library, which adds useful helpers to create DOM elements and keeping them in sync with the data."
+                    ),
+                    el(
+                        "p",
+                        { class: "my-6" },
+                        "Because RE:DOM is so close to the metal and doesn't use virtual dom, it's actually faster and uses less memory than almost all virtual dom based libraries, including React (benchmark)."
+                    ),
+                    el(
+                        "p",
+                           { class: "my-6" },
+                        "It's also easy to create reusable components with RE:DOM."
+                    ),
+                    el(
+                        "p",
+                        { class: ""},
+                        "Another benefit is, that you can use just pure JavaScript, so no complicated templating languages to learn and hassle with. Plus RE:DOM plays nicely with others. No need to write wrappers for things like Google Maps."
+                    )
+                ),
+                el(
+                    "div",
+                    { class: "mt-12" },
+                    el(
+                        "a",
+                        {
+                            href: "/#installation",
+                            class:
+                                "uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
+                        },
+                        "Get Started"
+                    ),
+                    el(
+                        "a",
+                        {
+                            href: "https://github.com/redom/redom/",
+                            target: "_blank",
+                            class:
+                                "uppercase rounded-full px-8 py-3 border-2 border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
+                        },
+                        "Github"
+                    )
+                )
+            )
         );
     }
 }
 
-mount(document.body, new App(data));
+class Doc {
+    constructor () {
+        this.el = el('div', {},
+            new Header(),
+            new Main()
+        );
+    }
+}
+
+const app = router("main#app", {
+    home: Home,
+    doc: Doc,
+});
+
+if (window.location.hash) {
+    app.update("doc", data);
+} else {
+    app.update("home", data);
+}
+
+
+window.addEventListener("hashchange", (event) => {
+    window.scroll(0, 0);
+
+    if (window.location.hash) {
+        console.log("#Sasss");
+        app.update("doc", data);
+    } else {
+        console.log("#Sas");
+        app.update("home", data);
+    }
+});
+
+mount(document.body, app);

@@ -4,7 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss'
 
 module.exports = {
-    input: 'src/main.js',
+    input: 'src/app.js',
     output: {
         file: 'dist/main.js',
         format: 'esm'

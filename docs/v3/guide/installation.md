@@ -1,12 +1,21 @@
 # Installing
 
-There are many ways to use **RE:DOM**.
+## Compatibility Note
 
-## Via npm
+Only if you use `el.extend()`, `svg.extend()` or `list.extend()`, you'll need at least IE9.
+All other features should work even in IE6. So for the most parts basically almost every browser out there is supported.
 
-You can install RE:DOM from npm by calling:
+## Redom Devtools
 
-```shell
+When using Redom, we recommend also installing the [Redom Devtools](https://github.com/redom/redom-devtools) in your browser, allowing you to inspect and
+debug your Redom applications in a more user-friendly interface.
+
+## NPM
+
+NPM is the recommended installation method when building large scale applications with Redom.
+It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/) or [Browserify](http://browserify.org/).
+
+```bash
 # Using npm
 npm install redom
 
@@ -14,43 +23,27 @@ npm install redom
 yarn add redom
 ```
 
-### UMD
+## CLI
 
-RE:DOM supports [UMD](https://github.com/umdjs/umd):
+Redom provides an [official CLI](https://github.com/redom/redom-cli) for quickly scaffolding ambitious Single Page Applications.
+It provides batteries-included build setups for a modern frontend workflow.
+It takes only a few minutes to get up and running with hot-reload, lint-on-save, and production-ready builds.
 
-```html
-<script src="https://redom.js.org/redom.min.js"></script>
-<script>
-    const { el, mount } = redom;
-    ...
-</script>
-```
+> The CLI assumes prior knowledge of Node.js and the associated build tools. If you are new to Redom or front-end build tools, we strongly suggest going without any build tools before using the CLI.
 
-### ES2015
-
-It's also possible to use the new [ES2015 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import):
-
-```js
-import { el, mount } from "https://redom.js.org/redom.es.min.js";
-```
-
-### Download
-
-Here's the download links:
-
--   [UMD, development](https://redom.js.org/redom.js)
--   [UMD, production](https://redom.js.org/redom.min.js)
--   [ES2015, development](https://redom.js.org/redom.es.js)
--   [ES2015, production](https://redom.js.org/redom.es.min.js)
-
-### Project generator
-
-You can also use the project generator, which will also install a file watcher and bundler. You can find it [here](https://github.com/redom/redom-cli).
-
-### Server-side use
+## Server-side
 
 RE:DOM also works on server side, by using [NO:DOM](https://github.com/redom/nodom).
 
-### RE:DOM dev tools for Chrome
+## Dev Build
 
-You can install [RE:DOM dev tools for Chrome](https://github.com/redom/redom-devtools)
+**Important:** the built files in GitHub’s `/dist` folder are only checked-in during releases.
+To use Redom from the latest source code on GitHub, you will have to build it yourself!
+
+```bash
+git clone https://github.com/redom/redom.git node_modules/redom
+cd node_modules/redom
+npm install
+npm run build
+```
+

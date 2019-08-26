@@ -24,7 +24,7 @@ export default class Header {
                             class: "flex items-center h-16 font-light text-2xl px-6",
                             href: "/",
                         },
-                        "Redom:js"
+                        "RE:DOM"
                     ))
                 ),
                 el(

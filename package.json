@@ -10,20 +10,21 @@
         "build": "rollup -c"
     },
     "dependencies": {
+        "autoprefixer": "^9.6.1",
+        "node-fetch": "^2.6.0",
+        "postcss-cli": "^6.1.3",
         "prismjs": "^1.17.1",
         "redom": "^3.24.1",
         "remarkable": "^2.0.0",
-        "tailwindcss": "^1.1.2",
-        "autoprefixer": "^9.6.1",
-        "postcss-cli": "^6.1.3"
+        "tailwindcss": "^1.1.2"
     },
     "devDependencies": {
         "prettier": "^1.18.2",
         "rollup": "^1.19.4",
         "rollup-plugin-commonjs": "^10.0.2",
+        "rollup-plugin-json": "^4.0.0",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-postcss": "^2.0.3",
-        "rollup-plugin-sass": "^1.2.2",
         "rollup-plugin-scss": "^1.0.2",
         "rollup-plugin-serve": "^1.0.1"
     }

@@ -704,12 +704,10 @@ class TopNav {
     }
 }
 
-const starPage = location.hostname === "localhost" ? location.origin : "https://mauroreisvieira.github.io/redomjs.org/";
-
 var config = {
-    startPage: starPage,
+    startPage: "/",
     contributors: "https://api.github.com/repos/redom/redom/contributors",
-    sponsors: "https://opencollective.com/redom/members/all.json",
+    sponsors: "https://opencollective.com/babel/members/all.json",
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
     version: "3.x",
     theme: {
@@ -9352,7 +9350,6 @@ class Main {
 
 class Home {
     constructor() {
-        this.isSponsor = false;
         this.el = el(
             "div",
             {},
@@ -9369,7 +9366,7 @@ class Home {
                     el("img", {
                         src: "./static/images/redomjs.svg",
                         alt: "Re:dom Logo",
-                        class: "self-center w-48 my-12",
+                        class: "self-center w-32 sm:w-40  my-12",
                     }),
                     el(
                         "h1",
@@ -9434,7 +9431,7 @@ class Home {
                         class: "w-full max-w-6xl relative mx-auto px-6 pt-16",
                     },
                     el("h2", { class: "text-gray-600 text-xl font-bold mb-4" }, "Contributors"),
-                    el("p", { class: "mb-16" }, "This project exists thanks to all the people who contribute."),
+                    el("p", { class: "mb-8" }, "This project exists thanks to all the people who contribute."),
                     (this.contributors = list("div.flex.flex-wrap.justify-center", Contributor, "id"))
                 )
             ),
@@ -9449,10 +9446,10 @@ class Home {
                     el("h2", { class: "text-gray-600 text-xl font-bold mb-4" }, "Sponsors"),
                     el(
                         "p",
-                        { class: "mb-16" },
+                        { class: "mb-8" },
                         "Support this project by becoming a sponsor. Your logo will show up here with a link to your website."
                     ),
-                    (this.sponsors = list("div.flex.flex-wrap.justify-center", Sponsor, "id")),
+                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Sponsor, "id")),
                     el(
                         "a",
                         {
@@ -9472,24 +9469,19 @@ class Home {
     }
 
     getContributors() {
-        fetch(config_2, {
-            credentials: "same-origin",
-        })
+        fetch(window.location.origin + "/.redomdoc/contributors.json")
             .then(response => response.json())
-            .then(results => {
-                this.contributors.update(results);
-            })
-            .catch(error => console.error(error));
+            .then(json => {
+                this.contributors.update(json);
+            });
     }
 
     getSponsors() {
-        fetch(config_3, {
-            mode: "no-cors",
-        })
-            .then(results => {
-                this.sponsors.update(results);
-            })
-            .catch(error => console.error(error));
+        fetch(window.location.origin + "/.redomdoc/sponsors.json")
+            .then(response => response.json())
+            .then(json => {
+                this.sponsors.update(json);
+            });
     }
 }
 
@@ -9499,16 +9491,18 @@ class Contributor {
     }
 
     update(data) {
-        const { url, avatar_url } = data;
+        const { html_url, avatar_url, login } = data;
         this.el = el(
             "a",
             {
-                href: url,
+                href: html_url,
                 target: "_blank",
+                title: login,
                 class: "my-2 mx-2",
             },
             el("img", {
                 class: "w-10 h-10 rounded-full",
+                alt: login,
                 src: avatar_url,
             })
         );
@@ -9521,19 +9515,32 @@ class Sponsor {
     }
 
     update(data) {
-        const { url, avatar_url } = data;
-        this.el = el(
-            "a",
-            {
-                href: url,
-                target: "_blank",
-                class: "my-2 mx-2",
-            },
-            el("img", {
-                class: "w-10 h-10 rounded-full",
-                src: avatar_url,
-            })
-        );
+        const { name, image, website, role, profile } = data;
+        if (role === "BACKER") {
+            let backer;
+            if (image) {
+                backer = el("img", {
+                    class: "w-16 h-16 rounded-full",
+                    alt: name,
+                    src: image,
+                });
+            } else {
+                backer = el("div", {
+                    class: "flex items-center justify-center font-semibold bg-gray-300 w-16 h-16 rounded-full"
+                }, name[0]);
+            }
+
+            this.el = el(
+                "a",
+                {
+                    href: website || profile,
+                    title: name,
+                    target: "_blank",
+                    class: "my-2 mx-2 w-16 h-16",
+                },
+                backer
+            );
+        }
     }
 }
 

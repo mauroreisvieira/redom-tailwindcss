@@ -13,6 +13,11 @@ class Link {
         this.el.title = text;
         this.el.textContent = text;
 
+        this.el.onclick = e => {
+            const event = new CustomEvent("on-click", { detail: data, bubbles: true });
+            this.el.dispatchEvent(event);
+        };
+
         if (_current) {
             setAttr(this.el, {
                 class: "py-1 mb-3 lg:mb-1 block text-primary",
@@ -39,17 +44,17 @@ export default class SideBar {
                 {
                     href: "/#",
                     title: "Re:dom",
-                    class: "self-center w-24 mb-8"
+                    class: "self-center w-24 mb-8",
                 },
                 (this.logo = el("img", {
                     src: "./static/images/redomjs.svg",
-                    alt: "Re:dom Logo"
+                    alt: "Re:dom Logo",
                 }))
             ),
             (this.search = el("input", {
                 class:
                     "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",
-                placeholder: "Search docs...",
+                placeholder: 'Search the docs (Press "/" to focus)',
                 type: "text",
                 value: "",
                 ariaLabel: "search input",
@@ -63,6 +68,10 @@ export default class SideBar {
         this.search.oninput = evt => {
             this.onSearch(this.search.value);
         };
+
+        this.el.addEventListener("on-click", e => {
+            this.search.value = "";
+        });
     }
 
     onSearch(value) {

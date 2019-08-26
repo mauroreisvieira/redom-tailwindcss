@@ -1,14 +1,13 @@
 module.exports = {
-    repo: 'https://github.com/mauroreisvieira/redomjs.org/blob/master/',
+    contributors: "https://api.github.com/repos/redom/redom/contributors",
+    sponsors: "https://opencollective.com/redom/members/all.json",
+    docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
     version: "3.x",
     theme: {
         colors: {
             primary: "#d31b33",
-            accent: "#673ab7"
-        }
-    },
-    search: {
-        searchMaxSuggestions: 10,
+            accent: "#673ab7",
+        },
     },
     algolia: {
         applicationID: "<APPLICATION_ID>",
@@ -49,7 +48,15 @@ module.exports = {
             text: "Elements",
             link: "docs/v3/guide/elements.md",
             meta: false,
-            children: [],
+            children: [
+                {
+                    path: "#text-reference",
+                    text: "Text reference",
+                    link: "docs/v3/guide/text-reference.md",
+                    meta: false,
+                    children: [],
+                },
+            ],
         },
         {
             path: "#svg",
@@ -84,15 +91,7 @@ module.exports = {
             text: "Lists",
             link: "docs/v3/guide/lists.md",
             meta: false,
-            children: [
-                {
-                    path: "#mounting",
-                    text: "Mouning",
-                    link: "docs/v3/guide/mounting.md",
-                    meta: false,
-                    children: [],
-                },
-            ],
+            children: [],
         },
         {
             path: "#update-elements",

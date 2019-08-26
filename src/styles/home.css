@@ -1,0 +1,10 @@
+#contributors,
+#sponsors {
+    @apply bg-gray-100
+}
+
+#contributors svg {
+    @apply text-gray-100;
+    @apply absolute;
+    bottom: 100%;
+}

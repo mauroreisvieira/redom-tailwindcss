@@ -165,6 +165,17 @@
   margin-top: 0;
 }
 
+#contributors,
+#sponsors {
+  background-color: #f7fafc
+}
+
+#contributors svg {
+  color: #f7fafc;
+  position: absolute;
+  bottom: 100%;
+}
+
 pre  {
   font-size: 0.85em;
   background-color: #f7fafc;

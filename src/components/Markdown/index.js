@@ -2,7 +2,7 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
-import { repo } from "../../../.redomdoc/config.js";
+import { docsRepo } from "../../../.redomdoc/config.js";
 import "./../../styles/markdown.css";
 
 export default class Markdown {
@@ -33,7 +33,7 @@ export default class Markdown {
                                 el(
                                     "a",
                                     {
-                                        href: repo + path,
+                                        href: docsRepo + path,
                                         target: "_black",
                                     },
                                     "Edit this page on GitHub"

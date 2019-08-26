@@ -51,7 +51,7 @@ export default class Home {
                         {
                             href: "#installation",
                             class:
-                                "uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
+                                "sm:inline-flex flex justify-center mb-4 uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
                         },
                         "Get Started"
                     ),
@@ -61,7 +61,7 @@ export default class Home {
                             href: "https://github.com/redom/redom/",
                             target: "_blank",
                             class:
-                                "uppercase rounded-full px-8 py-3 border-2 border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
+                                "sm:inline-flex flex justify-center uppercase rounded-full px-8 py-3 border-2 border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
                         },
                         "Github"
                     )

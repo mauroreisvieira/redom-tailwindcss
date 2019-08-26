@@ -32,8 +32,20 @@ export default class SideBar {
         this.el = el(
             "div",
             {
-                class: "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
+                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-12",
             },
+            el(
+                "a",
+                {
+                    href: "/#",
+                    title: "Re:dom",
+                    class: "self-center w-24 mb-8"
+                },
+                (this.logo = el("img", {
+                    src: "./static/images/redomjs.svg",
+                    alt: "Re:dom Logo"
+                }))
+            ),
             (this.search = el("input", {
                 class:
                     "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",

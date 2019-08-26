@@ -852,7 +852,7 @@ class Header {
             },
             el(
                 "div",
-                { class: "flex w-full mx-auto" },
+                { class: "h-16  flex w-full mx-auto" },
                 el(
                     "div",
                     {
@@ -861,10 +861,10 @@ class Header {
                     (this.logo = el(
                         "a#logo",
                         {
-                            class: "flex items-center h-16 font-light text-2xl px-6",
-                            href: "/",
+                            class: "lg:hidden flex items-center h-full font-light text-xl px-6",
+                            href: "/#",
                         },
-                        "Redom:js"
+                        "RE:DOM"
                     ))
                 ),
                 el(
@@ -9251,8 +9251,20 @@ class SideBar {
         this.el = el(
             "div",
             {
-                class: "px-6 pt-6 overflow-y-auto text-base lg:text-sm lg:py-12 lg:pl-6 lg:pr-8 mt-12",
+                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-12",
             },
+            el(
+                "a",
+                {
+                    href: "/#",
+                    title: "Re:dom",
+                    class: "self-center w-24 mb-8"
+                },
+                (this.logo = el("img", {
+                    src: "./static/images/redomjs.svg",
+                    alt: "Re:dom Logo"
+                }))
+            ),
             (this.search = el("input", {
                 class:
                     "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",
@@ -9304,7 +9316,7 @@ class Main {
                 "aside#sidebar",
                 {
                     class:
-                        "hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
+                        "bg-gray-100 z-50 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
                 (this.sideNav = new SideBar())
             ),
@@ -9372,7 +9384,7 @@ class Home {
                         {
                             href: "#installation",
                             class:
-                                "uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
+                                "sm:inline-flex flex justify-center mb-4 uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
                         },
                         "Get Started"
                     ),
@@ -9382,7 +9394,7 @@ class Home {
                             href: "https://github.com/redom/redom/",
                             target: "_blank",
                             class:
-                                "uppercase rounded-full px-8 py-3 border-2 border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
+                                "sm:inline-flex flex justify-center uppercase rounded-full px-8 py-3 border-2 border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
                         },
                         "Github"
                     )

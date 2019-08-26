@@ -15,7 +15,7 @@ export default class Main {
                 "aside#sidebar",
                 {
                     class:
-                        "hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
+                        "bg-gray-100 z-50 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
                 (this.sideNav = new SideBar())
             ),

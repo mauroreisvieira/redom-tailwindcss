@@ -12,7 +12,7 @@ export default class Header {
             },
             el(
                 "div",
-                { class: "flex w-full mx-auto" },
+                { class: "h-16  flex w-full mx-auto" },
                 el(
                     "div",
                     {
@@ -21,8 +21,8 @@ export default class Header {
                     (this.logo = el(
                         "a#logo",
                         {
-                            class: "flex items-center h-16 font-light text-2xl px-6",
-                            href: "/",
+                            class: "lg:hidden flex items-center h-full font-light text-xl px-6",
+                            href: "/#",
                         },
                         "RE:DOM"
                     ))

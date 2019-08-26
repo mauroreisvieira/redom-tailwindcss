@@ -9345,11 +9345,16 @@ class Home {
             el(
                 "div",
                 {
-                    class: "px-6 max-w-3xl mx-auto",
+                    class: "flex flex-col px-6 max-w-3xl mx-auto",
                 },
+                el("img", {
+                    src: "./static/images/redomjs.svg",
+                    alt: "Re:dom Logo",
+                    class: "self-center w-48 my-12",
+                }),
                 el(
                     "h1",
-                    { class: "text-3xl sm:text-4xl md:text-7xl xl:text-4xl font-bold leading-tight" },
+                    { class: "text-3xl sm:text-4xl md:text-7xl xl:text-4xl font-light leading-tight" },
                     "Tiny (2 KB) turboboosted JavaScript library for creating user interfaces"
                 ),
                 el(
@@ -9365,14 +9370,10 @@ class Home {
                         { class: "my-6" },
                         "Because RE:DOM is so close to the metal and doesn't use virtual dom, it's actually faster and uses less memory than almost all virtual dom based libraries, including React (benchmark)."
                     ),
+                    el("p", { class: "my-6" }, "It's also easy to create reusable components with RE:DOM."),
                     el(
                         "p",
-                           { class: "my-6" },
-                        "It's also easy to create reusable components with RE:DOM."
-                    ),
-                    el(
-                        "p",
-                        { class: ""},
+                        { class: "" },
                         "Another benefit is, that you can use just pure JavaScript, so no complicated templating languages to learn and hassle with. Plus RE:DOM plays nicely with others. No need to write wrappers for things like Google Maps."
                     )
                 ),
@@ -9384,7 +9385,7 @@ class Home {
                         {
                             href: "#installation",
                             class:
-                                "sm:inline-flex flex justify-center mb-4 uppercase rounded-full px-8 py-3 mr-4 border-2 border-primary text-base font-semibold text-primary",
+                                "sm:inline-flex flex justify-center mb-4 uppercase rounded-full px-8 py-3 sm:mr-4 border-2 border-primary text-base font-semibold text-primary",
                         },
                         "Get Started"
                     ),

@@ -9472,14 +9472,14 @@ class Home {
     }
 
     getContributors() {
-        fetch(config_2)
+        fetch(config_2, {
+            credentials: "same-origin",
+        })
             .then(response => response.json())
             .then(results => {
                 this.contributors.update(results);
             })
-            .catch(error => {
-                console.warn(error);
-            });
+            .catch(error => console.error(error));
     }
 
     getSponsors() {
@@ -9489,9 +9489,7 @@ class Home {
             .then(results => {
                 this.sponsors.update(results);
             })
-            .catch(error => {
-                console.warn(error);
-            });
+            .catch(error => console.error(error));
     }
 }
 

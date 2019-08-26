@@ -127,14 +127,14 @@ export default class Home {
     }
 
     getContributors() {
-        fetch(contributors)
+        fetch(contributors, {
+            credentials: "same-origin",
+        })
             .then(response => response.json())
             .then(results => {
                 this.contributors.update(results);
             })
-            .catch(error => {
-                console.warn(error);
-            });
+            .catch(error => console.error(error))
     }
 
     getSponsors() {
@@ -144,9 +144,7 @@ export default class Home {
             .then(results => {
                 this.sponsors.update(results);
             })
-            .catch(error => {
-                console.warn(error);
-            });
+            .catch(error => console.error(error))
     }
 }
 

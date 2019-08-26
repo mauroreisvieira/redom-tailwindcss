@@ -1,4 +1,7 @@
+const starPage = location.hostname === "localhost" ? location.origin : "https://mauroreisvieira.github.io/redomjs.org/";
+
 module.exports = {
+    startPage: starPage,
     contributors: "https://api.github.com/repos/redom/redom/contributors",
     sponsors: "https://opencollective.com/redom/members/all.json",
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
@@ -116,3 +119,4 @@ module.exports = {
         },
     ],
 };
+

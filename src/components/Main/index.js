@@ -28,7 +28,7 @@ export default class Main {
     }
 
     update() {
-        const current = sideNav.filter(item => item.path === window.location.hash)[0];
+        const current = sideNav.filter(item => item.path === location.hash)[0];
         this.sideNav.update(sideNav, current.path);
         new Markdown(current.link, this.content);
     }

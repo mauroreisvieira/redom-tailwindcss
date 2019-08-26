@@ -1,7 +1,7 @@
 import { el, svg } from "redom";
 import TopNav from "./../TopNav";
 
-import { topNav, version } from "../../../.redomdoc/config.js";
+import { startPage, topNav, version } from "../../../.redomdoc/config.js";
 
 export default class Header {
     constructor() {
@@ -22,7 +22,7 @@ export default class Header {
                         "a#logo",
                         {
                             class: "lg:hidden flex items-center h-full font-light text-xl px-6",
-                            href: "/#",
+                            href: startPage,
                         },
                         "RE:DOM"
                     ))

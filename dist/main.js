@@ -704,7 +704,10 @@ class TopNav {
     }
 }
 
+const starPage = location.hostname === "localhost" ? location.origin : "https://mauroreisvieira.github.io/redomjs.org/";
+
 var config = {
+    startPage: starPage,
     contributors: "https://api.github.com/repos/redom/redom/contributors",
     sponsors: "https://opencollective.com/redom/members/all.json",
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
@@ -822,26 +825,28 @@ var config = {
         },
     ],
 };
-var config_1 = config.contributors;
-var config_2 = config.sponsors;
-var config_3 = config.docsRepo;
-var config_4 = config.version;
-var config_5 = config.theme;
-var config_6 = config.algolia;
-var config_7 = config.topNav;
-var config_8 = config.sideNav;
+var config_1 = config.startPage;
+var config_2 = config.contributors;
+var config_3 = config.sponsors;
+var config_4 = config.docsRepo;
+var config_5 = config.version;
+var config_6 = config.theme;
+var config_7 = config.algolia;
+var config_8 = config.topNav;
+var config_9 = config.sideNav;
 
 var data = /*#__PURE__*/Object.freeze({
   'default': config,
   __moduleExports: config,
-  contributors: config_1,
-  sponsors: config_2,
-  docsRepo: config_3,
-  version: config_4,
-  theme: config_5,
-  algolia: config_6,
-  topNav: config_7,
-  sideNav: config_8
+  startPage: config_1,
+  contributors: config_2,
+  sponsors: config_3,
+  docsRepo: config_4,
+  version: config_5,
+  theme: config_6,
+  algolia: config_7,
+  topNav: config_8,
+  sideNav: config_9
 });
 
 class Header {
@@ -863,7 +868,7 @@ class Header {
                         "a#logo",
                         {
                             class: "lg:hidden flex items-center h-full font-light text-xl px-6",
-                            href: "/#",
+                            href: config_1,
                         },
                         "RE:DOM"
                     ))
@@ -887,7 +892,7 @@ class Header {
                                 {
                                     value: "v3",
                                 },
-                                config_4
+                                config_5
                             )
                         ),
                         el(
@@ -913,7 +918,7 @@ class Header {
             )
         );
         // this.logo.innerHTML = ;
-        this.nav.update(config_7);
+        this.nav.update(config_8);
     }
 }
 
@@ -9204,7 +9209,7 @@ class Markdown {
                                 el(
                                     "a",
                                     {
-                                        href: config_3 + path,
+                                        href: config_4 + path,
                                         target: "_black",
                                     },
                                     "Edit this page on GitHub"
@@ -9262,7 +9267,7 @@ class SideBar {
             el(
                 "a",
                 {
-                    href: "/#",
+                    href: config_1,
                     title: "Re:dom",
                     class: "self-center w-24 mb-8",
                 },
@@ -9296,9 +9301,9 @@ class SideBar {
 
     onSearch(value) {
         if (value) {
-            this.update(config_8.filter(item => item.text.toUpperCase().includes(value.toUpperCase())), this._current);
+            this.update(config_9.filter(item => item.text.toUpperCase().includes(value.toUpperCase())), this._current);
         } else {
-            this.update(config_8, this._current);
+            this.update(config_9, this._current);
         }
     }
 
@@ -9339,8 +9344,8 @@ class Main {
     }
 
     update() {
-        const current = config_8.filter(item => item.path === window.location.hash)[0];
-        this.sideNav.update(config_8, current.path);
+        const current = config_9.filter(item => item.path === location.hash)[0];
+        this.sideNav.update(config_9, current.path);
         new Markdown(current.link, this.content);
     }
 }
@@ -9467,7 +9472,7 @@ class Home {
     }
 
     getContributors() {
-        fetch(config_1)
+        fetch(config_2)
             .then(response => response.json())
             .then(results => {
                 this.contributors.update(results);
@@ -9478,7 +9483,7 @@ class Home {
     }
 
     getSponsors() {
-        fetch(config_2, {
+        fetch(config_3, {
             mode: "no-cors",
         })
             .then(results => {

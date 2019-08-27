@@ -182,7 +182,7 @@ export default class Home {
                 el(
                     "div",
                     {
-                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-40",
+                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-24",
                     },
                     el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Sponsors"),
                     el(
@@ -222,6 +222,7 @@ export class Contributor {
             {
                 href: html_url,
                 target: "_blank",
+                "data-title": login,
                 title: login,
                 class: "my-2 mx-2",
             },
@@ -262,6 +263,7 @@ export class Backer {
             "a",
             {
                 href: website !== "null" ? website : profile,
+                "data-title": name,
                 title: name,
                 target: "_blank",
                 class: "my-2 mx-2 w-16 h-16",

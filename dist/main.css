@@ -1,3 +1,11 @@
+a:not([href]) {
+  text-transform: uppercase;
+}
+
+a[href] {
+  text-transform: inherit;
+}
+
 .markdown-doc p {
   font-size: 1rem;
   margin-top: 1.5rem;
@@ -168,7 +176,7 @@
 #backers,
 #contributors,
 #sponsors {
-  background-color: #f7fafc
+  background-color: #f7fafc;
 }
 
 #contributors svg {
@@ -176,6 +184,43 @@
   color: #f7fafc;
   position: absolute;
   bottom: 100%;
+}
+
+a[data-title] {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+a[data-title]::after {
+  background-color: #2d3748;
+  border-radius: 0.125rem;
+  font-size: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  transition: 222ms cubic-bezier(0.4, 0, 1, 1);
+  transition-property: opacity, transform;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  min-width: 120px;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  color: #fff;
+  text-align: center;
+  text-transform: none;
+  pointer-events: none;
+  content: attr(data-title);
+  z-index: 1000;
+  word-break: break-all;
+}
+
+a[data-title]:hover::after {
+  transform: translate(-50%, -8px);
+  opacity: 1;
+  pointer-events: all;
 }
 
 pre  {

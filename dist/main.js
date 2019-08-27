@@ -875,88 +875,104 @@ var config = {
     ],
     sideNav: [
         {
-            path: "#installation",
-            text: "Installation",
-            link: "docs/v3/guide/installation.md",
+            path: false,
+            text: "Get Started",
+            link: false,
             meta: false,
-            children: [],
+            children: [
+                {
+                    path: "#installation",
+                    text: "Installation",
+                    link: "docs/v3/guide/installation.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#introduction",
+                    text: "Introduction",
+                    link: "docs/v3/guide/introduction.md",
+                    meta: false,
+                    children: [],
+                },
+            ],
         },
         {
-            path: "#introduction",
-            text: "Introduction",
-            link: "docs/v3/guide/introduction.md",
+            path: false,
+            text: "API",
+            link: false,
             meta: false,
-            children: [],
-        },
-        {
-            path: "#elements",
-            text: "Elements",
-            link: "docs/v3/guide/elements.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#svg",
-            text: "SVG",
-            link: "docs/v3/guide/svg.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#set-children",
-            text: "Set Children",
-            link: "docs/v3/guide/set-children.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#update-elements",
-            text: "Update elements",
-            link: "docs/v3/guide/update-elements.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#mounting",
-            text: "Mounting",
-            link: "docs/v3/guide/mounting.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#components",
-            text: "Components",
-            link: "docs/v3/guide/components.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#lists",
-            text: "Lists",
-            link: "docs/v3/guide/lists.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#lifecycle",
-            text: "Lifecycle",
-            link: "docs/v3/guide/lifecycle.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#place",
-            text: "Place",
-            link: "docs/v3/guide/place.md",
-            meta: false,
-            children: [],
-        },
-        {
-            path: "#router",
-            text: "Router",
-            link: "docs/v3/guide/router.md",
-            meta: false,
-            children: [],
+            children: [
+                {
+                    path: "#elements",
+                    text: "Elements",
+                    link: "docs/v3/guide/elements.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#svg",
+                    text: "SVG",
+                    link: "docs/v3/guide/svg.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#set-children",
+                    text: "Set Children",
+                    link: "docs/v3/guide/set-children.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#update-elements",
+                    text: "Update elements",
+                    link: "docs/v3/guide/update-elements.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#mounting",
+                    text: "Mounting",
+                    link: "docs/v3/guide/mounting.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#components",
+                    text: "Components",
+                    link: "docs/v3/guide/components.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#lists",
+                    text: "Lists",
+                    link: "docs/v3/guide/lists.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#lifecycle",
+                    text: "Lifecycle",
+                    link: "docs/v3/guide/lifecycle.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#place",
+                    text: "Place",
+                    link: "docs/v3/guide/place.md",
+                    meta: false,
+                    children: [],
+                },
+                {
+                    path: "#router",
+                    text: "Router",
+                    link: "docs/v3/guide/router.md",
+                    meta: false,
+                    children: [],
+                },
+            ],
         },
     ],
 };
@@ -989,7 +1005,7 @@ class Header {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-50 lg:z-40 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-50 lg:z-40 px-6 items-center",
             },
             el(
                 "div",
@@ -1002,7 +1018,7 @@ class Header {
                     (this.logo = el(
                         "a#logo",
                         {
-                            class: "lg:hidden flex items-center h-full font-light text-xl px-6",
+                            class: "lg:hidden flex items-center h-full font-light text-xl",
                             href: config_1,
                         },
                         "RE:DOM"
@@ -1011,7 +1027,7 @@ class Header {
                 el(
                     "div",
                     {
-                        class: " max-w-screen-xl items-center flex flex-grow justify-end lg:w-3/4 px-6",
+                        class: " max-w-screen-xl items-center flex flex-grow justify-end lg:w-3/4",
                     },
                     el(
                         "div",
@@ -1076,7 +1092,6 @@ class Header {
 
         this.button.addEventListener("click", e => {
             const event = new CustomEvent("on-button-click", { detail: e, bubbles: true });
-            console.log(event);
             this.button.dispatchEvent(event);
         });
     }
@@ -9382,7 +9397,6 @@ class Markdown {
                 })
                 .then(response => {
                     prism.highlightAll();
-                    console.log(this.content.querySelectorAll("h2"));
                 });
         });
     }
@@ -9396,14 +9410,38 @@ class Link$1 {
     update(data) {
         const { text, path, children } = data;
 
-        this.el.href = path;
-        this.el.title = text;
-        this.el.textContent = text;
+        this.el = el("ul", { class: "uppercase" }, text);
+
+        if (path) {
+            this.el = el(
+                "li",
+                {},
+                (this.link = el(
+                    "a",
+                    {
+                        title: text,
+                        href: path,
+                    },
+                    el("span", {}, text)
+                ))
+            );
+        }
 
         if (children.length) {
-            const aux = (this.nav = el("nav.ml-5.mt-2", {
-                role: "navigation",
-            }));
+            const aux = el(
+                "li",
+                {},
+                el(
+                    "span",
+                    {
+                        class: "mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs",
+                    },
+                    text
+                ),
+                (this.nav = el("ul", {
+                    class: "ml-5 mt-2 text-blue-700",
+                }))
+            );
             this.list = list(this.nav, Link$1);
             this.list.update(
                 children.map(item => {
@@ -9412,7 +9450,7 @@ class Link$1 {
                     };
                 })
             );
-            this.el.appendChild(aux);
+            this.el = aux;
         }
 
         if (path === location.hash) {
@@ -9425,7 +9463,8 @@ class Link$1 {
             });
         }
 
-        this.el.onclick = e => {
+        this.el.onclick = evt => {
+            evt.stopPropagation();
             const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
@@ -9439,31 +9478,39 @@ class SideBar {
         this.el = el(
             "div",
             {
-                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12",
+                class: "h-full flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12 pb-24",
             },
             el(
-                "a",
-                {
-                    href: config_1,
-                    title: "Re:dom",
-                    class: "self-center w-24 mb-8 hidden lg:flex",
-                },
-                (this.logo = el("img", {
-                    src: "./static/images/redomjs.svg",
-                    alt: "Re:dom Logo",
+                "div",
+                { class: "flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                el(
+                    "a",
+                    {
+                        href: config_1,
+                        title: "Re:dom",
+                        class: "self-center w-24 mb-8 hidden lg:flex",
+                    },
+                    (this.logo = el("img", {
+                        src: "./static/images/redomjs.svg",
+                        alt: "Re:dom Logo",
+                    }))
+                ),
+                (this.search = el("input", {
+                    class:
+                        "border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 block w-full appearance-none leading-normal",
+                    placeholder: 'Search the docs (Press "/" to focus)',
+                    type: "text",
+                    value: "",
+                    ariaLabel: "search input",
                 }))
             ),
-            (this.search = el("input", {
-                class:
-                    "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",
-                placeholder: 'Search the docs (Press "/" to focus)',
-                type: "text",
-                value: "",
-                ariaLabel: "search input",
-            })),
-            (this.nav = el("nav", {
-                role: "navigation",
-            }))
+            el(
+                "nav",
+                {
+                    role: "navigation",
+                },
+                (this.nav = el("ul"))
+            )
         );
 
         this.list = list(this.nav, Link$1);
@@ -9520,7 +9567,7 @@ class Main {
                 "aside#sidebar",
                 {
                     class:
-                        "bg-gray-100 z-40 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
+                        "h-screen bg-gray-100 z-40 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
                 (this.sideNav = new SideBar())
             )),
@@ -9736,7 +9783,7 @@ class Home {
                 el(
                     "div",
                     {
-                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-40",
+                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-24",
                     },
                     el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Sponsors"),
                     el(
@@ -9776,6 +9823,7 @@ class Contributor {
             {
                 href: html_url,
                 target: "_blank",
+                "data-title": login,
                 title: login,
                 class: "my-2 mx-2",
             },
@@ -9816,6 +9864,7 @@ class Backer {
             "a",
             {
                 href: website !== "null" ? website : profile,
+                "data-title": name,
                 title: name,
                 target: "_blank",
                 class: "my-2 mx-2 w-16 h-16",

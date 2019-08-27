@@ -10,14 +10,38 @@ class Link {
     update(data) {
         const { text, path, children } = data;
 
-        this.el.href = path;
-        this.el.title = text;
-        this.el.textContent = text;
+        this.el = el("ul", { class: "uppercase" }, text);
+
+        if (path) {
+            this.el = el(
+                "li",
+                {},
+                (this.link = el(
+                    "a",
+                    {
+                        title: text,
+                        href: path,
+                    },
+                    el("span", {}, text)
+                ))
+            );
+        }
 
         if (children.length) {
-            const aux = (this.nav = el("nav.ml-5.mt-2", {
-                role: "navigation",
-            }));
+            const aux = el(
+                "li",
+                {},
+                el(
+                    "span",
+                    {
+                        class: "mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs",
+                    },
+                    text
+                ),
+                (this.nav = el("ul", {
+                    class: "ml-5 mt-2 text-blue-700",
+                }))
+            );
             this.list = list(this.nav, Link);
             this.list.update(
                 children.map(item => {
@@ -27,7 +51,7 @@ class Link {
                     };
                 })
             );
-            this.el.appendChild(aux);
+            this.el = aux;
         }
 
         if (path === location.hash) {
@@ -40,7 +64,8 @@ class Link {
             });
         }
 
-        this.el.onclick = e => {
+        this.el.onclick = evt => {
+            evt.stopPropagation();
             const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
@@ -54,31 +79,39 @@ export default class SideBar {
         this.el = el(
             "div",
             {
-                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12",
+                class: "h-full flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12 pb-24",
             },
             el(
-                "a",
-                {
-                    href: startPage,
-                    title: "Re:dom",
-                    class: "self-center w-24 mb-8 hidden lg:flex",
-                },
-                (this.logo = el("img", {
-                    src: "./static/images/redomjs.svg",
-                    alt: "Re:dom Logo",
+                "div",
+                { class: "flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                el(
+                    "a",
+                    {
+                        href: startPage,
+                        title: "Re:dom",
+                        class: "self-center w-24 mb-8 hidden lg:flex",
+                    },
+                    (this.logo = el("img", {
+                        src: "./static/images/redomjs.svg",
+                        alt: "Re:dom Logo",
+                    }))
+                ),
+                (this.search = el("input", {
+                    class:
+                        "border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 block w-full appearance-none leading-normal",
+                    placeholder: 'Search the docs (Press "/" to focus)',
+                    type: "text",
+                    value: "",
+                    ariaLabel: "search input",
                 }))
             ),
-            (this.search = el("input", {
-                class:
-                    "transition border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 mb-6 block w-full appearance-none leading-normal",
-                placeholder: 'Search the docs (Press "/" to focus)',
-                type: "text",
-                value: "",
-                ariaLabel: "search input",
-            })),
-            (this.nav = el("nav", {
-                role: "navigation",
-            }))
+            el(
+                "nav",
+                {
+                    role: "navigation",
+                },
+                (this.nav = el("ul"))
+            )
         );
 
         this.list = list(this.nav, Link);

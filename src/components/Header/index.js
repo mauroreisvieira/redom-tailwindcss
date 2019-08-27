@@ -8,7 +8,7 @@ export default class Header {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-50 lg:z-40 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-50 lg:z-40 px-6 items-center",
             },
             el(
                 "div",
@@ -21,7 +21,7 @@ export default class Header {
                     (this.logo = el(
                         "a#logo",
                         {
-                            class: "lg:hidden flex items-center h-full font-light text-xl px-6",
+                            class: "lg:hidden flex items-center h-full font-light text-xl",
                             href: startPage,
                         },
                         "RE:DOM"
@@ -30,7 +30,7 @@ export default class Header {
                 el(
                     "div",
                     {
-                        class: " max-w-screen-xl items-center flex flex-grow justify-end lg:w-3/4 px-6",
+                        class: " max-w-screen-xl items-center flex flex-grow justify-end lg:w-3/4",
                     },
                     el(
                         "div",
@@ -95,7 +95,6 @@ export default class Header {
 
         this.button.addEventListener("click", e => {
             const event = new CustomEvent("on-button-click", { detail: e, bubbles: true });
-            console.log(event);
             this.button.dispatchEvent(event);
         });
     }

@@ -1,3 +1,12 @@
+a:not([href]) {
+    text-transform: uppercase;
+}
+
+a[href] {
+    text-transform: inherit;
+}
+
+
 .markdown-doc p {
     @apply text-base;
     @apply mt-6;

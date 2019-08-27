@@ -1,7 +1,10 @@
+const sponsors = require("./sponsors.js");
+const contributors = require("./contributors.js");
+
 module.exports = {
     startPage: "/",
-    contributors: "https://api.github.com/repos/redom/redom/contributors",
-    sponsors: "https://opencollective.com/babel/members/all.json",
+    contributors: contributors,
+    sponsors: sponsors,
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
     version: "3.x",
     theme: {

@@ -2,7 +2,7 @@ import { el, list, svg } from "redom";
 import Header from "./../components/Header";
 import Main from "./../components/Main";
 
-// import { contributors, sponsors } from "../../.redomdoc/config.js";
+import { contributors, sponsors } from "../../.redomdoc/config.js";
 
 import "./../styles/home.css";
 
@@ -122,24 +122,8 @@ export default class Home {
             )
         );
 
-        this.getContributors();
-        this.getSponsors();
-    }
-
-    getContributors() {
-        fetch(window.location.origin + "/.redomdoc/contributors.json")
-            .then(response => response.json())
-            .then(json => {
-                this.contributors.update(json);
-            });
-    }
-
-    getSponsors() {
-        fetch(window.location.origin + "/.redomdoc/sponsors.json")
-            .then(response => response.json())
-            .then(json => {
-                this.sponsors.update(json);
-            });
+        this.contributors.update(contributors);
+        this.sponsors.update(sponsors);
     }
 }
 
@@ -174,30 +158,32 @@ export class Sponsor {
 
     update(data) {
         const { name, image, website, role, profile } = data;
-        if (role === "BACKER") {
-            let backer;
-            if (image) {
-                backer = el("img", {
-                    class: "w-16 h-16 rounded-full",
-                    alt: name,
-                    src: image,
-                });
-            } else {
-                backer = el("div", {
-                    class: "flex items-center justify-center font-semibold bg-gray-300 w-16 h-16 rounded-full"
-                }, name[0]);
-            }
-
-            this.el = el(
-                "a",
+        let backer;
+        if (image !== "null") {
+            backer = el("img", {
+                class: "w-16 h-16 rounded-full",
+                alt: name,
+                src: image,
+            });
+        } else {
+            backer = el(
+                "div",
                 {
-                    href: website || profile,
-                    title: name,
-                    target: "_blank",
-                    class: "my-2 mx-2 w-16 h-16",
+                    class: "flex items-center justify-center font-semibold bg-gray-300 w-16 h-16 rounded-full",
                 },
-                backer
+                name[0]
             );
         }
+
+        this.el = el(
+            "a",
+            {
+                href: website !== "null" ? website : profile,
+                title: name,
+                target: "_blank",
+                class: "my-2 mx-2 w-16 h-16",
+            },
+            backer
+        );
     }
 }

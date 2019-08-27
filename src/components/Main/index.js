@@ -36,8 +36,20 @@ export default class Main {
     }
 
     update() {
-        const current = sideNav.filter(item => item.path === location.hash)[0];
-        this.sideNav.update(sideNav, current.path);
-        new Markdown(current.link, this.content);
+        const current = sideNav.map(item => {
+            if (item.children.length) {
+                item.children.map(subItem => {
+                    if (subItem.path === location.hash) {
+                        this._current = subItem;
+                    }
+                });
+            } else {
+                if (item.path === location.hash) {
+                    this._current = item;
+                }
+            }
+        });
+        this.sideNav.update(sideNav);
+        new Markdown(this._current.link, this.content);
     }
 }

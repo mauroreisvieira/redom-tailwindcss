@@ -9394,25 +9394,40 @@ class Link$1 {
     }
 
     update(data) {
-        const { text, path, _current } = data;
+        const { text, path, children } = data;
+
         this.el.href = path;
         this.el.title = text;
         this.el.textContent = text;
+
+        if (children.length) {
+            this.el = this.nav = el("nav.ml-5", {
+                role: "navigation",
+            });
+            this.list = list(this.nav, Link$1);
+            this.list.update(
+                children.map(item => {
+                    return {
+                        ...item,
+                    };
+                })
+            );
+        } else {
+            if (path === location.hash) {
+                setAttr(this.el, {
+                    class: "py-1 mb-3 lg:mb-1 block text-primary",
+                });
+            } else {
+                setAttr(this.el, {
+                    class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+                });
+            }
+        }
 
         this.el.onclick = e => {
             const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
-
-        if (_current) {
-            setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block text-primary",
-            });
-        } else {
-            setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
-            });
-        }
     }
 }
 
@@ -9468,12 +9483,10 @@ class SideBar {
         }
     }
 
-    update(data, current) {
-        this._current = current;
+    update(data) {
         this.list.update(
             data.map(item => {
                 return {
-                    _current: item.path === current,
                     ...item,
                 };
             })
@@ -9513,9 +9526,21 @@ class Main {
     }
 
     update() {
-        const current = config_9.filter(item => item.path === location.hash)[0];
-        this.sideNav.update(config_9, current.path);
-        new Markdown(current.link, this.content);
+        const current = config_9.map(item => {
+            if (item.children.length) {
+                item.children.map(subItem => {
+                    if (subItem.path === location.hash) {
+                        this._current = subItem;
+                    }
+                });
+            } else {
+                if (item.path === location.hash) {
+                    this._current = item;
+                }
+            }
+        });
+        this.sideNav.update(config_9);
+        new Markdown(this._current.link, this.content);
     }
 }
 

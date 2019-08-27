@@ -990,7 +990,7 @@ class Header {
         this.el = el(
             "header#header",
             {
-                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-40 items-center",
+                class: "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-50 lg:z-40 items-center",
             },
             el(
                 "div",
@@ -1037,24 +1037,49 @@ class Header {
                                 class:
                                     "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500",
                             },
-                            svg("svg",
+                            svg(
+                                "svg",
                                 {
                                     class: "fill-current h-4 w-4",
                                     xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 20 20"
+                                    viewBox: "0 0 20 20",
                                 },
                                 svg("path", {
-                                    d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z",
                                 })
                             )
                         )
                     ),
-                    el("div", (this.nav = new TopNav()))
+                    el("div", { class: "hidden lg:flex" }, (this.nav = new TopNav())),
+                    (this.button = el(
+                        "button",
+                        {
+                            class:
+                                "flex pl-4 items-center lg:hidden text-gray-500 focus:outline-none focus:text-gray-700",
+                        },
+                        svg(
+                            "svg",
+                            {
+                                class: "fill-current w-4 h-4",
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 20 20",
+                            },
+                            svg("path", {
+                                d: "M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z",
+                            })
+                        )
+                    ))
                 )
             )
         );
-        // this.logo.innerHTML = ;
+
         this.nav.update(config_8);
+
+        this.button.addEventListener("click", e => {
+            const event = new CustomEvent("on-button-click", { detail: e, bubbles: true });
+            console.log(event);
+            this.button.dispatchEvent(event);
+        });
     }
 }
 
@@ -9375,7 +9400,7 @@ class Link$1 {
         this.el.textContent = text;
 
         this.el.onclick = e => {
-            const event = new CustomEvent("on-click", { detail: data, bubbles: true });
+            const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
 
@@ -9398,14 +9423,14 @@ class SideBar {
         this.el = el(
             "div",
             {
-                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-12",
+                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12",
             },
             el(
                 "a",
                 {
                     href: config_1,
                     title: "Re:dom",
-                    class: "self-center w-24 mb-8",
+                    class: "self-center w-24 mb-8 hidden lg:flex",
                 },
                 (this.logo = el("img", {
                     src: "./static/images/redomjs.svg",
@@ -9430,7 +9455,7 @@ class SideBar {
             this.onSearch(this.search.value);
         };
 
-        this.el.addEventListener("on-click", e => {
+        this.el.addEventListener("on-item-click", e => {
             this.search.value = "";
         });
     }
@@ -9463,18 +9488,26 @@ class Main {
             {
                 class: "lg:flex w-full mx-auto m-auto",
             },
-            el(
+            (this.aside = el(
                 "aside#sidebar",
                 {
                     class:
-                        "bg-gray-100 z-50 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
+                        "bg-gray-100 z-40 hidden fixed top-0 h-full w-full lg:sticky lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block",
                 },
                 (this.sideNav = new SideBar())
-            ),
+            )),
             (this.content = el("div#content", {
                 class: "bg-white min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 px-6",
-            })),
+            }))
         );
+
+        document.addEventListener("on-button-click", e => {
+            this.aside.classList.toggle("hidden");
+        });
+
+        document.addEventListener("on-item-click", e => {
+            this.aside.classList.toggle("hidden");
+        });
 
         this.update();
     }

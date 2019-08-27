@@ -14,7 +14,7 @@ class Link {
         this.el.textContent = text;
 
         this.el.onclick = e => {
-            const event = new CustomEvent("on-click", { detail: data, bubbles: true });
+            const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
 
@@ -37,14 +37,14 @@ export default class SideBar {
         this.el = el(
             "div",
             {
-                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-12",
+                class: "flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12",
             },
             el(
                 "a",
                 {
                     href: startPage,
                     title: "Re:dom",
-                    class: "self-center w-24 mb-8",
+                    class: "self-center w-24 mb-8 hidden lg:flex",
                 },
                 (this.logo = el("img", {
                     src: "./static/images/redomjs.svg",
@@ -69,7 +69,7 @@ export default class SideBar {
             this.onSearch(this.search.value);
         };
 
-        this.el.addEventListener("on-click", e => {
+        this.el.addEventListener("on-item-click", e => {
             this.search.value = "";
         });
     }

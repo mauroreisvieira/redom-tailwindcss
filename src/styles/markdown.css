@@ -47,8 +47,8 @@
     @apply uppercase;
     @apply absolute;
     @apply text-xs;
-    @apply font-semibold;
-    @apply mt-3 mr-3;
+    @apply font-medium;
+    @apply mt-2 mr-2;
     @apply top-0 right-0;
     @apply text-gray-400;
 }

@@ -9428,7 +9428,7 @@ class Link$1 {
         }
 
         if (children.length) {
-            const aux = el(
+            this.el = el(
                 "li",
                 {},
                 el(
@@ -9443,15 +9443,9 @@ class Link$1 {
                 }))
             );
             this.list = list(this.nav, Link$1);
-            this.list.update(
-                children.map(item => {
-                    return {
-                        ...item,
-                    };
-                })
-            );
-            this.el = aux;
+            this.list.update(children);
         }
+
 
         if (path === location.hash) {
             setAttr(this.el, {
@@ -9498,7 +9492,7 @@ class SideBar {
                 (this.search = el("input", {
                     class:
                         "border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 block w-full appearance-none leading-normal",
-                    placeholder: 'Search the docs (Press "/" to focus)',
+                    placeholder: 'Search the docs (Press "Enter" to focus)',
                     type: "text",
                     value: "",
                     ariaLabel: "search input",
@@ -9513,7 +9507,15 @@ class SideBar {
             )
         );
 
+
         this.list = list(this.nav, Link$1);
+
+        document.addEventListener("keypress", (evt) => {
+            if (evt.key === "Enter") {
+                this.search.focus();
+            }
+        });
+
         this.search.oninput = evt => {
             this.onSearch(this.search.value);
         };
@@ -9538,7 +9540,6 @@ class SideBar {
                     });
                 }
             });
-
             this.update(results, this._current);
         } else {
             this.update(config_9, this._current);
@@ -9546,13 +9547,7 @@ class SideBar {
     }
 
     update(data) {
-        this.list.update(
-            data.map(item => {
-                return {
-                    ...item,
-                };
-            })
-        );
+        this.list.update(data);
     }
 }
 

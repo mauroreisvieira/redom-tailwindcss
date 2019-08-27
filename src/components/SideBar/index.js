@@ -28,7 +28,7 @@ class Link {
         }
 
         if (children.length) {
-            const aux = el(
+            this.el = el(
                 "li",
                 {},
                 el(
@@ -43,16 +43,9 @@ class Link {
                 }))
             );
             this.list = list(this.nav, Link);
-            this.list.update(
-                children.map(item => {
-                    const { path } = item;
-                    return {
-                        ...item,
-                    };
-                })
-            );
-            this.el = aux;
+            this.list.update(children);
         }
+
 
         if (path === location.hash) {
             setAttr(this.el, {
@@ -99,7 +92,7 @@ export default class SideBar {
                 (this.search = el("input", {
                     class:
                         "border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-600 rounded-sm bg-gray-200 py-3 pr-4 pl-4 block w-full appearance-none leading-normal",
-                    placeholder: 'Search the docs (Press "/" to focus)',
+                    placeholder: 'Search the docs (Press "Enter" to focus)',
                     type: "text",
                     value: "",
                     ariaLabel: "search input",
@@ -114,7 +107,15 @@ export default class SideBar {
             )
         );
 
+
         this.list = list(this.nav, Link);
+
+        document.addEventListener("keypress", (evt) => {
+            if (evt.key === "Enter") {
+                this.search.focus();
+            }
+        });
+
         this.search.oninput = evt => {
             this.onSearch(this.search.value);
         };
@@ -139,7 +140,6 @@ export default class SideBar {
                     });
                 }
             });
-
             this.update(results, this._current);
         } else {
             this.update(sideNav, this._current);
@@ -147,13 +147,6 @@ export default class SideBar {
     }
 
     update(data) {
-        this.list.update(
-            data.map(item => {
-                const { path } = item;
-                return {
-                    ...item,
-                };
-            })
-        );
+        this.list.update(data);
     }
 }

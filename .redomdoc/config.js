@@ -2,7 +2,7 @@ const sponsors = require("./sponsors.js");
 const contributors = require("./contributors.js");
 
 module.exports = {
-    startPage: "/",
+    startPage: "https://mauroreisvieira.github.io/redomjs.org/",
     contributors: contributors,
     sponsors: sponsors,
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",

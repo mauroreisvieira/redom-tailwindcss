@@ -843,7 +843,7 @@ var contributors = [{
                         },];
 
 var config = {
-    startPage: "/",
+    startPage: "https://mauroreisvieira.github.io/redomjs.org/",
     contributors: contributors,
     sponsors: sponsors,
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",

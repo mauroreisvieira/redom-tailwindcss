@@ -2,7 +2,7 @@ import { el, list, svg } from "redom";
 import Header from "./../components/Header";
 import Main from "./../components/Main";
 
-import { contributors, sponsors } from "../../.redomdoc/config.js";
+import { contributors, backers } from "../../.redomdoc/config.js";
 
 import "./../styles/home.css";
 
@@ -150,6 +150,33 @@ export default class Home {
                 )
             ),
             el(
+                "div#backers",
+                { class: "text-center text-gray-700" },
+                el(
+                    "div",
+                    {
+                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-4",
+                    },
+                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Backers"),
+                    el(
+                        "p",
+                        { class: "mb-8" },
+                        "Thank you to all our backers!"
+                    ),
+                    (this.backers = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
+                    el(
+                        "a",
+                        {
+                            href: "https://opencollective.com/redom#backers",
+                            target: "_blank",
+                            class:
+                                "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
+                        },
+                        "Become a Backer!"
+                    )
+                )
+            ),
+            el(
                 "div#sponsors",
                 { class: "text-center text-gray-700" },
                 el(
@@ -163,11 +190,11 @@ export default class Home {
                         { class: "mb-8" },
                         "Support this project by becoming a sponsor. Your logo will show up here with a link to your website."
                     ),
-                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Sponsor, "id")),
+                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
                     el(
                         "a",
                         {
-                            href: "https://opencollective.com/redom#sponsor",
+                            href: "https://opencollective.com/redom/sponsor/0/website",
                             target: "_blank",
                             class:
                                 "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
@@ -179,7 +206,7 @@ export default class Home {
         );
 
         this.contributors.update(contributors);
-        this.sponsors.update(sponsors);
+        this.backers.update(backers);
     }
 }
 
@@ -207,7 +234,7 @@ export class Contributor {
     }
 }
 
-export class Sponsor {
+export class Backer {
     constructor() {
         this.el = el("a");
     }

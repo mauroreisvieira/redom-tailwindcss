@@ -46,6 +46,7 @@ export default class Markdown {
                 })
                 .then(response => {
                     Prism.highlightAll();
+                    console.log(this.content.querySelectorAll("h2"));
                 });
         });
     }

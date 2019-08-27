@@ -37,16 +37,17 @@ export default class Main {
 
     update() {
         const current = sideNav.map(item => {
+            if (item.path === location.hash) {
+                this._current = item;
+                return;
+            }
+
             if (item.children.length) {
                 item.children.map(subItem => {
                     if (subItem.path === location.hash) {
                         this._current = subItem;
                     }
                 });
-            } else {
-                if (item.path === location.hash) {
-                    this._current = item;
-                }
             }
         });
         this.sideNav.update(sideNav);

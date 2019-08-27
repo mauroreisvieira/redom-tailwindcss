@@ -28,7 +28,7 @@ function getContributors() {
 }
 
 function getOpenCollective() {
-    const writeStream = fs.createWriteStream(".redomdoc/sponsors.js");
+    const writeStream = fs.createWriteStream(".redomdoc/backers.js");
 
     fetch("https://opencollective.com/redom/members/all.json")
         .then(res => res.json())

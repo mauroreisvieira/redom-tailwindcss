@@ -1,10 +1,10 @@
-const sponsors = require("./sponsors.js");
+const backers = require("./backers.js");
 const contributors = require("./contributors.js");
 
 module.exports = {
     startPage: "https://mauroreisvieira.github.io/redomjs.org/",
     contributors: contributors,
-    sponsors: sponsors,
+    backers: backers,
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
     version: "3.x",
     theme: {
@@ -52,15 +52,7 @@ module.exports = {
             text: "Elements",
             link: "docs/v3/guide/elements.md",
             meta: false,
-            children: [
-                {
-                    path: "#text-reference",
-                    text: "Text reference",
-                    link: "docs/v3/guide/text-reference.md",
-                    meta: false,
-                    children: [],
-                },
-            ],
+            children: [],
         },
         {
             path: "#svg",
@@ -70,9 +62,16 @@ module.exports = {
             children: [],
         },
         {
-            path: "#set-children.md",
+            path: "#set-children",
             text: "Set Children",
             link: "docs/v3/guide/set-children.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#update-elements",
+            text: "Update elements",
+            link: "docs/v3/guide/update-elements.md",
             meta: false,
             children: [],
         },
@@ -84,9 +83,9 @@ module.exports = {
             children: [],
         },
         {
-            path: "#lifecycle",
-            text: "Lifecycle",
-            link: "docs/v3/guide/lifecycle.md",
+            path: "#components",
+            text: "Components",
+            link: "docs/v3/guide/components.md",
             meta: false,
             children: [],
         },
@@ -98,9 +97,9 @@ module.exports = {
             children: [],
         },
         {
-            path: "#update-elements",
-            text: "Update elements",
-            link: "docs/v3/guide/update-elements.md",
+            path: "#lifecycle",
+            text: "Lifecycle",
+            link: "docs/v3/guide/lifecycle.md",
             meta: false,
             children: [],
         },
@@ -120,4 +119,3 @@ module.exports = {
         },
     ],
 };
-

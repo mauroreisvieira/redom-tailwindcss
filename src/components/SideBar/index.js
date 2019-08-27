@@ -1,4 +1,4 @@
-import { el, list, setAttr } from "redom";
+import { el, list, setChildren, setAttr } from "redom";
 
 import { sideNav, startPage } from "../../../.redomdoc/config.js";
 
@@ -15,9 +15,9 @@ class Link {
         this.el.textContent = text;
 
         if (children.length) {
-            this.el = this.nav = el("nav.ml-5", {
+            const aux = (this.nav = el("nav.ml-5.mt-2", {
                 role: "navigation",
-            });
+            }));
             this.list = list(this.nav, Link);
             this.list.update(
                 children.map(item => {
@@ -27,16 +27,17 @@ class Link {
                     };
                 })
             );
+            this.el.appendChild(aux);
+        }
+
+        if (path === location.hash) {
+            setAttr(this.el, {
+                class: "py-1 mb-3 lg:mb-1 block text-primary",
+            });
         } else {
-            if (path === location.hash) {
-                setAttr(this.el, {
-                    class: "py-1 mb-3 lg:mb-1 block text-primary",
-                });
-            } else {
-                setAttr(this.el, {
-                    class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
-                });
-            }
+            setAttr(this.el, {
+                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+            });
         }
 
         this.el.onclick = e => {
@@ -92,7 +93,21 @@ export default class SideBar {
 
     onSearch(value) {
         if (value) {
-            this.update(sideNav.filter(item => item.text.toUpperCase().includes(value.toUpperCase())), this._current);
+            const results = [];
+            sideNav.map(item => {
+                if (item.text.toUpperCase().includes(value.toUpperCase())) {
+                    results.push(item);
+                }
+                if (item.children.length) {
+                    item.children.map(subItem => {
+                        if (subItem.text.toUpperCase().includes(value.toUpperCase())) {
+                            results.push(subItem);
+                        }
+                    });
+                }
+            });
+
+            this.update(results, this._current);
         } else {
             this.update(sideNav, this._current);
         }

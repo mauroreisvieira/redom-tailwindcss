@@ -704,7 +704,7 @@ class TopNav {
     }
 }
 
-var sponsors = [{
+var backers = [{
                             name: "Joona Kulmala",
                             image: "https://www.gravatar.com/avatar/4e09d3603a416da422d4fbab92601a21?default=404",
                             website: "https://twitter.com/joona931",
@@ -845,7 +845,7 @@ var contributors = [{
 var config = {
     startPage: "https://mauroreisvieira.github.io/redomjs.org/",
     contributors: contributors,
-    sponsors: sponsors,
+    backers: backers,
     docsRepo: "https://github.com/mauroreisvieira/redomjs.org/blob/master/",
     version: "3.x",
     theme: {
@@ -893,15 +893,7 @@ var config = {
             text: "Elements",
             link: "docs/v3/guide/elements.md",
             meta: false,
-            children: [
-                {
-                    path: "#text-reference",
-                    text: "Text reference",
-                    link: "docs/v3/guide/text-reference.md",
-                    meta: false,
-                    children: [],
-                },
-            ],
+            children: [],
         },
         {
             path: "#svg",
@@ -911,9 +903,16 @@ var config = {
             children: [],
         },
         {
-            path: "#set-children.md",
+            path: "#set-children",
             text: "Set Children",
             link: "docs/v3/guide/set-children.md",
+            meta: false,
+            children: [],
+        },
+        {
+            path: "#update-elements",
+            text: "Update elements",
+            link: "docs/v3/guide/update-elements.md",
             meta: false,
             children: [],
         },
@@ -925,9 +924,9 @@ var config = {
             children: [],
         },
         {
-            path: "#lifecycle",
-            text: "Lifecycle",
-            link: "docs/v3/guide/lifecycle.md",
+            path: "#components",
+            text: "Components",
+            link: "docs/v3/guide/components.md",
             meta: false,
             children: [],
         },
@@ -939,9 +938,9 @@ var config = {
             children: [],
         },
         {
-            path: "#update-elements",
-            text: "Update elements",
-            link: "docs/v3/guide/update-elements.md",
+            path: "#lifecycle",
+            text: "Lifecycle",
+            link: "docs/v3/guide/lifecycle.md",
             meta: false,
             children: [],
         },
@@ -963,7 +962,7 @@ var config = {
 };
 var config_1 = config.startPage;
 var config_2 = config.contributors;
-var config_3 = config.sponsors;
+var config_3 = config.backers;
 var config_4 = config.docsRepo;
 var config_5 = config.version;
 var config_6 = config.theme;
@@ -976,7 +975,7 @@ var data = /*#__PURE__*/Object.freeze({
   __moduleExports: config,
   startPage: config_1,
   contributors: config_2,
-  sponsors: config_3,
+  backers: config_3,
   docsRepo: config_4,
   version: config_5,
   theme: config_6,
@@ -9383,6 +9382,7 @@ class Markdown {
                 })
                 .then(response => {
                     prism.highlightAll();
+                    console.log(this.content.querySelectorAll("h2"));
                 });
         });
     }
@@ -9401,9 +9401,9 @@ class Link$1 {
         this.el.textContent = text;
 
         if (children.length) {
-            this.el = this.nav = el("nav.ml-5", {
+            const aux = (this.nav = el("nav.ml-5.mt-2", {
                 role: "navigation",
-            });
+            }));
             this.list = list(this.nav, Link$1);
             this.list.update(
                 children.map(item => {
@@ -9412,16 +9412,17 @@ class Link$1 {
                     };
                 })
             );
+            this.el.appendChild(aux);
+        }
+
+        if (path === location.hash) {
+            setAttr(this.el, {
+                class: "py-1 mb-3 lg:mb-1 block text-primary",
+            });
         } else {
-            if (path === location.hash) {
-                setAttr(this.el, {
-                    class: "py-1 mb-3 lg:mb-1 block text-primary",
-                });
-            } else {
-                setAttr(this.el, {
-                    class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
-                });
-            }
+            setAttr(this.el, {
+                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+            });
         }
 
         this.el.onclick = e => {
@@ -9477,7 +9478,21 @@ class SideBar {
 
     onSearch(value) {
         if (value) {
-            this.update(config_9.filter(item => item.text.toUpperCase().includes(value.toUpperCase())), this._current);
+            const results = [];
+            config_9.map(item => {
+                if (item.text.toUpperCase().includes(value.toUpperCase())) {
+                    results.push(item);
+                }
+                if (item.children.length) {
+                    item.children.map(subItem => {
+                        if (subItem.text.toUpperCase().includes(value.toUpperCase())) {
+                            results.push(subItem);
+                        }
+                    });
+                }
+            });
+
+            this.update(results, this._current);
         } else {
             this.update(config_9, this._current);
         }
@@ -9527,16 +9542,17 @@ class Main {
 
     update() {
         const current = config_9.map(item => {
+            if (item.path === location.hash) {
+                this._current = item;
+                return;
+            }
+
             if (item.children.length) {
                 item.children.map(subItem => {
                     if (subItem.path === location.hash) {
                         this._current = subItem;
                     }
                 });
-            } else {
-                if (item.path === location.hash) {
-                    this._current = item;
-                }
             }
         });
         this.sideNav.update(config_9);
@@ -9688,6 +9704,33 @@ class Home {
                 )
             ),
             el(
+                "div#backers",
+                { class: "text-center text-gray-700" },
+                el(
+                    "div",
+                    {
+                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-4",
+                    },
+                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Backers"),
+                    el(
+                        "p",
+                        { class: "mb-8" },
+                        "Thank you to all our backers!"
+                    ),
+                    (this.backers = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
+                    el(
+                        "a",
+                        {
+                            href: "https://opencollective.com/redom#backers",
+                            target: "_blank",
+                            class:
+                                "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
+                        },
+                        "Become a Backer!"
+                    )
+                )
+            ),
+            el(
                 "div#sponsors",
                 { class: "text-center text-gray-700" },
                 el(
@@ -9701,11 +9744,11 @@ class Home {
                         { class: "mb-8" },
                         "Support this project by becoming a sponsor. Your logo will show up here with a link to your website."
                     ),
-                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Sponsor, "id")),
+                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
                     el(
                         "a",
                         {
-                            href: "https://opencollective.com/redom#sponsor",
+                            href: "https://opencollective.com/redom/sponsor/0/website",
                             target: "_blank",
                             class:
                                 "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
@@ -9717,7 +9760,7 @@ class Home {
         );
 
         this.contributors.update(config_2);
-        this.sponsors.update(config_3);
+        this.backers.update(config_3);
     }
 }
 
@@ -9745,7 +9788,7 @@ class Contributor {
     }
 }
 
-class Sponsor {
+class Backer {
     constructor() {
         this.el = el("a");
     }

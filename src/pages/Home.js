@@ -14,12 +14,12 @@ export default class Home {
             el(
                 "div#hero",
                 {
-                    class: "z-40 w-full max-w-4xl relative mx-auto px-6 pt-16 pb-24 mb-24 sm:mb-40",
+                    class: "z-40 w-full relative mx-auto px-6 pt-8 sm:pb-24 mb-16",
                 },
                 el(
                     "div",
                     {
-                        class: "flex flex-col px-6 mx-auto",
+                        class: "flex flex-col px-6 mx-auto items-center  max-w-4xl ",
                     },
                     el("img", {
                         src: "./static/images/redomjs.svg",
@@ -28,12 +28,12 @@ export default class Home {
                     }),
                     el(
                         "h1",
-                        { class: "text-2xl sm:text-4xl font-light leading-tight" },
+                        { class: "text-2xl sm:text-4xl font-light leading-tight text-center" },
                         "Tiny (2 KB) turboboosted JavaScript library for creating user interfaces."
                     ),
                     el(
                         "div",
-                        { class: "flex flex-col sm:flex-row mt-12" },
+                        { class: "flex flex-col sm:flex-row mt-12 w-full justify-center" },
                         el(
                             "a",
                             {
@@ -69,6 +69,62 @@ export default class Home {
                 )
             ),
             el(
+                "div",
+                {
+                    class: "flex flex-col sm:flex-row mx-auto max-w-6xl mb-24 sm:mb-48 pb-8 text-center",
+                },
+                el(
+                    "div",
+                    {
+                        class: "sm:w-1/3 pb-8 px-4",
+                    },
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Powerful"),
+                    el("p", {}, "Useful helpers to create DOM elements and keeping them in sync with the data.")
+                ),
+                el(
+                    "div",
+                    {
+                        class: "sm:w-1/3 pb-8 px-4",
+                    },
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Faster"),
+                    el(
+                        "p",
+                        {},
+                        "Close to the metal and",
+                        el("strong", {}, " doesn't use virtual DOM "),
+                        "it's actually",
+                        el("strong", {}, "  faster "),
+                        "and uses",
+                        el("strong", {}, "  less memory "),
+                        "than almost all virtual DOM based libraries, including React ",
+                        el(
+                            "a",
+                            {
+                                class: "text-primary hover:underline",
+                                target: "_blank",
+                                title: "Benchmark",
+                                href:
+                                    "https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html",
+                            },
+                            "(benchmark)"
+                        ),
+                        "."
+                    )
+                ),
+                el(
+                    "div",
+                    {
+                        class: "sm:w-1/3 pb-8 px-4",
+                    },
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Simple"),
+                    el(
+                        "p",
+                        {},
+                        "You can use just", el("strong", {}, " pure JavaScript "), "so no complicated templating languages to learn and hassle with."
+                    )
+                )
+            ),
+            el(
                 "div#contributors",
                 { class: "text-center relative text-gray-700" },
                 svg(
@@ -86,9 +142,9 @@ export default class Home {
                 el(
                     "div",
                     {
-                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16",
+                        class: "w-full max-w-6xl relative mx-auto px-6",
                     },
-                    el("h2", { class: "text-gray-600 text-xl font-bold mb-4" }, "Contributors"),
+                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Contributors"),
                     el("p", { class: "mb-8" }, "This project exists thanks to all the people who contribute."),
                     (this.contributors = list("div.flex.flex-wrap.justify-center", Contributor, "id"))
                 )
@@ -101,7 +157,7 @@ export default class Home {
                     {
                         class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-40",
                     },
-                    el("h2", { class: "text-gray-600 text-xl font-bold mb-4" }, "Sponsors"),
+                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Sponsors"),
                     el(
                         "p",
                         { class: "mb-8" },

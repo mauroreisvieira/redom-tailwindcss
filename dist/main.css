@@ -171,6 +171,7 @@
 }
 
 #contributors svg {
+  pointer-events: none;
   color: #f7fafc;
   position: absolute;
   bottom: 100%;

@@ -4,6 +4,7 @@
 }
 
 #contributors svg {
+    @apply pointer-events-none;
     @apply text-gray-100;
     @apply absolute;
     bottom: 100%;

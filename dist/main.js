@@ -9462,7 +9462,7 @@ class Link$1 {
         if (children.length) {
             this.el = el(
                 "li",
-                {},
+                { "tab-index": 0 },
                 el(
                     "span",
                     {

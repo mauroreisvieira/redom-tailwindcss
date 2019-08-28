@@ -24,19 +24,19 @@ If you take a close look, you will find that there are actually four packages be
 npm install babel-cli babel-plugin-syntax-jsx babel-plugin-transform-react-jsx babel-preset-es2015 —-save-dev
 
 # Using yarn
-npm add babel-cli babel-plugin-syntax-jsx babel-plugin-transform-react-jsx babel-preset-es2015
+npm add babel-cli babel-plugin-syntax-jsx babel-plugin-transform-react-jsx babel-preset-es2015 --dev
 ```
 
 Create a `.babelrc` file:
 
 ```json
-    {
-      "plugins": [
-        "syntax-jsx",
-        ["transform-react-jsx", { "pragma": "redom.el" }]
-      ],
-      "presets": ["es2015"]
-    }
+{
+  "plugins": [
+    "syntax-jsx",
+    ["transform-react-jsx", { "pragma": "redom.el" }]
+  ],
+  "presets": ["es2015"]
+}
 ```
 
 To run Babel as a standalone tool, run this from the command line:

@@ -3,13 +3,13 @@
 Note that if your web browser is configured to block 3rd-party data/cookies, the example below will not work, as the `localStorage` data will fail to be saved from JSFiddle.
 You'll have to click on `Edit in JSFiddle` to see the live result.
 
-> This is a fully spec-compliant TodoMVC implementation in under 123 effective lines of JavaScript (including comments and blank lines).
+> This is a fully spec-compliant TodoMVC implementation in under +/- 120 lines of JavaScript (including comments and blank lines).
 
 ```json
 {
     "el": "iframe",
     "attributes": {
-        "src": "https://jsfiddle.net/mauroreisvieira/4f05gLj8/76/embedded/result,html,js,css",
+        "src": "https://jsfiddle.net/mauroreisvieira/fL68cjey/embedded/result,html,js,css",
         "allowfullscreen": "allowfullscreen",
         "frameborder": "0"
     }

@@ -141,7 +141,7 @@ module.exports = {
             children: [
                 {
                     path: "#example-todomvc",
-                    text: "SVG",
+                    text: "Todo",
                     link: "docs/v3/examples/todomvc.md",
                     meta: false,
                     children: [],

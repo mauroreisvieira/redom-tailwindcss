@@ -37,7 +37,7 @@ export default class Home {
                         el(
                             "a",
                             {
-                                href: "#getting-started/installation",
+                                href: "#installation",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 py-3 sm:mr-4 mb-4 border border-primary text-base font-semibold text-primary",
                             },
@@ -78,7 +78,7 @@ export default class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Powerful"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Small & Powerful"),
                     el("p", {}, "Useful helpers to create DOM elements and keeping them in sync with the data.")
                 ),
                 el(
@@ -86,7 +86,7 @@ export default class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Faster"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "High Performance"),
                     el(
                         "p",
                         {},
@@ -116,7 +116,7 @@ export default class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Simple"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Easy to Learn"),
                     el(
                         "p",
                         {},

@@ -78,6 +78,10 @@ a[href] {
     content: 'bash';
 }
 
+.markdown-doc pre.language-json::before  {
+    content: 'json';
+}
+
 .markdown-doc p code,
 .markdown-doc li code {
     @apply inline-block;

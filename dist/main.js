@@ -881,14 +881,14 @@ var config = {
             meta: false,
             children: [
                 {
-                    path: "#getting-started/installation",
+                    path: "#installation",
                     text: "Installation",
                     link: "docs/v3/getting-started/installation.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#getting-started/introduction",
+                    path: "#introduction",
                     text: "Introduction",
                     link: "docs/v3/getting-started/introduction.md",
                     meta: false,
@@ -903,75 +903,82 @@ var config = {
             meta: false,
             children: [
                 {
-                    path: "#guide/elements",
+                    path: "#elements",
                     text: "Elements",
                     link: "docs/v3/guide/elements.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/svg",
+                    path: "#svg",
                     text: "SVG",
                     link: "docs/v3/guide/svg.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/set-children",
+                    path: "#set-children",
                     text: "Set Children",
                     link: "docs/v3/guide/set-children.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/update-elements",
+                    path: "#update-elements",
                     text: "Update elements",
                     link: "docs/v3/guide/update-elements.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/mounting",
+                    path: "#mounting",
                     text: "Mounting",
                     link: "docs/v3/guide/mounting.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/components",
+                    path: "#components",
                     text: "Components",
                     link: "docs/v3/guide/components.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/lists",
+                    path: "#lists",
                     text: "Lists",
                     link: "docs/v3/guide/lists.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/lifecycle",
+                    path: "#lifecycle",
                     text: "Lifecycle",
                     link: "docs/v3/guide/lifecycle.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/place",
+                    path: "#place",
                     text: "Place",
                     link: "docs/v3/guide/place.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#guide/router",
+                    path: "#router",
                     text: "Router",
                     link: "docs/v3/guide/router.md",
                     meta: false,
                     children: [],
                 },
+                {
+                    path: "#jsx",
+                    text: "JSX",
+                    link: "docs/v3/guide/jsx.md",
+                    meta: false,
+                    children: [],
+                }
             ],
         },
         {
@@ -981,8 +988,8 @@ var config = {
             meta: false,
             children: [
                 {
-                    path: "#example-todomvc",
-                    text: "Todo",
+                    path: "#todomvc",
+                    text: "TodoMVC",
                     link: "docs/v3/examples/todomvc.md",
                     meta: false,
                     children: [],
@@ -9658,7 +9665,7 @@ class Home {
                         el(
                             "a",
                             {
-                                href: "#getting-started/installation",
+                                href: "#installation",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 py-3 sm:mr-4 mb-4 border border-primary text-base font-semibold text-primary",
                             },
@@ -9699,7 +9706,7 @@ class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Powerful"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Small & Powerful"),
                     el("p", {}, "Useful helpers to create DOM elements and keeping them in sync with the data.")
                 ),
                 el(
@@ -9707,7 +9714,7 @@ class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Faster"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "High Performance"),
                     el(
                         "p",
                         {},
@@ -9737,7 +9744,7 @@ class Home {
                     {
                         class: "sm:w-1/3 pb-8 px-4",
                     },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Simple"),
+                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Easy to Learn"),
                     el(
                         "p",
                         {},

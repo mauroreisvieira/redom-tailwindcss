@@ -1,4 +1,4 @@
-import { el, setChildren } from "redom";
+import { el, mount, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
@@ -41,7 +41,17 @@ export default class Markdown {
                             ))
                         )
                     );
+
                     this.markdown.innerHTML = this.md.render(result);
+
+                    if (this.markdown.querySelector(".language-json")) {
+                        const json = JSON.parse(this.markdown.querySelector(".language-json").textContent);
+                        if (json.el && json.attributes) {
+                            const iframe = el(json.el, json.attributes);
+                            this.markdown.querySelector(".language-json").parentElement.remove();
+                            this.markdown.appendChild(iframe);
+                        }
+                    }
                     setChildren(content, this.content);
                 })
                 .then(response => {

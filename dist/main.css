@@ -173,6 +173,13 @@ a[href] {
   margin-top: 0;
 }
 
+.markdown-doc iframe {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  height: 500px;
+}
+
 #backers,
 #contributors,
 #sponsors {

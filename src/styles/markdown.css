@@ -158,3 +158,8 @@ a[href] {
 .markdown-doc blockquote p {
     @apply mt-0;
 }
+.markdown-doc iframe {
+    @apply my-8;
+    @apply w-full;
+    height: 500px;
+}

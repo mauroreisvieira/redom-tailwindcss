@@ -876,21 +876,21 @@ var config = {
     sideNav: [
         {
             path: false,
-            text: "Get Started",
+            text: "Getting Started",
             link: false,
             meta: false,
             children: [
                 {
-                    path: "#installation",
+                    path: "#getting-started/installation",
                     text: "Installation",
-                    link: "docs/v3/guide/installation.md",
+                    link: "docs/v3/getting-started/installation.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#introduction",
+                    path: "#getting-started/introduction",
                     text: "Introduction",
-                    link: "docs/v3/guide/introduction.md",
+                    link: "docs/v3/getting-started/introduction.md",
                     meta: false,
                     children: [],
                 },
@@ -898,77 +898,92 @@ var config = {
         },
         {
             path: false,
-            text: "API Reference",
+            text: "Guide",
             link: false,
             meta: false,
             children: [
                 {
-                    path: "#elements",
+                    path: "#guide/elements",
                     text: "Elements",
                     link: "docs/v3/guide/elements.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#svg",
+                    path: "#guide/svg",
                     text: "SVG",
                     link: "docs/v3/guide/svg.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#set-children",
+                    path: "#guide/set-children",
                     text: "Set Children",
                     link: "docs/v3/guide/set-children.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#update-elements",
+                    path: "#guide/update-elements",
                     text: "Update elements",
                     link: "docs/v3/guide/update-elements.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#mounting",
+                    path: "#guide/mounting",
                     text: "Mounting",
                     link: "docs/v3/guide/mounting.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#components",
+                    path: "#guide/components",
                     text: "Components",
                     link: "docs/v3/guide/components.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#lists",
+                    path: "#guide/lists",
                     text: "Lists",
                     link: "docs/v3/guide/lists.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#lifecycle",
+                    path: "#guide/lifecycle",
                     text: "Lifecycle",
                     link: "docs/v3/guide/lifecycle.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#place",
+                    path: "#guide/place",
                     text: "Place",
                     link: "docs/v3/guide/place.md",
                     meta: false,
                     children: [],
                 },
                 {
-                    path: "#router",
+                    path: "#guide/router",
                     text: "Router",
                     link: "docs/v3/guide/router.md",
+                    meta: false,
+                    children: [],
+                },
+            ],
+        },
+        {
+            path: false,
+            text: "Examples",
+            link: false,
+            meta: false,
+            children: [
+                {
+                    path: "#example-todomvc",
+                    text: "SVG",
+                    link: "docs/v3/examples/todomvc.md",
                     meta: false,
                     children: [],
                 },
@@ -9392,7 +9407,17 @@ class Markdown {
                             ))
                         )
                     );
+
                     this.markdown.innerHTML = this.md.render(result);
+
+                    if (this.markdown.querySelector(".language-json")) {
+                        const json = JSON.parse(this.markdown.querySelector(".language-json").textContent);
+                        if (json.el && json.attributes) {
+                            const iframe = el(json.el, json.attributes);
+                            this.markdown.querySelector(".language-json").parentElement.remove();
+                            this.markdown.appendChild(iframe);
+                        }
+                    }
                     setChildren(content, this.content);
                 })
                 .then(response => {
@@ -9633,7 +9658,7 @@ class Home {
                         el(
                             "a",
                             {
-                                href: "#installation",
+                                href: "#getting-started/installation",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 py-3 sm:mr-4 mb-4 border border-primary text-base font-semibold text-primary",
                             },

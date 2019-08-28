@@ -37,7 +37,7 @@ export default class Home {
                         el(
                             "a",
                             {
-                                href: "#installation",
+                                href: "#getting-started/installation",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 py-3 sm:mr-4 mb-4 border border-primary text-base font-semibold text-primary",
                             },

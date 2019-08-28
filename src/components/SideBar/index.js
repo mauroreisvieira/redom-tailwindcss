@@ -39,7 +39,7 @@ class Link {
                     text
                 ),
                 (this.nav = el("ul", {
-                    class: "ml-5 mt-2 text-blue-700",
+                    class: "mt-2 mb-3 text-blue-700",
                 }))
             );
             this.list = list(this.nav, Link);
@@ -59,7 +59,7 @@ class Link {
 
         this.el.onclick = evt => {
             evt.stopPropagation();
-            const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
+            const event = new CustomEvent("on:click-item", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
     }
@@ -76,13 +76,13 @@ export default class SideBar {
             },
             el(
                 "div",
-                { class: "flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                { class: "hidden lg:flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
                 el(
                     "a",
                     {
                         href: startPage,
                         title: "Re:dom",
-                        class: "self-center w-24 mb-8 hidden lg:flex",
+                        class: "self-center w-24 mb-8",
                     },
                     (this.logo = el("img", {
                         src: "./static/images/redomjs.svg",
@@ -120,7 +120,7 @@ export default class SideBar {
             this.onSearch(this.search.value);
         };
 
-        this.el.addEventListener("on-item-click", e => {
+        this.el.addEventListener("on:click-item", e => {
             this.search.value = "";
         });
     }

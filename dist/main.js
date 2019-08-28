@@ -898,7 +898,7 @@ var config = {
         },
         {
             path: false,
-            text: "API",
+            text: "API Reference",
             link: false,
             meta: false,
             children: [
@@ -1091,7 +1091,7 @@ class Header {
         this.nav.update(config_8);
 
         this.button.addEventListener("click", e => {
-            const event = new CustomEvent("on-button-click", { detail: e, bubbles: true });
+            const event = new CustomEvent("on:click-button", { detail: e, bubbles: true });
             this.button.dispatchEvent(event);
         });
     }
@@ -9439,7 +9439,7 @@ class Link$1 {
                     text
                 ),
                 (this.nav = el("ul", {
-                    class: "ml-5 mt-2 text-blue-700",
+                    class: "mt-2 mb-3 text-blue-700",
                 }))
             );
             this.list = list(this.nav, Link$1);
@@ -9459,7 +9459,7 @@ class Link$1 {
 
         this.el.onclick = evt => {
             evt.stopPropagation();
-            const event = new CustomEvent("on-item-click", { detail: data, bubbles: true });
+            const event = new CustomEvent("on:click-item", { detail: data, bubbles: true });
             this.el.dispatchEvent(event);
         };
     }
@@ -9476,13 +9476,13 @@ class SideBar {
             },
             el(
                 "div",
-                { class: "flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                { class: "hidden lg:flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
                 el(
                     "a",
                     {
                         href: config_1,
                         title: "Re:dom",
-                        class: "self-center w-24 mb-8 hidden lg:flex",
+                        class: "self-center w-24 mb-8",
                     },
                     (this.logo = el("img", {
                         src: "./static/images/redomjs.svg",
@@ -9520,7 +9520,7 @@ class SideBar {
             this.onSearch(this.search.value);
         };
 
-        this.el.addEventListener("on-item-click", e => {
+        this.el.addEventListener("on:click-item", e => {
             this.search.value = "";
         });
     }
@@ -9571,11 +9571,11 @@ class Main {
             }))
         );
 
-        document.addEventListener("on-button-click", e => {
+        document.addEventListener("on:click-button", e => {
             this.aside.classList.toggle("hidden");
         });
 
-        document.addEventListener("on-item-click", e => {
+        document.addEventListener("on:click-item", e => {
             this.aside.classList.toggle("hidden");
         });
 

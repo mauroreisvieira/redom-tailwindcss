@@ -94,7 +94,7 @@ export default class Header {
         this.nav.update(topNav);
 
         this.button.addEventListener("click", e => {
-            const event = new CustomEvent("on-button-click", { detail: e, bubbles: true });
+            const event = new CustomEvent("on:click-button", { detail: e, bubbles: true });
             this.button.dispatchEvent(event);
         });
     }

@@ -57,7 +57,7 @@ module.exports = {
         },
         {
             path: false,
-            text: "API",
+            text: "API Reference",
             link: false,
             meta: false,
             children: [

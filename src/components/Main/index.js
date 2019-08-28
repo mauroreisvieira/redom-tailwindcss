@@ -24,11 +24,11 @@ export default class Main {
             }))
         );
 
-        document.addEventListener("on-button-click", e => {
+        document.addEventListener("on:click-button", e => {
             this.aside.classList.toggle("hidden");
         });
 
-        document.addEventListener("on-item-click", e => {
+        document.addEventListener("on:click-item", e => {
             this.aside.classList.toggle("hidden");
         });
 

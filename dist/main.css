@@ -95,7 +95,7 @@ a[href] {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
   line-height: 1.625;
-  white-space: nowrap;
+  white-space: normal;
   color: #673ab7;
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   vertical-align: baseline;

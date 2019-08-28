@@ -86,7 +86,7 @@ a[href] {
     @apply text-sm;
     @apply px-1;
     @apply leading-relaxed;
-    @apply whitespace-no-wrap;
+    @apply whitespace-normal;
     @apply text-accent;
     @apply font-mono;
     @apply align-baseline;

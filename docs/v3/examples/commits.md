@@ -1,6 +1,6 @@
 # GitHub Commits Example
 
-> This example fetches latest Vue.js commits data from GitHub’s API and displays them as a list. You can switch between the master and dev branches.
+> This example fetches latest RE:DOM commits data from GitHub’s API and displays them as a list. You can switch between the master and dev branches.
 
 ```json
 {

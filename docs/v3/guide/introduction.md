@@ -24,7 +24,10 @@ Feel free to open it in another tab and follow along as we go through some basic
 ```
 
 
-The [Installation](/#installation) page provides more options of installing Vue. Note: We do not recommend that beginners start with vue-cli, especially if you are not yet familiar with Node.js-based build tools.
+The [Installation](/#installation) page provides more options of installing RE:DOM.
+
+**Note:** We do not recommend that beginners start with redom-cli, especially if you are not yet familiar with Node.js-based build tools.
+
 ### UMD
 
 RE:DOM supports [UMD](https://github.com/umdjs/umd):

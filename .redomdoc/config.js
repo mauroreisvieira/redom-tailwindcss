@@ -35,32 +35,24 @@ module.exports = {
     sideNav: [
         {
             path: false,
-            text: "Getting Started",
+            text: "Guide",
             link: false,
             meta: false,
             children: [
                 {
                     path: "#installation",
                     text: "Installation",
-                    link: "docs/v3/getting-started/installation.md",
+                    link: "docs/v3/guide/installation.md",
                     meta: false,
                     children: [],
                 },
                 {
                     path: "#introduction",
                     text: "Introduction",
-                    link: "docs/v3/getting-started/introduction.md",
+                    link: "docs/v3/guide/introduction.md",
                     meta: false,
                     children: [],
                 },
-            ],
-        },
-        {
-            path: false,
-            text: "Guide",
-            link: false,
-            meta: false,
-            children: [
                 {
                     path: "#elements",
                     text: "Elements",
@@ -153,6 +145,13 @@ module.exports = {
                     meta: false,
                     children: [],
                 },
+                {
+                    path: "#commits",
+                    text: "GitHub Commits",
+                    link: "docs/v3/examples/commits.md",
+                    meta: false,
+                    children: [],
+                }
             ],
         },
     ],

@@ -24,7 +24,7 @@ export default class Markdown {
                         },
                         el(
                             "div",
-                            { class: "max-w-screen-xl" },
+                            { class: "max-w-5xl" },
                             (this.markdown = el("div")),
                             (this.footer = el(
                                 "div",

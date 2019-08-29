@@ -9,7 +9,7 @@ You'll have to click on `Edit in JSFiddle` to see the live result.
 {
     "el": "iframe",
     "attributes": {
-        "src": "https://jsfiddle.net/mauroreisvieira/fL68cjey/embedded/result,html,js,css",
+        "src": "https://jsfiddle.net/mauroreisvieira/fL68cjey/embedded/result,js,css",
         "allowfullscreen": "allowfullscreen",
         "frameborder": "0"
     }

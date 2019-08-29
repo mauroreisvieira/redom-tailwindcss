@@ -1,9 +1,5 @@
 # Elements
 
-## Hyperscript
-
-> Hyperscript syntax for RE:DOM templates. [Hyperscript](https://github.com/hyperhype/hyperscript) is a simple standardized syntax for creating VDOMs for use in Inferno.
-
 `el()` (actually an [alias](#alias) for [`html()`](https://github.com/redom/redom/blob/master/esm/html.js)) is a helper for `document.createElement()` with a couple of differences.
 
 The basic idea is to simply create elements with `el()` and mount them with `mount()`, almost like you would do with plain JavaScript:

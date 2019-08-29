@@ -10,7 +10,7 @@ class Link {
     update(data) {
         const { text, path, children } = data;
 
-        this.el = el("ul", { class: "uppercase" }, text);
+        this.el = el("ul", text);
 
         if (path) {
             this.el = el(
@@ -19,6 +19,7 @@ class Link {
                 (this.link = el(
                     "a",
                     {
+                        class: "flex w-full",
                         title: text,
                         href: path,
                     },
@@ -34,7 +35,7 @@ class Link {
                 el(
                     "span",
                     {
-                        class: "mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs",
+                        class: "mb-3 lg:mb-2 text-gray-500 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
                     },
                     text
                 ),
@@ -49,11 +50,11 @@ class Link {
 
         if (path === location.hash) {
             setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block text-primary",
+                class: "outline-none py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+                class: "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-600 font-medium",
             });
         }
 
@@ -72,11 +73,11 @@ export default class SideBar {
         this.el = el(
             "div",
             {
-                class: "h-full flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12 pb-24",
+                class: "h-full flex flex-col px-6 overflow-y-auto scrolling-touch text-base lg:text-sm py-24 lg:py-12",
             },
             el(
                 "div",
-                { class: "hidden lg:flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                { class: "hidden lg:flex flex-col pb-4 mb-6 bg-gray-100" },
                 el(
                     "a",
                     {

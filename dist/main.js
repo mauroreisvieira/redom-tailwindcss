@@ -876,32 +876,24 @@ var config = {
     sideNav: [
         {
             path: false,
-            text: "Getting Started",
+            text: "Guide",
             link: false,
             meta: false,
             children: [
                 {
                     path: "#installation",
                     text: "Installation",
-                    link: "docs/v3/getting-started/installation.md",
+                    link: "docs/v3/guide/installation.md",
                     meta: false,
                     children: [],
                 },
                 {
                     path: "#introduction",
                     text: "Introduction",
-                    link: "docs/v3/getting-started/introduction.md",
+                    link: "docs/v3/guide/introduction.md",
                     meta: false,
                     children: [],
                 },
-            ],
-        },
-        {
-            path: false,
-            text: "Guide",
-            link: false,
-            meta: false,
-            children: [
                 {
                     path: "#elements",
                     text: "Elements",
@@ -994,6 +986,13 @@ var config = {
                     meta: false,
                     children: [],
                 },
+                {
+                    path: "#commits",
+                    text: "GitHub Commits",
+                    link: "docs/v3/examples/commits.md",
+                    meta: false,
+                    children: [],
+                }
             ],
         },
     ],
@@ -9397,7 +9396,7 @@ class Markdown {
                         },
                         el(
                             "div",
-                            { class: "max-w-screen-xl" },
+                            { class: "max-w-5xl" },
                             (this.markdown = el("div")),
                             (this.footer = el(
                                 "div",
@@ -9442,7 +9441,7 @@ class Link$1 {
     update(data) {
         const { text, path, children } = data;
 
-        this.el = el("ul", { class: "uppercase" }, text);
+        this.el = el("ul", text);
 
         if (path) {
             this.el = el(
@@ -9451,6 +9450,7 @@ class Link$1 {
                 (this.link = el(
                     "a",
                     {
+                        class: "flex w-full",
                         title: text,
                         href: path,
                     },
@@ -9466,7 +9466,7 @@ class Link$1 {
                 el(
                     "span",
                     {
-                        class: "mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs",
+                        class: "mb-3 lg:mb-2 text-gray-500 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
                     },
                     text
                 ),
@@ -9481,11 +9481,11 @@ class Link$1 {
 
         if (path === location.hash) {
             setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block text-primary",
+                class: "outline-none py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "py-1 mb-3 lg:mb-1 block hover:text-gray-900 text-gray-700",
+                class: "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-600 font-medium",
             });
         }
 
@@ -9504,11 +9504,11 @@ class SideBar {
         this.el = el(
             "div",
             {
-                class: "h-full flex flex-col px-6 overflow-y-auto text-base lg:text-sm mt-24 lg:mt-12 pb-24",
+                class: "h-full flex flex-col px-6 overflow-y-auto scrolling-touch text-base lg:text-sm py-24 lg:py-12",
             },
             el(
                 "div",
-                { class: "hidden lg:flex flex-col sticky top-0 pb-4 mb-6 bg-gray-100" },
+                { class: "hidden lg:flex flex-col pb-4 mb-6 bg-gray-100" },
                 el(
                     "a",
                     {

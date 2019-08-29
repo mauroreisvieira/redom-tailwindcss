@@ -1053,9 +1053,17 @@ class Header {
                     el(
                         "div",
                         { class: "relative" },
+                        el("label", {
+                            id: "selectversion",
+                            class: "hidden",
+                        }, "Select Version"),
                         el(
                             "select",
                             {
+                                role: "listbox",
+                                "aria-labelledby": "selectversion",
+                                tabindex: "0",
+                                id: "version",
                                 class:
                                     "appearance-none block bg-white pl-2 pr-8 py-1 text-gray-500 font-medium text-base focus:outline-none",
                             },
@@ -1090,6 +1098,8 @@ class Header {
                     (this.button = el(
                         "button",
                         {
+                            "arial-label": "Menu",
+                            role: "button",
                             class:
                                 "flex pl-4 items-center lg:hidden text-gray-500 focus:outline-none focus:text-gray-700",
                         },

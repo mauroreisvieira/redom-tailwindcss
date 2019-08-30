@@ -6,7 +6,7 @@
 {
     "el": "iframe",
     "attributes": {
-        "src": "https://jsfiddle.net/mauroreisvieira/6tvh32qm/60/embedded/result,js,css",
+        "src": "https://jsfiddle.net/mauroreisvieira/Lspv60wf/embedded/result,js,css",
         "allowfullscreen": "allowfullscreen",
         "frameborder": "0"
     }

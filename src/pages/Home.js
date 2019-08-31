@@ -1,6 +1,4 @@
 import { el, list, svg } from "redom";
-import Header from "./../components/Header";
-import Main from "./../components/Main";
 
 import { contributors, backers } from "../../.redomdoc/config.js";
 
@@ -120,7 +118,9 @@ export default class Home {
                     el(
                         "p",
                         {},
-                        "You can use just", el("strong", {}, " pure JavaScript "), "so no complicated templating languages to learn and hassle with."
+                        "You can use just",
+                        el("strong", {}, " pure JavaScript "),
+                        "so no complicated templating languages to learn and hassle with."
                     )
                 )
             ),
@@ -158,11 +158,7 @@ export default class Home {
                         class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-4",
                     },
                     el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Backers"),
-                    el(
-                        "p",
-                        { class: "mb-8" },
-                        "Thank you to all our backers!"
-                    ),
+                    el("p", { class: "mb-8" }, "Thank you to all our backers!"),
                     (this.backers = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
                     el(
                         "a",
@@ -241,7 +237,7 @@ export class Backer {
     }
 
     update(data) {
-        const { name, image, website, role, profile } = data;
+        const { name, image, website, profile } = data;
         let backer;
         if (image !== "null") {
             backer = el("img", {

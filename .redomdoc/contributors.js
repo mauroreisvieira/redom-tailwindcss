@@ -19,10 +19,6 @@ module.exports = [{
                             avatar_url: "https://avatars0.githubusercontent.com/u/1460615?v=4",
                             login: "talmobi",
                         },{
-                            html_url: "https://github.com/def0x099",
-                            avatar_url: "https://avatars0.githubusercontent.com/u/43454318?v=4",
-                            login: "def0x099",
-                        },{
                             html_url: "https://github.com/andrejcremoznik",
                             avatar_url: "https://avatars2.githubusercontent.com/u/761287?v=4",
                             login: "andrejcremoznik",
@@ -86,6 +82,10 @@ module.exports = [{
                             html_url: "https://github.com/jung-kurt",
                             avatar_url: "https://avatars2.githubusercontent.com/u/5148839?v=4",
                             login: "jung-kurt",
+                        },{
+                            html_url: "https://github.com/louisfoster",
+                            avatar_url: "https://avatars3.githubusercontent.com/u/8028567?v=4",
+                            login: "louisfoster",
                         },{
                             html_url: "https://github.com/nikcorg",
                             avatar_url: "https://avatars0.githubusercontent.com/u/816988?v=4",

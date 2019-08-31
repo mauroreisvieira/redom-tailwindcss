@@ -1,4 +1,4 @@
-import { el, list, setChildren, setAttr } from "redom";
+import { el, list, setAttr } from "redom";
 
 import { sideNav, startPage } from "../../../.redomdoc/config.js";
 
@@ -35,7 +35,8 @@ class Link {
                 el(
                     "span",
                     {
-                        class: "mb-3 lg:mb-2 text-gray-500 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
+                        class:
+                            "mb-3 lg:mb-2 text-gray-500 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
                     },
                     text
                 ),
@@ -47,14 +48,14 @@ class Link {
             this.list.update(children);
         }
 
-
         if (path === location.hash) {
             setAttr(this.el, {
                 class: "outline-none py-1 mb-3 lg:mb-1 block text-primary",
             });
         } else {
             setAttr(this.el, {
-                class: "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-600 font-medium",
+                class:
+                    "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-600 font-medium",
             });
         }
 
@@ -108,20 +109,19 @@ export default class SideBar {
             )
         );
 
-
         this.list = list(this.nav, Link);
 
-        document.addEventListener("keypress", (evt) => {
+        document.addEventListener("keypress", evt => {
             if (evt.key === "Enter") {
                 this.search.focus();
             }
         });
 
-        this.search.oninput = evt => {
+        this.search.oninput = () => {
             this.onSearch(this.search.value);
         };
 
-        this.el.addEventListener("on:click-item", e => {
+        this.el.addEventListener("on:click-item", () => {
             this.search.value = "";
         });
     }

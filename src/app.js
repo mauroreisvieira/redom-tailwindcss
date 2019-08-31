@@ -16,7 +16,7 @@ if (window.location.hash) {
     app.update("home", data);
 }
 
-window.addEventListener("hashchange", (event) => {
+window.addEventListener("hashchange", () => {
     window.scroll(0, 0);
     if (window.location.hash) {
         app.update("doc", data);

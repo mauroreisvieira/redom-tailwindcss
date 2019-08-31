@@ -1,4 +1,4 @@
-import { el, mount, setChildren } from "redom";
+import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
@@ -7,7 +7,7 @@ import "./../../styles/markdown.css";
 
 export default class Markdown {
     constructor(path, content) {
-        new Promise((resolve, reject) => {
+        new Promise(() => {
             return fetch(window.location.origin + window.location.pathname + path)
                 .then(response => {
                     return response.text();
@@ -54,7 +54,7 @@ export default class Markdown {
                     }
                     setChildren(content, this.content);
                 })
-                .then(response => {
+                .then(() => {
                     Prism.highlightAll();
                 });
         });

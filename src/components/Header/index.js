@@ -35,10 +35,14 @@ export default class Header {
                     el(
                         "div",
                         { class: "relative" },
-                        el("label", {
-                            id: "selectversion",
-                            class: "hidden",
-                        }, "Select Version"),
+                        el(
+                            "label",
+                            {
+                                id: "selectversion",
+                                class: "hidden",
+                            },
+                            "Select Version"
+                        ),
                         el(
                             "select",
                             {

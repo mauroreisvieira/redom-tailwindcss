@@ -1,4 +1,4 @@
-import { el, mount, setChildren } from "redom";
+import { el } from "redom";
 import Markdown from "./../Markdown";
 import SideBar from "./../SideBar";
 

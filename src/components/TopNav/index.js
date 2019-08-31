@@ -9,7 +9,7 @@ class Link {
 
     update(data) {
         const { link, text, icon } = data;
-        this.el.target = '_blank';
+        this.el.target = "_blank";
         this.el.href = link;
         this.el.title = text;
         this.el.innerHTML = icon;
@@ -17,20 +17,14 @@ class Link {
 }
 
 export default class TopNav {
-    constructor(data) {
+    constructor() {
         this.el = el("div", {
             class: "flex justify-start items-center text-gray-500",
         });
         this.list = list(this.el, Link, "id");
     }
 
-    update(data, current) {
-        this.list.update(
-            data.map(item => {
-                return {
-                    ...item,
-                };
-            })
-        );
+    update(data) {
+        this.list.update(data.map(item => item));
     }
 }

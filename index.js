@@ -1,10 +1,9 @@
+/* eslint-disable no-undef */
 const fetch = require("node-fetch");
 const fs = require("fs");
-const glob = require("glob");
 
 getContributors();
 getOpenCollective();
-// getRoutes();
 
 function getContributors() {
     const writeStream = fs.createWriteStream(".redomdoc/contributors.js");
@@ -50,10 +49,4 @@ function getOpenCollective() {
             writeStream.write(content);
             writeStream.end();
         });
-}
-
-function getRoutes() {
-    glob("docs/**/*.md", {}, function(er, files) {
-        // console.log(files);
-    });
 }

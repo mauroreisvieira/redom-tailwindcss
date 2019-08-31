@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+import minify from "rollup-plugin-babel-minify";
 import serve from "rollup-plugin-serve";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
@@ -13,8 +15,9 @@ module.exports = {
         postcss({
             extract: true,
         }),
-        process.env.BUILD !== 'production' ? serve() : '',
+        process.env.BUILD !== "production" ? serve() : "",
         resolve(),
         commonjs(),
+        process.env.BUILD === "production" ? minify() : "",
     ],
 };

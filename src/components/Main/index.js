@@ -24,11 +24,11 @@ export default class Main {
             }))
         );
 
-        document.addEventListener("on:click-button", e => {
+        document.addEventListener("on:click-button", () => {
             this.aside.classList.toggle("hidden");
         });
 
-        document.addEventListener("on:click-item", e => {
+        document.addEventListener("on:click-item", () => {
             this.aside.classList.toggle("hidden");
         });
 
@@ -36,7 +36,7 @@ export default class Main {
     }
 
     update() {
-        const current = sideNav.map(item => {
+        sideNav.map(item => {
             if (item.path === location.hash) {
                 this._current = item;
                 return;

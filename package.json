@@ -2,13 +2,14 @@
     "name": "redomjs.org",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "https://github.com/mauroreisvieira/redom-samples.git",
+    "repository": "https://github.com/mauroreisvieira/redomjs.org.git",
     "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
     "license": "MIT",
     "scripts": {
         "api": "node index.js",
         "dev": "rollup -c -w",
-        "build": "npm run api && rollup -c --environment BUILD:production --compact"
+        "build": "npm run api && rollup -c --environment BUILD:production",
+        "lint": "eslint src/**/**/*.js"
     },
     "dependencies": {
         "autoprefixer": "^9.6.1",

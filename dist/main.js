@@ -970,7 +970,22 @@ var config = {
                     link: "docs/v3/guide/jsx.md",
                     meta: false,
                     children: [],
-                }
+                },
+            ],
+        },
+        {
+            path: false,
+            text: "Misc",
+            link: false,
+            meta: false,
+            children: [
+                {
+                    path: "#api",
+                    text: "API Reference",
+                    link: "docs/v3/api/index.md",
+                    meta: false,
+                    children: [],
+                },
             ],
         },
         {
@@ -992,7 +1007,7 @@ var config = {
                     link: "docs/v3/examples/commits.md",
                     meta: false,
                     children: [],
-                }
+                },
             ],
         },
     ],

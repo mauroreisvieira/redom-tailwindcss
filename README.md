@@ -1,4 +1,4 @@
-# redomjs.org
+# Build Documentation with RE:DOM and Tailwind CSS
 
 This site content is written in `.MD` format located in **docs/** folder.
 

@@ -1,7 +1,7 @@
 import { el, svg } from "redom";
 import TopNav from "./../TopNav";
 
-import { startPage, topNav, version } from "../../../.redomdoc/config.js";
+import { startPage, topNav, version } from "../../../.config/config.js";
 
 export default class Header {
     constructor() {

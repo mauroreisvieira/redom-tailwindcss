@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const config = require("./.redomdoc/config.js");
+const config = require("./.config/config.js");
 const defaultConfig = require("tailwindcss/defaultConfig");
 
 module.exports = {

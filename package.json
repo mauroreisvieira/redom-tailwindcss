@@ -1,14 +1,13 @@
 {
-    "name": "redomjs.org",
+    "name": "redomjs-tailwindcss",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "https://github.com/mauroreisvieira/redomjs.org.git",
+    "repository": "https://github.com/mauroreisvieira/redomjs-tailwindcss.git",
     "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "api": "node index.js",
         "dev": "rollup -c -w",
-        "build": "npm run api && rollup -c --environment BUILD:production",
+        "build": "prettier .config/*.js --write && rollup -c --environment BUILD:production",
         "lint": "eslint src/**/**/*.js"
     },
     "dependencies": {
@@ -21,16 +20,17 @@
         "tailwindcss": "^1.1.2"
     },
     "devDependencies": {
+        "cssnano": "^4.1.10",
         "eslint": "^6.3.0",
         "eslint-config-prettier": "^6.1.0",
         "eslint-plugin-prettier": "^3.1.0",
         "prettier": "^1.18.2",
         "rollup": "^1.19.4",
+        "rollup-plugin-babel-minify": "^9.0.0",
         "rollup-plugin-commonjs": "^10.0.2",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-postcss": "^2.0.3",
         "rollup-plugin-scss": "^1.0.2",
-        "rollup-plugin-serve": "^1.0.1",
-        "rollup-plugin-babel-minify": "^9.0.0"
+        "rollup-plugin-serve": "^1.0.1"
     }
 }

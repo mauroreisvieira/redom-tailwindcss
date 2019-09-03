@@ -1,6 +1,6 @@
 import { el, list, setAttr } from "redom";
 
-import { sideNav, startPage } from "../../../.redomdoc/config.js";
+import { sideNav, startPage } from "../../../.config/config.js";
 
 class Link {
     constructor() {
@@ -84,10 +84,10 @@ export default class SideBar {
                     {
                         href: startPage,
                         title: "Re:dom",
-                        class: "self-center w-24 mb-8",
+                        class: "self-center w-40 mb-8",
                     },
                     (this.logo = el("img", {
-                        src: "./static/images/redomjs.svg",
+                        src: "./static/images/mddoks.svg",
                         alt: "Re:dom Logo",
                     }))
                 ),

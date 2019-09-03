@@ -2,7 +2,7 @@ import { el } from "redom";
 import Markdown from "./../Markdown";
 import SideBar from "./../SideBar";
 
-import { sideNav } from "../../../.redomdoc/config.js";
+import { sideNav } from "../../../.config/config.js";
 
 export default class Main {
     constructor() {

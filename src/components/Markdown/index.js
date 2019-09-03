@@ -2,7 +2,7 @@ import { el, setChildren } from "redom";
 import { Remarkable } from "remarkable";
 import Prism from "prismjs";
 
-import { docsRepo } from "../../../.redomdoc/config.js";
+import { docsRepo } from "../../../.config/config.js";
 import "./../../styles/markdown.css";
 
 export default class Markdown {

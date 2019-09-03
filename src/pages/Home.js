@@ -1,6 +1,4 @@
-import { el, list, svg } from "redom";
-
-import { contributors, backers } from "../../.redomdoc/config.js";
+import { el, svg } from "redom";
 
 import "./../styles/home.css";
 
@@ -20,14 +18,14 @@ export default class Home {
                         class: "flex flex-col px-6 mx-auto items-center  max-w-4xl ",
                     },
                     el("img", {
-                        src: "./static/images/redomjs.svg",
+                        src: "./static/images/mddoks.svg",
                         alt: "Re:dom Logo",
-                        class: "self-center w-32 sm:w-40  my-12",
+                        class: "self-center w-56 sm:w-64  my-12",
                     }),
                     el(
                         "h1",
                         { class: "text-2xl sm:text-4xl font-light leading-tight text-center" },
-                        "Tiny (2 KB) turboboosted JavaScript library for creating user interfaces."
+                        "Documentation with RE:DOM and Tailwind CSS"
                     ),
                     el(
                         "div",
@@ -65,206 +63,7 @@ export default class Home {
                         )
                     )
                 )
-            ),
-            el(
-                "div",
-                {
-                    class: "flex flex-col sm:flex-row mx-auto max-w-6xl mb-24 sm:mb-48 pb-8 text-center",
-                },
-                el(
-                    "div",
-                    {
-                        class: "sm:w-1/3 pb-8 px-4",
-                    },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Small & Powerful"),
-                    el("p", {}, "Useful helpers to create DOM elements and keeping them in sync with the data.")
-                ),
-                el(
-                    "div",
-                    {
-                        class: "sm:w-1/3 pb-8 px-4",
-                    },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "High Performance"),
-                    el(
-                        "p",
-                        {},
-                        "Close to the metal and",
-                        el("strong", {}, " doesn't use virtual DOM "),
-                        "it's actually",
-                        el("strong", {}, "  faster "),
-                        "and uses",
-                        el("strong", {}, "  less memory "),
-                        "than almost all virtual DOM based libraries, including React ",
-                        el(
-                            "a",
-                            {
-                                class: "text-primary hover:underline",
-                                target: "_blank",
-                                title: "Benchmark",
-                                href:
-                                    "https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts-results/table.html",
-                            },
-                            "(benchmark)"
-                        ),
-                        "."
-                    )
-                ),
-                el(
-                    "div",
-                    {
-                        class: "sm:w-1/3 pb-8 px-4",
-                    },
-                    el("h2", { class: "text-xl font-medium mb-4 text-gray-700" }, "Easy to Learn"),
-                    el(
-                        "p",
-                        {},
-                        "You can use just",
-                        el("strong", {}, " pure JavaScript "),
-                        "so no complicated templating languages to learn and hassle with."
-                    )
-                )
-            ),
-            el(
-                "div#contributors",
-                { class: "text-center relative text-gray-700" },
-                svg(
-                    "svg",
-                    {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        viewBox: "0 0 1440 320",
-                    },
-                    svg("path", {
-                        fill: "currentColor",
-                        d:
-                            "M0 288h48c48 0 144 0 240-5.3C384 277 480 267 576 240c96-27 192-69 288-69.3 96 .3 192 42.3 288 69.3s192 37 240 42.7l48 5.3v32H0z",
-                    })
-                ),
-                el(
-                    "div",
-                    {
-                        class: "w-full max-w-6xl relative mx-auto px-6",
-                    },
-                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Contributors"),
-                    el("p", { class: "mb-8" }, "This project exists thanks to all the people who contribute."),
-                    (this.contributors = list("div.flex.flex-wrap.justify-center", Contributor, "id"))
-                )
-            ),
-            el(
-                "div#backers",
-                { class: "text-center text-gray-700" },
-                el(
-                    "div",
-                    {
-                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-4",
-                    },
-                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Backers"),
-                    el("p", { class: "mb-8" }, "Thank you to all our backers!"),
-                    (this.backers = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
-                    el(
-                        "a",
-                        {
-                            href: "https://opencollective.com/redom#backers",
-                            target: "_blank",
-                            class:
-                                "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
-                        },
-                        "Become a Backer!"
-                    )
-                )
-            ),
-            el(
-                "div#sponsors",
-                { class: "text-center text-gray-700" },
-                el(
-                    "div",
-                    {
-                        class: "w-full max-w-6xl relative mx-auto px-6 pt-16 pb-24",
-                    },
-                    el("h2", { class: "text-gray-600 text-xl font-medium mb-4" }, "Sponsors"),
-                    el(
-                        "p",
-                        { class: "mb-8" },
-                        "Support this project by becoming a sponsor. Your logo will show up here with a link to your website."
-                    ),
-                    (this.sponsors = list("div.flex.flex-wrap.justify-center.mb-6", Backer, "id")),
-                    el(
-                        "a",
-                        {
-                            href: "https://opencollective.com/redom/sponsor/0/website",
-                            target: "_blank",
-                            class:
-                                "tracking-wider mb-4 rounded-full px-6 py-2 sm:mr-4 border border-primary text-sm font-semibold text-primary",
-                        },
-                        "Become a Sponsor!"
-                    )
-                )
             )
-        );
-
-        this.contributors.update(contributors);
-        this.backers.update(backers);
-    }
-}
-
-export class Contributor {
-    constructor() {
-        this.el = el("a");
-    }
-
-    update(data) {
-        const { html_url, avatar_url, login } = data;
-        this.el = el(
-            "a",
-            {
-                href: html_url,
-                target: "_blank",
-                "data-title": login,
-                title: login,
-                class: "my-2 mx-2",
-            },
-            el("img", {
-                class: "w-10 h-10 rounded-full",
-                alt: login,
-                src: avatar_url,
-            })
-        );
-    }
-}
-
-export class Backer {
-    constructor() {
-        this.el = el("a");
-    }
-
-    update(data) {
-        const { name, image, website, profile } = data;
-        let backer;
-        if (image !== "null") {
-            backer = el("img", {
-                class: "w-16 h-16 rounded-full",
-                alt: name,
-                src: image,
-            });
-        } else {
-            backer = el(
-                "div",
-                {
-                    class: "flex items-center justify-center font-semibold bg-gray-300 w-16 h-16 rounded-full",
-                },
-                name[0]
-            );
-        }
-
-        this.el = el(
-            "a",
-            {
-                href: website !== "null" ? website : profile,
-                "data-title": name,
-                title: name,
-                target: "_blank",
-                class: "my-2 mx-2 w-16 h-16",
-            },
-            backer
         );
     }
 }

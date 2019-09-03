@@ -1,6 +1,6 @@
 import { router, mount } from "redom";
 import { Home, Doc } from "./pages/index";
-import * as data from "../.redomdoc/config.js";
+import * as data from "../.config/config.js";
 
 import "./styles/prism.css";
 import "./styles/tailwind.css";

@@ -1,6 +1,6 @@
 {
-  "name": "Redomjs",
-  "short_name": "Redom",
+  "name": "Mddoks",
+  "short_name": "mddoks",
   "icons": [{
         "src": "static/images/touch/icon-128x128.png",
         "sizes": "128x128",
@@ -21,5 +21,5 @@
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#fff",
-  "theme_color": "#d31b33"
+  "theme_color": "#1cb3ba"
 }

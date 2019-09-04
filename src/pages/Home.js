@@ -1,7 +1,5 @@
 import { el, svg } from "redom";
 
-import "./../styles/home.css";
-
 export default class Home {
     constructor() {
         this.el = el(
@@ -18,14 +16,14 @@ export default class Home {
                         class: "flex flex-col px-6 mx-auto items-center  max-w-4xl ",
                     },
                     el("img", {
-                        src: "./static/images/mddoks.svg",
-                        alt: "Re:dom Logo",
-                        class: "self-center w-56 sm:w-64  my-12",
+                        src: "./static/images/logo.svg",
+                        alt: "Dok Logo",
+                        class: "self-center w-32 sm:w-40  my-12",
                     }),
                     el(
                         "h1",
                         { class: "text-2xl sm:text-4xl font-light leading-tight text-center" },
-                        "Documentation with RE:DOM and Tailwind CSS"
+                        "JavaScript Framework that's geared towards building project documentation from a clean markdown."
                     ),
                     el(
                         "div",
@@ -36,6 +34,7 @@ export default class Home {
                                 href: "#installation",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 py-3 sm:mr-4 mb-4 border border-primary text-base font-semibold text-primary",
+                                rel: "prerender",
                             },
                             "Get Started"
                         ),
@@ -46,6 +45,7 @@ export default class Home {
                                 target: "_blank",
                                 class:
                                     "sm:inline-flex items-center tracking-wider flex justify-center uppercase rounded-full px-8 pl-2 py-2 mb-4 border border-gray-200 bg-gray-200 text-base font-semibold text-gray-700",
+                                rel: "noopener",
                             },
                             svg(
                                 "svg",

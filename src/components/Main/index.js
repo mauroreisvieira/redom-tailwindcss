@@ -2,7 +2,7 @@ import { el } from "redom";
 import Markdown from "./../Markdown";
 import SideBar from "./../SideBar";
 
-import { sideNav } from "../../../.config/config.js";
+import { router } from "../../../.config/config.js";
 
 export default class Main {
     constructor() {
@@ -36,7 +36,7 @@ export default class Main {
     }
 
     update() {
-        sideNav.map(item => {
+        router.map(item => {
             if (item.path === location.hash) {
                 this._current = item;
                 return;
@@ -50,7 +50,7 @@ export default class Main {
                 });
             }
         });
-        this.sideNav.update(sideNav);
+        this.sideNav.update(router);
         new Markdown(this._current.link, this.content);
     }
 }

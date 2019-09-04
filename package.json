@@ -1,8 +1,8 @@
 {
-    "name": "redomjs-tailwindcss",
+    "name": "dok",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "https://github.com/mauroreisvieira/redomjs-tailwindcss.git",
+    "repository": "https://github.com/mauroreisvieira/dok.git",
     "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
     "license": "MIT",
     "scripts": {

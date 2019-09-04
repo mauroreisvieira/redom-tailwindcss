@@ -1,6 +1,6 @@
 import { el, list, setAttr } from "redom";
 
-import { sideNav, startPage } from "../../../.config/config.js";
+import { router, startPage } from "../../../.config/config.js";
 
 class Link {
     constructor() {
@@ -36,7 +36,7 @@ class Link {
                     "span",
                     {
                         class:
-                            "mb-3 lg:mb-2 text-gray-500 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
+                            "mb-3 lg:mb-2 uppercase mb-3 lg:mb-2 text-gray-500 tracking-wide font-bold text-sm lg:text-xs",
                     },
                     text
                 ),
@@ -55,7 +55,7 @@ class Link {
         } else {
             setAttr(this.el, {
                 class:
-                    "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-600 font-medium",
+                    "outline-none py-1 mb-3 lg:mb-1 block focus:text-gray-900 hover:text-gray-900 text-gray-700 font-medium",
             });
         }
 
@@ -83,12 +83,13 @@ export default class SideBar {
                     "a",
                     {
                         href: startPage,
-                        title: "Re:dom",
-                        class: "self-center w-40 mb-8",
+                        title: "Dok",
+                        class: "self-center w-24 mb-8",
+                        rel: "prerender",
                     },
                     (this.logo = el("img", {
-                        src: "./static/images/mddoks.svg",
-                        alt: "Re:dom Logo",
+                        src: "./static/images/redomjs.svg",
+                        alt: "Dok Logo",
                     }))
                 ),
                 (this.search = el("input", {
@@ -97,7 +98,7 @@ export default class SideBar {
                     placeholder: 'Search the docs (Press "Enter" to focus)',
                     type: "text",
                     value: "",
-                    ariaLabel: "search input",
+                    "aria-Label": "search input",
                 }))
             ),
             el(
@@ -127,9 +128,9 @@ export default class SideBar {
     }
 
     onSearch(value) {
-        if (value) {
+        if (value.length > 1) {
             const results = [];
-            sideNav.map(item => {
+            router.map(item => {
                 if (item.text.toUpperCase().includes(value.toUpperCase())) {
                     results.push(item);
                 }
@@ -143,7 +144,7 @@ export default class SideBar {
             });
             this.update(results, this._current);
         } else {
-            this.update(sideNav, this._current);
+            this.update(router, this._current);
         }
     }
 

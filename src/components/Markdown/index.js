@@ -4,6 +4,7 @@ import Prism from "prismjs";
 
 import { docsRepo } from "../../../.config/config.js";
 import "./../../styles/markdown.css";
+import "prismjs/components/prism-typescript";
 
 export default class Markdown {
     constructor(path, content) {
@@ -34,7 +35,8 @@ export default class Markdown {
                                     "a",
                                     {
                                         href: docsRepo + path,
-                                        target: "_black",
+                                        target: "_blank",
+                                        rel: "noopener",
                                     },
                                     "Edit this page on GitHub"
                                 )

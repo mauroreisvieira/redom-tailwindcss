@@ -1,6 +1,6 @@
 # RE:DOM & Tailwind CSS
 
-JavaScript Framework that's geared towards building project documentation from a clean markdown.
+Building project documentation from a clean markdown.
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/mauroreisvieira/redom-tailwindcss/blob/master/LICENSE)
 

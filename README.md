@@ -1,8 +1,8 @@
-# DOK
+# RE:DOM & Tailwind CSS
 
 JavaScript Framework that's geared towards building project documentation from a clean markdown.
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/mauroreisvieira/dok/blob/master/LICENSE)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/mauroreisvieira/redom-tailwindcss/blob/master/LICENSE)
 
 
 This site content is written in `.MD` format located in **docs/** folder.
@@ -20,16 +20,16 @@ $ npm install
 $ npm run dev # dev server at http://localhost:10001
 ```
 
-Alternatively you can [download](https://codeload.github.com/mauroreisvieira/dok/zip/master) this repository.
+Alternatively you can [download](https://codeload.github.com/mauroreisvieira/redom-tailwindcss/zip/master) this repository.
 
-## About Dok
+## About  mauroreisvieira/mddoks
 
 Dok is an documentation builder that helps you quickly build documentations.\
 It's powered by [Tailwind CSS](https://github.com/tailwindcss/tailwindcss), allowing you to create custom themes, which makes the process of creating documentation easy.
 
 ## Documentation
 
-Dok documentation is available at [Dok](https://mauroreisvieira.github.io/dok/#/)
+Dok documentation is available at [redom-tailwindcss](https://mauroreisvieira.github.io/redom-tailwindcss/#/)
 
 ## License
 

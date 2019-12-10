@@ -10,7 +10,7 @@ This site content is written in `.MD` format located in **docs/** folder.
 ## Get Started
 
 ```bash
-git clone https://github.com/mauroreisvieira/dok
+git clone https://github.com/mauroreisvieira/redom-tailwindcss
 ```
 
 ## Developing
@@ -22,15 +22,15 @@ $ npm run dev # dev server at http://localhost:10001
 
 Alternatively you can [download](https://codeload.github.com/mauroreisvieira/redom-tailwindcss/zip/master) this repository.
 
-## About  mauroreisvieira/mddoks
+## About 
 
-Dok is an documentation builder that helps you quickly build documentations.\
+RE:DOM & Tailwind CSS is an documentation builder that helps you quickly build documentations.\
 It's powered by [Tailwind CSS](https://github.com/tailwindcss/tailwindcss), allowing you to create custom themes, which makes the process of creating documentation easy.
 
 ## Documentation
 
-Dok documentation is available at [redom-tailwindcss](https://mauroreisvieira.github.io/redom-tailwindcss/#/)
+RE:DOM & Tailwind CSS documentation is available at [redom-tailwindcss](https://mauroreisvieira.github.io/redom-tailwindcss/#/)
 
 ## License
 
-The Dok is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+The redom-tailwindcss is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
